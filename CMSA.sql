@@ -173,11 +173,14 @@ CREATE TABLE consumibles(
 CREATE TABLE compras(
 	idcompra INT(11) PRIMARY KEY AUTO_INCREMENT,
     fecha DATETIME NOT NULL,
-    idproveedor INT(11) NOT NULL
+    idproveedor INT(11) NOT NULL,
+    total DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE detalles_compra(
-	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT
+	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idconsumibe INT(11) NOT NULL,
+    fechacaducidad DATE
 );
 
 CREATE TABLE inventarios(
@@ -187,7 +190,9 @@ CREATE TABLE inventarios(
 );
 
 CREATE TABLE detalles_inventario(
-	iddetalle_inventario INT(11) PRIMARY KEY AUTO_INCREMENT
+	iddetalle_inventario INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idconsumibe INT(11) NOT NULL,
+    fechacaducidad DATE
 );
 
 CREATE TABLE ventas(
@@ -201,7 +206,10 @@ CREATE TABLE detalles_venta(
 
 -- SI ES CONSULTA
 CREATE TABLE detalles_consulta(
-	iddetalle_consulta INT(11) PRIMARY KEY AUTO_INCREMENT
+	iddetalle_consulta INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idventa INT(11) NOT NULL,
+    
+    FOREIGN KEY (idventa) REFERENCES ventas(idventa)
 );
 
 CREATE TABLE examenes(

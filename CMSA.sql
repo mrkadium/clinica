@@ -13,7 +13,9 @@ CREATE TABLE municipios(
     municipio VARCHAR(200) NOT NULL,
     iddepartamento INT(2) NOT NULL,
     
-    FOREIGN KEY (iddepartamento) REFERENCES departamentos(iddepartamento)
+    FOREIGN KEY (iddepartamento) REFERENCES departamentos(iddepartamento),
+    
+    INDEX (municipio)
 );
 
 CREATE TABLE pacientes(
@@ -29,7 +31,12 @@ CREATE TABLE pacientes(
     iddepartamento INT(2) NOT NULL,
     
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
-    FOREIGN KEY (iddepartamento) REFERENCES departamentos(iddepartamento)
+    FOREIGN KEY (iddepartamento) REFERENCES departamentos(iddepartamento),
+    
+    INDEX (expediente),
+    INDEX (nombres),
+    INDEX (apellidos),
+    INDEX (genero)
 );
 
 CREATE TABLE roles(
@@ -54,16 +61,21 @@ CREATE TABLE permisos(
 
 CREATE TABLE especialidades(
 	idespecialidad INT(4) PRIMARY KEY AUTO_INCREMENT,
-    especialidad VARCHAR(200) NOT NULL
+    especialidad VARCHAR(200) NOT NULL,
+    
+    INDEX (especialidad)
 );
 
 CREATE TABLE cargos(
 	idcargo INT(4) PRIMARY KEY AUTO_INCREMENT,
-    cargo VARCHAR(100) NOT NULL
+    cargo VARCHAR(100) NOT NULL,
+    
+    INDEX (cargo)
 );
 
 CREATE TABLE empleados(
 	idempleado INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idcargo INT(4) NOT NULL,
     jvpm INT(11),
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
@@ -72,12 +84,11 @@ CREATE TABLE empleados(
     dui CHAR(10) NOT NULL,
     nit CHAR(17) NOT NULL,
     idmunicipio INT(3) NOT NULL,
+    iddepartamento INT(2) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
-    idcargo INT(4) NOT NULL,
     fechacontratacion DATE,
     fechasalida DATE,
     estado ENUM('ACTIVO', 'INACTIVO'),
-    iddepartamento INT(2) NOT NULL,
     
     FOREIGN KEY (idcargo) REFERENCES cargos(idcargo),
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
@@ -85,7 +96,8 @@ CREATE TABLE empleados(
     
     INDEX (jvpm),
     INDEX (nombres),
-    INDEX (apellidos)
+    INDEX (apellidos),
+    INDEX (genero)
 );
 
 CREATE TABLE especialidades_medico(
@@ -116,7 +128,9 @@ CREATE TABLE usuarios(
     estado ENUM('ACTIVO', 'BLOQUEADO'),
     
     FOREIGN KEY (idrol) REFERENCES roles(idrol),
-    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
+    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
+    
+    INDEX (usuario)
 );
 
 CREATE TABLE laboratorios(
@@ -151,10 +165,50 @@ CREATE TABLE consumibles(
     
     FOREIGN KEY (idmarca) REFERENCES marcas(idmarca),
     
-    INDEX (categoria),
+    INDEX (tipo),
+    INDEX (nombre),
     INDEX (alias)
 );
 
+CREATE TABLE compras(
+	idcompra INT(11) PRIMARY KEY AUTO_INCREMENT,
+    fecha DATETIME NOT NULL,
+    idproveedor INT(11) NOT NULL
+);
+
+CREATE TABLE detalles_compra(
+	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT
+);
+
+CREATE TABLE inventarios(
+	idinventario INT(11) PRIMARY KEY AUTO_INCREMENT,
+    fecha DATETIME NOT NULL,
+    idproveedor INT(11) NOT NULL
+);
+
+CREATE TABLE detalles_inventario(
+	iddetalle_inventario INT(11) PRIMARY KEY AUTO_INCREMENT
+);
+
+CREATE TABLE ventas(
+	idventa INT(11) PRIMARY KEY AUTO_INCREMENT,
+    fecha DATETIME NOT NULL
+);
+
+CREATE TABLE detalles_venta(
+	iddetalle_venta INT(11) PRIMARY KEY AUTO_INCREMENT
+);
+
+-- SI ES CONSULTA
+CREATE TABLE detalles_consulta(
+	iddetalle_consulta INT(11) PRIMARY KEY AUTO_INCREMENT
+);
+
+CREATE TABLE examenes(
+	idexamen INT(11) PRIMARY KEY AUTO_INCREMENT
+);
+
+/*
 CREATE TABLE operaciones(
 	idoperacion INT(11) PRIMARY KEY AUTO_INCREMENT,
     idtitular INT(11) NOT NULL,
@@ -246,3 +300,4 @@ BEGIN
 END;
 //
 DELIMITER ;
+*/

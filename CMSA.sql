@@ -158,6 +158,7 @@ CREATE TABLE consumibles(
 	idconsumible INT(11) PRIMARY KEY AUTO_INCREMENT,
     tipo ENUM('PRODUCTO', 'SERVICIO') NOT NULL,
     nombre VARCHAR(200) NOT NULL,
+    presentacion ENUM('N/A', 'LÍQUIDO', 'JARABE', 'POLVO', 'PASTILLA'),
     alias VARCHAR(100) NOT NULL,
     idmarca INT(11) NOT NULL,
     preciocompra DECIMAL(10,2) NOT NULL,
@@ -173,26 +174,40 @@ CREATE TABLE consumibles(
 CREATE TABLE compras(
 	idcompra INT(11) PRIMARY KEY AUTO_INCREMENT,
     fecha DATETIME NOT NULL,
-    idproveedor INT(11) NOT NULL,
-    total DECIMAL(10,2) NOT NULL
+    idlaboratorio INT(11) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    
+    FOREIGN KEY (idlaboratorio) REFERENCES laboratorios(idlaboratorio)
 );
 
 CREATE TABLE detalles_compra(
 	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idcompra INT(11) NOT NULL,
     idconsumibe INT(11) NOT NULL,
-    fechacaducidad DATE
+    fechacaducidad DATE,
+    cantidad INT(11) NOT NULL,
+    preciocompra DECIMAL(10,2) NOT NULL,
+    precioventa DECIMAL(10,2) NOT NULL,
+    gravado DECIMAL(10,2),
+    
+    FOREIGN KEY (idcompra) REFERENCES compras(idcompra),
+    FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
 
 CREATE TABLE inventarios(
 	idinventario INT(11) PRIMARY KEY AUTO_INCREMENT,
     fecha DATETIME NOT NULL,
-    idproveedor INT(11) NOT NULL
+    idlaboratorio INT(11) NOT NULL,
+    
+    FOREIGN KEY (idlaboratorio) REFERENCES laboratorios(idlaboratorio)
 );
 
 CREATE TABLE detalles_inventario(
 	iddetalle_inventario INT(11) PRIMARY KEY AUTO_INCREMENT,
     idconsumibe INT(11) NOT NULL,
-    fechacaducidad DATE
+    fechacaducidad DATE,
+    
+    FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
 
 CREATE TABLE ventas(
@@ -201,7 +216,10 @@ CREATE TABLE ventas(
 );
 
 CREATE TABLE detalles_venta(
-	iddetalle_venta INT(11) PRIMARY KEY AUTO_INCREMENT
+	iddetalle_venta INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idconsumibe INT(11) NOT NULL,
+    
+    FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
 
 -- SI ES CONSULTA

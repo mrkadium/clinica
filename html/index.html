@@ -9,12 +9,13 @@
 </head>
 <body>
     <nav>
-        <img src="../img/Clínica.jpg" alt="">
+        <div class="logo">
+            <img src="../img/Clínica.png" alt="" onclick="openWindow();">
+        </div>
         <div class="links">
-            <a href="#">Servicios</a>
-            <a href="#">Acerca de</a>
-            <a href="#">Citas</a>
-            <a href="#">Link4</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#acercade">Acerca de</a>
+            <a href="#citas">Citas</a>
         </div>
         <div class="sesion">
             <img src="">
@@ -25,12 +26,34 @@
             </div>
         </div>
         <div class="iniciarSesion">
-            <a href="#">Regístrate</a>
             <a href="#">Iniciar sesión</a>
+            <a href="#">Regístrate</a>
         </div>
     </nav>
     <div class="contenedor">
-        <main></main>
+        <main>
+            <section id="servicios">
+                <div class="vanish">
+                    <h2>Servicios</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
+                    <a href="" class="vermas">Ver más</a>
+                </div>
+            </section>
+            <section id="acercade">
+                <div class="vanish">
+                    <h2>Seccion2</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
+                    <a href="" class="vermas">Ver más</a>
+                </div>
+            </section>
+            <section id="citas">
+                <div class="vanish">
+                    <h2>Seccion3</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
+                    <a href="" class="vermas">Ver más</a>
+                </div>
+            </section>
+        </main>
     </div>
     <footer></footer>
 </body>

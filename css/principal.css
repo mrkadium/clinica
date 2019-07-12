@@ -3,6 +3,7 @@
     --nav-color-bold: rgb(200,200,200);
     --footer-color: rgb(75,75,75);
     --footer-color-light: rgba(60,60,60);
+    --footer-color-trans: rgba(60,60,60, .5);
     --main-color: rgb(0,164,167);
     --nav-font-color: rgb(150,150,150);
 }
@@ -25,6 +26,7 @@ body{
 /* NAVBAR */
 nav{
     position: fixed;
+    z-index: 1;
     width: 100%;
     padding: 10px;
     overflow: hidden;
@@ -52,6 +54,7 @@ nav .logo h1{
     color: var(--nav-font-color);
     font-size: 16px;
     margin-left: 10px;
+    letter-spacing: 1px;
 
     transition: color .3s ease;
 }
@@ -153,7 +156,7 @@ main section .vanish-other{
     align-items: center;
     text-align: center;
     /* background-color: rgba(255,255,255, .7); */
-    background-image: linear-gradient(-90deg, rgba(255,255,255, .3),rgba(255,255,255, 1),rgba(255,255,255, 1),rgba(255,255,255, 1));
+    background-image: linear-gradient(-90deg, rgba(255,255,255, .8),rgba(255,255,255, .9),rgba(255,255,255, .95),rgba(255,255,255, 1));
 }
 main section .vanish-other p, main section .vanish-other h2, main section .vanish-other a{
     margin: 15px 0;
@@ -174,7 +177,7 @@ main section:nth-child(odd) .vanish-other{
     align-items: center;
     text-align: center;
     /* background-color: rgba(255,255,255, .7); */
-    background-image: linear-gradient(-90deg, rgba(255,255,255, 1),rgba(255,255,255, .95),rgba(255,255,255, .9),rgba(255,255,255, .7));
+    background-image: linear-gradient(-90deg, rgba(255,255,255, 1),rgba(255,255,255, .95),rgba(255,255,255, .9),rgba(255,255,255, .8));
 }
 
 
@@ -232,6 +235,64 @@ main section#citas{
 
 
 
+
+/* SLIDER */
+.slider-container{
+    height: 100vh;
+    overflow: hidden;
+}
+.slider{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+
+    transition: background-image .6s ease-in;
+}
+.slider .prev, .slider .next{
+    position: absolute;
+    width: 10%;
+    top: 0;
+    bottom: 0;
+    background-image: linear-gradient(-90deg, rgba(75,75,75, 0),rgba(75,75,75, .5));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+
+    transition: background-image .3s ease;
+}
+.slider .next{
+    right: 0;
+    background-image: linear-gradient(90deg, rgba(75,75,75, 0),rgba(75,75,75, .5));
+}
+.slider .next:hover{
+    background-image: linear-gradient(90deg, rgba(75,75,75, 0),rgba(75,75,75, .7));
+}
+.slider .prev:hover{
+    background-image: linear-gradient(-90deg, rgba(75,75,75, 0),rgba(75,75,75, .7));
+}
+
+
+.slider-content{
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    background-color: rgba(30, 143, 255, 0.39);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.slider-content img{
+    width: 50px;
+}
+
+
+
+
 /* FOOTER */
 footer{
     min-height: 40vh;
@@ -259,6 +320,7 @@ footer{
 }
 .secciones>div>h4{
     margin-bottom: 15px;
+    color: var(--main-color);
 }
 .secciones .contactos a, .secciones .contactos p{
     text-decoration: none;

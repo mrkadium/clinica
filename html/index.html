@@ -34,9 +34,17 @@
     </nav>
     <div class="contenedor">
         <main>
-            <!-- <section class="slider">
-
-            </section> -->
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="prev"><i class="icon icon-circle-left"></i></div>
+                    <div class="next"><i class="icon icon-circle-right"></i></div>
+                    <div class="slider-content">
+                        <img class="slider-img" alt="">
+                        <h3>Tema 1</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laboriosam facere aperiam beatae nisi aliquam commodi est, possimus necessitatibus tempora quaerat quo odio esse ipsa omnis accusamus rem eius in eligendi error ipsam voluptatem. Commodi, pariatur. Quidem itaque sequi maxime laudantium, accusamus similique nisi? Recusandae hic placeat expedita numquam pariatur.</p>
+                    </div>
+                </div>
+            </div>
             <section id="servicios">
                 <div class="vanish">
                     <div class="sec">
@@ -89,6 +97,52 @@
         const openWindow = function(){
             location.href = "nothing.html";
         }
+
+        let images = ['img1.jpg','img2.jpg','img3.jpg','img4.jpg'];
+        const slider = document.querySelector(".slider");
+        const sliderimg = document.querySelector(".slider .slider-img");
+        const next = document.querySelector(".slider .next");
+        const prev = document.querySelector(".slider .prev");
+        let cont = -1;
+        let time = 5000;
+
+        function changeImage(){
+            if(cont < images.length - 1){
+                cont++;
+            }else{
+                cont = 0;
+            }
+            slider.style = `background-image: url('../img/${images[cont]}');`;
+            sliderimg.setAttribute("src", "../img/" +  images[cont]);
+        }
+        
+        next.addEventListener('click', nextImage);
+        function nextImage(){
+            if(cont < images.length - 1){
+                cont++;
+            }else{
+                cont = 0;
+            }
+            slider.style = `background-image: url('../img/${images[cont]}');`;
+            sliderimg.setAttribute("src", "../img/" +  images[cont]);
+        }
+        
+        prev.addEventListener('click', prevImage);
+        function prevImage(){
+            if(cont > 0){
+                cont--;
+            }else{
+                cont = images.length - 1;
+            }
+            slider.style = `background-image: url('../img/${images[cont]}');`;
+            sliderimg.setAttribute("src", "../img/" +  images[cont]);
+        }
+        
+        function timeout(){
+            changeImage();
+            setTimeout(timeout, time);
+        }
+        timeout();
     </script>
 </body>
 </html>

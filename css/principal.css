@@ -37,6 +37,8 @@ nav{
     transition: background-color .3s ease;
 }
 nav .logo{
+    display: flex;
+    align-items: center;
     height: 10vh;
     padding-left: 20px;
 }
@@ -45,6 +47,16 @@ nav .logo:hover{
 }
 nav .logo img{
     height: 100%;
+}
+nav .logo h1{
+    color: var(--nav-font-color);
+    font-size: 16px;
+    margin-left: 10px;
+
+    transition: color .3s ease;
+}
+nav .logo:hover h1{
+    color: var(--main-color);
 }
 nav .links, nav .iniciarSesion{
     padding: 0 20px;
@@ -88,18 +100,132 @@ nav .sesion{
 main section{
     height: 100vh;
 }
+
+/* VANISH */
 main section .vanish{
     width: 100%;
     height: 100%;
+    background-image: linear-gradient(90deg ,rgba(255, 255, 255, 1), rgba(255, 255, 255, .8), rgba(255, 255, 255, 0));
+}
+main section .vanish .sec{
     padding: 20px;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+main section .vanish .sec p, main section .vanish .sec h2{
+    color: var(--footer-color);
+}
+main section .vanish .sec p, main section .vanish .sec h2, main section .vanish .sec a{
+    margin: 15px 0;
+}
+main section .vanish .sec p{
+    line-height: 1.4;
+}
+main section:nth-child(odd) .vanish{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg ,rgba(255, 255, 255, 0), rgba(255, 255, 255, .8), rgba(255, 255, 255, 1));
+}
+main section:nth-child(odd) .vanish .sec{
+    padding: 20px;
+    margin-left: auto;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, .5);
 }
+
+
+
+/* VANISH-OTHER */
+main section .vanish-other{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* background-color: rgba(255,255,255, .7); */
+    background-image: linear-gradient(-90deg, rgba(255,255,255, .3),rgba(255,255,255, 1),rgba(255,255,255, 1),rgba(255,255,255, 1));
+}
+main section .vanish-other p, main section .vanish-other h2, main section .vanish-other a{
+    margin: 15px 0;
+}
+main section .vanish-other p, main section .vanish-other h2{
+    color: var(--footer-color);
+}
+main section .vanish-other p{
+    line-height: 1.4;
+}
+main section:nth-child(odd) .vanish-other{
+    width: 40%;
+    margin-left: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* background-color: rgba(255,255,255, .7); */
+    background-image: linear-gradient(-90deg, rgba(255,255,255, 1),rgba(255,255,255, .95),rgba(255,255,255, .9),rgba(255,255,255, .7));
+}
+
+
+
+
+
+/* VANISH-2 */
+main section .vanish-2{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255,255,255, .8);
+    color: var(--footer-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+main section .vanish-2 *{
+    margin: 15px 0;
+}
+.vermas{
+    color: var(--main-color);
+    text-decoration: none;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bold;
+
+    transition: background-color .3s ease;
+}
+.vermas:hover{
+    background-color: var(--main-color);
+    color: white;
+}
+
+
+
+
+
 main section#servicios{
     background-image: url("../img/img1.jpg");
+    background-size: cover;
+}
+main section#acercade{
+    background-image: url("../img/img4.jpg");
+    background-size: cover;
+}
+main section#citas{
+    background-image: url("../img/img3.jpg");
     background-size: cover;
 }
 
@@ -108,7 +234,38 @@ main section#servicios{
 
 /* FOOTER */
 footer{
-    height: 100vh;
+    min-height: 40vh;
+    width: 100%;
     overflow: hidden;
     background-color: var(--footer-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+}
+.secciones{
+    width: 90%;
+    margin-top: 50px;
+    display: flex;
+    border-collapse: collapse;
+}
+.secciones>div{
+    flex: 1;
+    padding: 10px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+.secciones>div>h4{
+    margin-bottom: 15px;
+}
+.secciones .contactos a, .secciones .contactos p{
+    text-decoration: none;
+    color: white;
+    display: block;
+    margin-top: 10px;
+}
+.secciones i{
+    font-size: 14px;
 }

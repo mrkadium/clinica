@@ -164,6 +164,11 @@ main section .vanish-other p, main section .vanish-other h2, main section .vanis
 main section .vanish-other p, main section .vanish-other h2{
     color: var(--footer-color);
 }
+main section .vanish-other h2{
+    color: white;
+    padding: 10px 20px;
+    background-color: var(--main-color);
+}
 main section .vanish-other p{
     line-height: 1.4;
 }
@@ -209,6 +214,9 @@ main section .vanish-2 *{
     font-weight: bold;
 
     transition: background-color .3s ease;
+}
+.vermas-2{
+    color: white;
 }
 .vermas:hover{
     background-color: var(--main-color);
@@ -279,15 +287,37 @@ main section#citas{
 .slider-content{
     width: 100%;
     height: 100%;
-    padding: 50px;
-    background-color: rgba(30, 143, 255, 0.39);
+    padding: 0 10%;
+    background-color: rgba(0,0,0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
-.slider-content img{
+.slider-content .slider-img{
+    flex: 1;
     width: 50px;
+    margin: 10px;
+}
+.slider-content .slider-info{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 10px;
+    color: white;
+    padding: 20px;
+
+    border-left: 1px solid white;
+}
+.slider-content .slider-info>*{
+    margin: 10px 0px;
+    text-align: justify;
+}
+.slider-content .slider-info h3{
+    background-color: var(--main-color);
+    text-align: left;
+    padding: 10px 20px;
 }
 
 
@@ -305,6 +335,7 @@ footer{
     flex-direction: column;
     color: white;
     text-align: center;
+    padding: 20px;
 }
 .secciones{
     width: 90%;
@@ -317,6 +348,16 @@ footer{
     padding: 10px;
     border-left: 1px solid white;
     border-right: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.secciones>.direccion{
+    flex: 2;
+}
+.secciones .contactos{
+    width: 100%;
 }
 .secciones>div>h4{
     margin-bottom: 15px;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Clínicas Médicas San Antonio</title>
+    <link rel="icon" href="../img/Clínica.ico">
     <link rel="stylesheet" href="../css/principal.css">
     <link rel="stylesheet" href="../css/fonts.css">
 </head>
@@ -40,8 +41,11 @@
                     <div class="next"><i class="icon icon-circle-right"></i></div>
                     <div class="slider-content">
                         <img class="slider-img" alt="">
-                        <h3>Tema 1</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laboriosam facere aperiam beatae nisi aliquam commodi est, possimus necessitatibus tempora quaerat quo odio esse ipsa omnis accusamus rem eius in eligendi error ipsam voluptatem. Commodi, pariatur. Quidem itaque sequi maxime laudantium, accusamus similique nisi? Recusandae hic placeat expedita numquam pariatur.</p>
+                        <div class="slider-info">
+                            <h3>Noticia</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laboriosam facere aperiam beatae nisi aliquam commodi est, possimus necessitatibus tempora quaerat quo odio esse ipsa omnis accusamus rem eius in eligendi error ipsam voluptatem. Commodi, pariatur. Quidem itaque sequi maxime laudantium, accusamus similique nisi? Recusandae hic placeat expedita numquam pariatur.</p>
+                            <a href="" class="vermas vermas-2">Ver más</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,20 +81,26 @@
                 <h4>Contáctanos:</h4>
                 <a href="#"><i class="icon icon-facebook2"></i> Facebook | Clínicas Médicas San Antonio</a>
                 <a href="#"><i class="icon icon-whatsapp"></i> Whatsapp | +503 7043 9084</a>
-            </div>
-            <div class="direccion">
-                <h4>Visítanos:</h4>
-                <div class="contactos">
-                    <a href="#"><i class="icon icon-earth"></i> Calla a Colonia El Carmen, N#3</a>
-                </div>
-            </div>
-            <div class="horarios">
                 <h4>Horarios de atención:</h4>
                 <div class="contactos">
                     <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
                     <p><i class="icon icon-hour-glass"></i> Sábado y domingo: 8:30 AM - 12:30 PM</p>
                 </div>
             </div>
+            <div class="direccion">
+                <h4>Visítanos:</h4>
+                <div class="contactos">
+                    <a href="#"><i class="icon icon-earth"></i> Calla a Colonia El Carmen, N#3</a>
+                    <div id="map" style="height: 200px; width: 100%;"></div>
+                </div>
+            </div>
+            <!-- <div class="horarios">
+                <h4>Horarios de atención:</h4>
+                <div class="contactos">
+                    <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
+                    <p><i class="icon icon-hour-glass"></i> Sábado y domingo: 8:30 AM - 12:30 PM</p>
+                </div>
+            </div> -->
         </div>
     </footer>
     <script>
@@ -99,21 +109,72 @@
         }
 
         let images = ['img1.jpg','img2.jpg','img3.jpg','img4.jpg'];
-        const slider = document.querySelector(".slider");
-        const sliderimg = document.querySelector(".slider .slider-img");
         const next = document.querySelector(".slider .next");
         const prev = document.querySelector(".slider .prev");
         let cont = -1;
         let time = 5000;
+        
+        const slider = document.querySelector(".slider");
+        const sliderimg = document.querySelector(".slider .slider-img");
+        const sliderTitle = document.querySelector(".slider-info h3");
+        const sliderContent = document.querySelector(".slider-info p");
+        const sliderLink = document.querySelector(".slider-info a");
+
+        function Noticia(){
+            let img;
+            let titulo;
+            let contenido;
+            let link;
+            this.Noticia = function(i, t, c, l){
+                img = i;
+                titulo = t;
+                contenido = c;
+                link = l;
+            }
+            Object.defineProperty(this, 'img', {
+                get : function(){return img;},
+                set : function(value){img = value;}
+            });
+            Object.defineProperty(this, 'titulo', {
+                get : function(){return titulo;},
+                set : function(value){titulo = value;}
+            });
+            Object.defineProperty(this, 'contenido', {
+                get : function(){return contenido;},
+                set : function(value){contenido = value;}
+            });
+            Object.defineProperty(this, 'link', {
+                get : function(){return link;},
+                set : function(value){link = value;}
+            });
+        }
+
+        let noticia1 = new Noticia();
+        noticia1.Noticia("img1.jpg", "Sólo hoy: ¡Consultas gratis!", "Ven hoy a nuestra clínica, entre 8 y 12 de la mañana, y podrás tener una consulta gratis.", "nothing.com");
+        let noticia2 = new Noticia();
+        noticia2.Noticia("img2.jpg", "Otra noticia", "Pues esta es otra noticia", "nothing.com");
+        let noticia3 = new Noticia();
+        noticia3.Noticia("img3.jpg", "Sólo hoy: ¡Consultas gratis!", "Ven hoy a nuestra clínica, entre 8 y 12 de la mañana, y podrás tener una consulta gratis.", "nothing.com");
+        let noticia4 = new Noticia();
+        noticia4.Noticia("img4.jpg", "Otra noticia", "Pues esta es otra noticia", "nothing.com");
+
+        let noticiasArray = [noticia1, noticia2, noticia3, noticia4];
+
+        function changeNew(contador){
+            slider.style = `background-image: url('../img/${noticiasArray[contador].img}');`;
+            sliderimg.setAttribute("src", "../img/" +  noticiasArray[contador].img);
+            sliderTitle.textContent = noticiasArray[contador].titulo;
+            sliderContent.textContent = noticiasArray[contador].contenido;
+            sliderLink.setAttribute("href", noticiasArray[contador].link);
+        }
 
         function changeImage(){
-            if(cont < images.length - 1){
+            if(cont < noticiasArray.length - 1){
                 cont++;
             }else{
                 cont = 0;
             }
-            slider.style = `background-image: url('../img/${images[cont]}');`;
-            sliderimg.setAttribute("src", "../img/" +  images[cont]);
+            changeNew(cont);
         }
         
         next.addEventListener('click', nextImage);
@@ -123,8 +184,7 @@
             }else{
                 cont = 0;
             }
-            slider.style = `background-image: url('../img/${images[cont]}');`;
-            sliderimg.setAttribute("src", "../img/" +  images[cont]);
+            changeNew(cont);
         }
         
         prev.addEventListener('click', prevImage);
@@ -134,8 +194,7 @@
             }else{
                 cont = images.length - 1;
             }
-            slider.style = `background-image: url('../img/${images[cont]}');`;
-            sliderimg.setAttribute("src", "../img/" +  images[cont]);
+            changeNew(cont);
         }
         
         function timeout(){
@@ -143,6 +202,22 @@
             setTimeout(timeout, time);
         }
         timeout();
+
+        var coord = {lat:13.723006, lng:-89.730413};
+        function initMap(){
+            var options = {
+                zoom: 17,
+                center: coord
+            }
+            var map = new google.maps.Map(document.getElementById('map'), options);
+        
+            var marker = new google.maps.Marker({
+                position: coord,
+                map: map,
+                icon: '../img/ClínicaMaps.ico'
+            });
+        }
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap" type="text/javascript"></script>
 </body>
 </html>

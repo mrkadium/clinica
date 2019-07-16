@@ -22,5 +22,23 @@
             </form>
         </div>
     </div>
+    <div id="map" style="height: 400px; width: 400px;"></div>
+    <script>
+        var coord = {lat:13.723006, lng:-89.730413};
+        function initMap(){
+            var options = {
+                zoom: 17,
+                center: coord
+            }
+            var map = new google.maps.Map(document.getElementById('map'), options);
+        
+            var marker = new google.maps.Marker({
+                position: coord,
+                map: map,
+                icon: '../img/ClínicaMaps.ico'
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap" type="text/javascript"></script>
 </body>
 </html>

@@ -1,3 +1,49 @@
-<footer>Footer</footer>
+    <footer>
+        <p>Clínicas Médicas San Antonio &copy; 2019</p>
+        <div class="secciones">
+            <div class="contactos">
+                <h4>Contáctanos:</h4>
+                <a href="#"><i class="icon icon-facebook2"></i> Clínicas Médicas San Antonio</a>
+                <a href="#"><i class="icon icon-whatsapp"></i> +503 7043 9084</a>
+            </div>
+            <div class="horarios">
+                <h4>Horarios de atención:</h4>
+                <div class="contactos">
+                    <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
+                    <p><i class="icon icon-hour-glass"></i> Sábado y domingo: 8:30 AM - 12:30 PM</p>
+                </div>
+            </div>
+            <div class="direccion">
+                <h4>Visítanos:</h4>
+                <div class="contactos">
+                    <a href="#"><i class="icon icon-earth"></i> Calla a Colonia El Carmen, N#3</a>
+                    <div id="map" style="height: 200px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const openWindow = function(url){
+            location.href = url;
+        }
+        // MAP
+        var coord = {lat:13.723006, lng:-89.730413};
+        var coord2 = {lat:13.723300, lng:-89.730413};
+        function initMap(){
+            var options = {
+                zoom: 17,
+                center: coord2
+            }
+            var map = new google.maps.Map(document.getElementById('map'), options);
+        
+            var marker = new google.maps.Marker({
+                position: coord,
+                map: map,
+                icon: 'resources/img/ClínicaMaps.ico'
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap" type="text/javascript"></script>
 </body>
 </html>

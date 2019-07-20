@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/error.css">
     <title>Error</title>
 </head>
 <body>
     <div class="error">
-        <h1>Error de servidor</h1>
+        <div class="errorLogo">
+            <img src="../img/Clínica.png" onclick="openWindow('nothing.html')" alt="">
+        </div>
+        <div class="errorContent">
+            <h1><i class="icon icon-warning"></i> Recurso no encontrado</h1>
+            <p>El recurso que se ha solicitado no existe o ha sido eliminado del servidor, por lo que no se puede mostrar.</p>
+            <small><i>error404:file not found.</i></small>
+            <a href=""><i class="icon icon-home3"></i> Volver al sitio</a>
+        </div>
     </div>
 </body>
 </html>

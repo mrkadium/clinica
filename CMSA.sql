@@ -2,6 +2,18 @@ DROP DATABASE IF EXISTS cmsa;
 CREATE DATABASE cmsa;
 USE cmsa;
 
+CREATE TABLE empresa(
+	idempresa INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(200)
+);
+
+CREATE TABLE noticias(
+	idnoticia INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200) NOT NULL,
+    resumen VARCHAR(250) NOT NULL,
+    contenido LONGTEXT NOT NULL
+);
+
 CREATE TABLE departamentos(
 	iddepartamento INT(2) PRIMARY KEY AUTO_INCREMENT,
     departamento VARCHAR(20) NOT NULL,
@@ -18,63 +30,49 @@ CREATE TABLE municipios(
     INDEX (municipio)
 );
 
+CREATE TABLE sucursales(
+	idsucursal INT PRIMARY KEY AUTO_INCREMENT,
+    idempresa INT DEFAULT 1,
+    idmunicipio INT NOT NULL,
+    direccion LONGTEXT,
+    telefono1 VARCHAR(20),
+    telefono2 VARCHAR(20),
+    email VARCHAR(100),
+    
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa),
+    FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio)
+);
+
 CREATE TABLE pacientes(
-	idpaciente INT(11) PRIMARY KEY AUTO_INCREMENT,
-	expediente INT(11) NOT NULL UNIQUE,
+	idpaciente INT PRIMARY KEY AUTO_INCREMENT,
+	expediente INT NOT NULL UNIQUE,
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
     genero ENUM('FEMENINO', 'MASCULINO'),
     telefono CHAR(9),
     email VARCHAR(60),
-    idmunicipio INT(3) NOT NULL,
-    iddepartamento INT(2) NOT NULL,
+    idmunicipio INT NOT NULL,
     
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
-    FOREIGN KEY (iddepartamento) REFERENCES departamentos(iddepartamento),
     
     INDEX (expediente),
     INDEX (nombres),
-    INDEX (apellidos),
-    INDEX (genero)
-);
-
-CREATE TABLE roles(
-	idrol INT(4) PRIMARY KEY AUTO_INCREMENT,
-    rol VARCHAR(40) NOT NULL
-);
-
-CREATE TABLE opciones(
-	idopcion INT PRIMARY KEY AUTO_INCREMENT,
-    opcion VARCHAR(100) NOT NULL,
-    clasificacion VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE permisos(
-	idpermiso INT PRIMARY KEY AUTO_INCREMENT,
-    idrol INT NOT NULL,
-    idopcion INT NOT NULL,
-    
-    FOREIGN KEY (idrol) REFERENCES roles(idrol),
-    FOREIGN KEY (idopcion) REFERENCES opciones(idopcion)
-);
-
-CREATE TABLE especialidades(
-	idespecialidad INT(4) PRIMARY KEY AUTO_INCREMENT,
-    especialidad VARCHAR(200) NOT NULL,
-    
-    INDEX (especialidad)
+    INDEX (apellidos)
 );
 
 CREATE TABLE cargos(
 	idcargo INT(4) PRIMARY KEY AUTO_INCREMENT,
     cargo VARCHAR(100) NOT NULL,
+    descripcion LONGTEXT,
     
     INDEX (cargo)
 );
 
 CREATE TABLE empleados(
 	idempleado INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idjefe INT,
+    idsucursal INT,
     idcargo INT(4) NOT NULL,
     jvpm INT(11),
     nombres VARCHAR(100) NOT NULL,
@@ -84,20 +82,35 @@ CREATE TABLE empleados(
     dui CHAR(10) NOT NULL,
     nit CHAR(17) NOT NULL,
     idmunicipio INT(3) NOT NULL,
-    iddepartamento INT(2) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     fechacontratacion DATE,
     fechasalida DATE,
     estado ENUM('ACTIVO', 'INACTIVO'),
     
+    FOREIGN KEY (idjefe) REFERENCES empleados(idempleado),
+    FOREIGN KEY (idsucursal) REFERENCES sucursales(idsucursal),
     FOREIGN KEY (idcargo) REFERENCES cargos(idcargo),
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
-    FOREIGN KEY (iddepartamento) REFERENCES departamentos(iddepartamento),
     
     INDEX (jvpm),
     INDEX (nombres),
-    INDEX (apellidos),
-    INDEX (genero)
+    INDEX (apellidos)
+);
+
+CREATE TABLE contactos(
+	idcontacto INT PRIMARY KEY AUTO_INCREMENT,
+    tipo ENUM('EMAIL', 'TELEFONO') NOT NULL,
+    contacto VARCHAR(200) NOT NULL,
+    idempleado INT(11) NOT NULL,
+    
+    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
+);
+
+CREATE TABLE especialidades(
+	idespecialidad INT(4) PRIMARY KEY AUTO_INCREMENT,
+    especialidad VARCHAR(200) NOT NULL,
+    
+    INDEX (especialidad)
 );
 
 CREATE TABLE especialidades_medico(
@@ -110,25 +123,48 @@ CREATE TABLE especialidades_medico(
     PRIMARY KEY (idespecialidad, idmedico)
 );
 
-CREATE TABLE contactos(
-	idcontacto INT PRIMARY KEY AUTO_INCREMENT,
-    tipo ENUM('EMAIL', 'TELEFONO') NOT NULL,
-    contacto VARCHAR(200) NOT NULL,
-    idempleado INT(11) NOT NULL,
+CREATE TABLE horarios(
+	idhorario INT PRIMARY KEY AUTO_INCREMENT,
+    idespecialidad INT,
+    idsucursal INT,
+    horainicial VARCHAR(100),
+    horafinal VARCHAR(100),
+    dias VARCHAR(100),
     
-    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
+    FOREIGN KEY (idespecialidad) REFERENCES especialidades(idespecialidad),
+    FOREIGN KEY (idsucursal) REFERENCES sucursales(idsucursal)
+);
+
+CREATE TABLE roles(
+	idrol INT PRIMARY KEY AUTO_INCREMENT,
+    rol VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE menus(
+	idmenu INT PRIMARY KEY AUTO_INCREMENT,
+    menu VARCHAR(100) NOT NULL,
+	idpadre INT NOT NULL
+);
+
+CREATE TABLE permisos(
+	idpermiso INT PRIMARY KEY AUTO_INCREMENT,
+    idrol INT NOT NULL,
+    idmenu INT NOT NULL,
+    
+    FOREIGN KEY (idrol) REFERENCES roles(idrol),
+    FOREIGN KEY (idmenu) REFERENCES menus(idmenu)
 );
 
 CREATE TABLE usuarios(
-	idusuario INT(11) PRIMARY KEY AUTO_INCREMENT,
+	idusuario INT PRIMARY KEY AUTO_INCREMENT,
+    idempleado INT NOT NULL,
+    idrol INT NOT NULL,
     usuario VARCHAR(20) BINARY NOT NULL UNIQUE,
-    credencial VARCHAR(64) NOT NULL,
-    idrol INT(4) NOT NULL,
-    idempleado INT(11) NOT NULL,
+    clave VARCHAR(64) NOT NULL,
     estado ENUM('ACTIVO', 'BLOQUEADO'),
     
-    FOREIGN KEY (idrol) REFERENCES roles(idrol),
     FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
+    FOREIGN KEY (idrol) REFERENCES roles(idrol),
     
     INDEX (usuario)
 );
@@ -136,13 +172,11 @@ CREATE TABLE usuarios(
 CREATE TABLE laboratorios(
 	idlaboratorio INT(6) PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(200) NOT NULL,
-    iddepartamento INT(2) NOT NULL,
     idmunicipio INT(3) NOT NULL,
     direccion VARCHAR(200),
     descripcion LONGTEXT,
     
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
-    FOREIGN KEY(iddepartamento) REFERENCES departamentos(iddepartamento),
     
     INDEX (nombre)
 );
@@ -158,15 +192,15 @@ CREATE TABLE consumibles(
 	idconsumible INT(11) PRIMARY KEY AUTO_INCREMENT,
     tipo ENUM('PRODUCTO', 'SERVICIO') NOT NULL,
     nombre VARCHAR(200) NOT NULL,
-    presentacion ENUM('N/A', 'LÍQUIDO', 'JARABE', 'POLVO', 'PASTILLA'),
     alias VARCHAR(100) NOT NULL,
+    presentacion ENUM('N/A', 'LÍQUIDO', 'JARABE', 'POLVO', 'PASTILLA', 'CÁPSULA'),
     idmarca INT(11) NOT NULL,
     preciocompra DECIMAL(10,2) NOT NULL,
+    precioventasugerido DECIMAL(10,2) NOT NULL,
     precioventa DECIMAL(10,2) NOT NULL,
     
     FOREIGN KEY (idmarca) REFERENCES marcas(idmarca),
     
-    INDEX (tipo),
     INDEX (nombre),
     INDEX (alias)
 );
@@ -175,6 +209,8 @@ CREATE TABLE compras(
 	idcompra INT(11) PRIMARY KEY AUTO_INCREMENT,
     fecha DATETIME NOT NULL,
     idlaboratorio INT(11) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    descuentos DECIMAL(10,2) NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     
     FOREIGN KEY (idlaboratorio) REFERENCES laboratorios(idlaboratorio)
@@ -183,11 +219,11 @@ CREATE TABLE compras(
 CREATE TABLE detalles_compra(
 	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT,
     idcompra INT(11) NOT NULL,
-    idconsumibe INT(11) NOT NULL,
+    idconsumibLe INT(11) NOT NULL,
     fechacaducidad DATE,
     cantidad INT(11) NOT NULL,
     preciocompra DECIMAL(10,2) NOT NULL,
-    precioventa DECIMAL(10,2) NOT NULL,
+    precioventasugerido DECIMAL(10,2) NOT NULL,
     gravado DECIMAL(10,2),
     
     FOREIGN KEY (idcompra) REFERENCES compras(idcompra),
@@ -204,97 +240,103 @@ CREATE TABLE inventarios(
 
 CREATE TABLE detalles_inventario(
 	iddetalle_inventario INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idconsumibe INT(11) NOT NULL,
+    idinventario INT NOT NULL,
+    idconsumible INT(11) NOT NULL,
     fechacaducidad DATE,
     
+    FOREIGN KEY (idinventario) REFERENCES inventarios(idinventario),
     FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
 
 CREATE TABLE ventas(
 	idventa INT(11) PRIMARY KEY AUTO_INCREMENT,
-    fecha DATETIME NOT NULL
+    numero INT NOT NULL,
+    fecha DATETIME NOT NULL,
+    idpaciente INT NOT NULL,
+	paciente VARCHAR(200) NOT NULL,
+	direccion LONGTEXT NOT NULL,
+	telefono VARCHAR(20),
+	idempleado INT NOT NULL,
+	subtotal DECIMAL(10,2),
+	descuentos DECIMAL(10,2),
+	total DECIMAL(10,2),
+	deuda DECIMAL(10,2),
+    estado ENUM('PENDIENTE', 'CANCELADA'),
+	
+    FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
+    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
 );
 
 CREATE TABLE detalles_venta(
 	iddetalle_venta INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idconsumibe INT(11) NOT NULL,
+    idventa INT NOT NULL,
+    idconsumible INT(11) NOT NULL,
+    cantidad INT(11),
+	precio DECIMAL(10,2),
+	excento DECIMAL(10,2),
+	gravado	DECIMAL(10,2),
+	nosujeto DECIMAL(10,2),
+	montoIVA DECIMAL(10,2),
+	montoFOVIAL DECIMAL(10,2),
+	montoGUERRA DECIMAL(10,2),
     
+    FOREIGN KEY (idventa) REFERENCES ventas(idventa),
     FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
 
--- SI ES CONSULTA
-CREATE TABLE detalles_consulta(
-	iddetalle_consulta INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idventa INT(11) NOT NULL,
+CREATE TABLE abonos(
+	idabono INT PRIMARY KEY AUTO_INCREMENT,
+    idventa	INT(11),
+	fechaabono DATE,
+	abono DECIMAL(10,2),
     
     FOREIGN KEY (idventa) REFERENCES ventas(idventa)
 );
 
+-- SI ES CONSULTA
+CREATE TABLE empleados_consulta(
+	idconsulta INT NOT NULL,
+    idempleado INT NOT NULL,
+    
+    FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
+    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
+    
+    PRIMARY KEY (idconsulta, idempleado)
+);
+
+CREATE TABLE detalles_consulta(
+	idconsulta INT(11) PRIMARY KEY,
+    razonconsulta LONGTEXT,
+	temperatura	VARCHAR(10),
+	frecuenciacardiaca VARCHAR(20),
+	frecuenciarespiratoria VARCHAR(20),
+	presionarterial	VARCHAR(20),
+	saturacionoxigeno VARCHAR(20),
+	diagnostico LONGTEXT,
+	tratamiento LONGTEXT,
+	observaciones LONGTEXT,
+    
+    FOREIGN KEY (idconsulta) REFERENCES ventas(idventa)
+);
+
 CREATE TABLE examenes(
-	idexamen INT(11) PRIMARY KEY AUTO_INCREMENT
+	idexamen INT(11) PRIMARY KEY AUTO_INCREMENT,
+    examen VARCHAR(200) NOT NULL,
+    descripcion LONGTEXT
+);
+
+CREATE TABLE examenes_consulta(
+	idconsulta INT NOT NULL,
+    idexamen INT NOT NULL,
+    estado ENUM('PENDIENTE', 'REVISADO'),
+    fecharevision DATE,
+    resultados LONGTEXT,
+    
+    FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
+    FOREIGN KEY (idexamen) REFERENCES examenes(idexamen)
 );
 
 /*
-CREATE TABLE operaciones(
-	idoperacion INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idtitular INT(11) NOT NULL,
-    titular VARCHAR(200) NOT NULL,
-    categoria ENUM('INVENTARIO', 'VENTA', 'COMPRA'),
-    fecha DATETIME NOT NULL,
-    idlaboratorio INT NOT NULL DEFAULT 1,
-    
-    FOREIGN KEY (idlaboratorio) REFERENCES laboratorios(idlaboratorio),
-    
-    INDEX (categoria),
-    INDEX (fecha)
-);
-
-CREATE TABLE detalles_operacion(
-	iddetalle INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idoperacion INT(11) NOT NULL,
-    idconsumible INT(11) NOT NULL,
-    cantidad INT(11) NOT NULL,
-    preciocompra DECIMAL(10,2),
-    precioventa DECIMAL(10,2) NOT NULL,
-    gravado DECIMAL(10,2) NOT NULL,
-    fecha_caducidad DATE,
-    
-    FOREIGN KEY (idoperacion) REFERENCES operaciones(idoperacion),
-    FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
-);
-
-CREATE TABLE detalle_consulta(
-	idconsulta INT(11) PRIMARY KEY,
-    idmedico INT(11) NOT NULL,
-    razonconsulta LONGTEXT,
-    temperatura VARCHAR(10) DEFAULT '36.5',
-    frecuenciacardiaca VARCHAR(20),
-    frecuenciarespiratoria VARCHAR(20),
-    presionarterial VARCHAR(20),
-    saturacionoxigeno VARCHAR(20),
-    diagnostico LONGTEXT,
-    tratamiento LONGTEXT,
-    observaciones LONGTEXT,
-    
-    FOREIGN KEY (idconsulta) REFERENCES operaciones(idoperacion),
-    FOREIGN KEY (idmedico) REFERENCES empleados(idempleado),
-    
-    FULLTEXT (diagnostico)
-);
-
-CREATE TABLE resultados_examenes(
-	idresultado INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idconsulta INT(11),
-    examen VARCHAR(200),
-    estado ENUM('PENDIENTE','ANALIZADO'),
-    resultados LONGTEXT,
-    fecha DATE,
-    
-    FOREIGN KEY (idconsulta) REFERENCES operaciones(idoperacion)
-);
-
-
-
 -- TRIGGERS
 DELIMITER //
 CREATE TRIGGER bi_operaciones

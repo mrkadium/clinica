@@ -40,74 +40,23 @@
             <i class="icon icon-menu"></i>
         </div>
         <div class="linksMobile">
-            <a href="#" class="iniciar">Iniciar sesión</a>
-            <a href="#" class="iniciar">Regístrate</a>
+            <!-- <a href="#" class="iniciar">Iniciar sesión</a> -->
+            <!-- <a href="#" class="iniciar">Regístrate</a> -->
+            <div class="sesionUsuario">
+                <p class="nombre">Mario Adalberto Rivera Olivo</p>
+                <p class="usuario">[mario.rivera]</p>
+                <a href="#" class="cerrar">Cerrar Sesión</a>
+            </div>
             <hr>
             <a href="#servicios">Servicios</a>
             <a href="#citas">Citas</a>
             <a href="#acercade">Acerca de</a>
-            <hr>
-            <a href="#" class="cerrar">Cerrar Sesión</a>
+            <!-- <hr> -->
+            <!-- <a href="#" class="cerrar">Cerrar Sesión</a> -->
         </div>
     </nav>
-    <div class="formulario">
-        <h1 id="titulo">Formulario</h1>
-        <form id="formulario" action="">
-            <div class="campo">
-                <label for="campo1">Campo1</label>
-                <i></i>
-                <div class="varios">
-                    <input type="text" class="short" name="campo1" id="campo1" readonly tabindex="-1">
-                    <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
-                    <a href="#" class="lupa"><i class="icon icon-search"></i></a>
-                </div>
-            </div>
-            <div class="campo">
-                <label for="campo2">Campo2</label>
-                <i></i>
-                <input type="text" name="campo2" id="campo2">
-            </div>
-            <div class="campo">
-                <label for="campo3">Campo3</label>
-                <i></i>
-                <input type="text" name="campo3" id="campo3">
-            </div>
-            <div class="campo">
-                <label for="campo5">Campo5</label>
-                <i></i>
-                <select name="campo5" id="campo5">
-                    <option value="0">-- Seleccionar --</option>
-                    <option value="1">Avión</option>
-                </select>
-            </div>
-            <div class="campo">
-                <label for="campo6">Campo6</label>
-                <i></i>
-                <div>
-                    <input type="radio" name="radio">Excelente
-                </div>
-                <div>
-                    <input type="radio" name="radio">Malo
-                </div>
-            </div>
-            <div class="campo">
-                <label for="campo7">Campo7</label>
-                <i></i>
-                <div>
-                    <input type="checkbox" name="bici">Bici
-                </div>
-                <div>
-                    <input type="checkbox" name="carro">Carro
-                </div>
-            </div>
-            <div class="campo">
-                <label for="campo8">Campo8</label>
-                <i></i>
-                <textarea name="obs" id="obs" cols="30" rows="10"></textarea>
-            </div>
-            <input type="submit" name="" id="" class="ghost-blue" value="Enviar"> 
-            <a href="" class="ghost-red">Cancelar</a>
-        </form>
+    <div class="contenedor">
+
     </div>
     <footer>
         <p>Clínicas Médicas San Antonio &copy; 2019</p>
@@ -159,29 +108,6 @@
             icon: '../img/ClínicaMaps.ico'
         });
     }
-
-
-    // VALIDACIONES DE FORMULARIO
-    const formulario = document.querySelector('#formulario');
-    let evaluar = true;
-
-    let campos = [
-        new Campo('campo1', 'Debe elegir un elemento dando clic en la lupa'),
-        new Campo('campo2'),
-        new Campo('campo3'),
-        new Campo('campo5', 'Debe seleccionar un elemento')
-    ];
-
-    formulario.addEventListener('submit', function(e){
-        for(c of campos){
-            if(c.alertar() == false){
-                evaluar = false;
-            }
-        }
-        if(!evaluar){
-            e.preventDefault();
-        }
-    });
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap" type="text/javascript"></script>
 </body>

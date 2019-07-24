@@ -1,8 +1,8 @@
 window.onload = function(){
     // BURGER
     const burger = document.querySelector('.burger');
-    const bars = document.querySelector('.burger .fa-bars');
-    const ex = document.querySelector('.burger .fa-times');
+    const bars = document.querySelector('.burger .icon-menu');
+    const ex = document.querySelector('.burger .icon-cross');
     const linksMobile = document.querySelector("nav .linksMobile");
 
     if(burger){
@@ -73,46 +73,54 @@ window.onload = function(){
 
         let noticiasArray = [noticia1, noticia2, noticia3, noticia4];
 
-        function changeNew(contador){
-            slider.style = `background-image: url('../img/${noticiasArray[contador].img}');`;
-            sliderimg.setAttribute("src", "../img/" +  noticiasArray[contador].img);
-            sliderTitle.textContent = noticiasArray[contador].titulo;
-            sliderContent.textContent = noticiasArray[contador].contenido;
-            sliderLink.setAttribute("href", noticiasArray[contador].link);
+        if(next && prev){
+            function changeNew(contador){
+                slider.style = `background-image: url('../img/${noticiasArray[contador].img}');`;
+                sliderimg.setAttribute("src", "../img/" +  noticiasArray[contador].img);
+                sliderTitle.textContent = noticiasArray[contador].titulo;
+                sliderContent.textContent = noticiasArray[contador].contenido;
+                sliderLink.setAttribute("href", noticiasArray[contador].link);
+            }
+
+            function changeImage(){
+                if(cont < noticiasArray.length - 1){
+                    cont++;
+                }else{
+                    cont = 0;
+                }
+                changeNew(cont);
+            }
+        
+        
+            next.addEventListener('click', nextImage);
+            function nextImage(){
+                if(cont < images.length - 1){
+                    cont++;
+                }else{
+                    cont = 0;
+                }
+                changeNew(cont);
+            }
+            
+            prev.addEventListener('click', prevImage);
+            function prevImage(){
+                if(cont > 0){
+                    cont--;
+                }else{
+                    cont = images.length - 1;
+                }
+                changeNew(cont);
+            }
+        
+            function timeout(){
+                changeImage();
+                setTimeout(timeout, time);
+            }
+            timeout();
         }
 
-        function changeImage(){
-            if(cont < noticiasArray.length - 1){
-                cont++;
-            }else{
-                cont = 0;
-            }
-            changeNew(cont);
-        }
-        
-        next.addEventListener('click', nextImage);
-        function nextImage(){
-            if(cont < images.length - 1){
-                cont++;
-            }else{
-                cont = 0;
-            }
-            changeNew(cont);
-        }
-        
-        prev.addEventListener('click', prevImage);
-        function prevImage(){
-            if(cont > 0){
-                cont--;
-            }else{
-                cont = images.length - 1;
-            }
-            changeNew(cont);
-        }
-        
-        function timeout(){
-            changeImage();
-            setTimeout(timeout, time);
-        }
-        timeout();
+        // const forms = function(){
+            
+        // }
+        // forms();
 }

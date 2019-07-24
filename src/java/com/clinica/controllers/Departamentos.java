@@ -23,44 +23,40 @@ public class Departamentos extends HttpServlet {
         
         String accion = request.getParameter("accion") != null ? request.getParameter("accion") : "";
         
-        try {
-            switch(accion){
-                case "":
-                    accion(request, response);
-                    break;
-                default:
-                    request.getRequestDispatcher("error/error404.html").forward(request, response);
-                    break;
+        if(accion.equals("")){
+            try{
+                Conexion conn = new ConexionPool();
+                conn.conectar();
+                Operaciones.abrirConexion(conn);
+                Operaciones.iniciarTransaccion();
+
+                String sql = "SELECT * FROM departamentos;";
+
+                String[][] resultSet  = Operaciones.consultar(sql, null);
+
+                String[] cabeceras = new String[]{"ID","Departamento"};
+
+                Tabla t = new Tabla(resultSet,"80%",Tabla.STYLE.TABLE01,Tabla.ALIGN.LEFT,cabeceras);
+
+                request.setAttribute("tabla", t.getTabla());
+                request.getRequestDispatcher("home/principal.jsp").forward(request, response);
+
+                Operaciones.commit();
+            }catch(Exception e){
+                try {
+                    Operaciones.rollback();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Departamentos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }finally{
+                try {
+                    Operaciones.cerrarConexion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Departamentos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Departamentos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-    private void accion(HttpServletRequest request, HttpServletResponse response) throws SQLException{
-        try{
-            Conexion conn = new ConexionPool();
-            conn.conectar();
-            Operaciones.abrirConexion(conn);
-            Operaciones.iniciarTransaccion();
-            
-            String sql = "SELECT * FROM departamentos;";
-            
-            String[][] resultSet  = Operaciones.consultar(sql, null);
-            
-            String[] cabeceras = new String[]{"ID","Departamento"};
-            
-            Tabla t = new Tabla(resultSet,"80%",Tabla.STYLE.TABLE01,Tabla.ALIGN.LEFT,cabeceras);
-            
-            request.setAttribute("tabla", t.getTabla());
-            request.getRequestDispatcher("home/principal.jsp").forward(request, response);
-            
-            Operaciones.commit();
-        }catch(Exception e){
-            Operaciones.rollback();
-        }finally{
-            Operaciones.cerrarConexion();
-        }
     }
 
     @Override

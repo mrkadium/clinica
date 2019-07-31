@@ -32,7 +32,7 @@
     font-size: 17px;
     color: var(--gray);
 }
-.formulario .campo label{
+.formulario .campo>label{
     color: var(--main-color);
 }
 .formulario .campo>i{
@@ -46,7 +46,8 @@
     display: flex;
     align-items: flex-start;
 }
-.formulario .campo input[type="text"], 
+.formulario .campo input[type="text"],
+.formulario .campo input[type="number"],
 .formulario .campo select, 
 .formulario .campo textarea{
     border: 2px solid var(--nav-color-bold);
@@ -77,7 +78,8 @@
     height: 100px;
     padding: 5px;
 }
-.formulario .campo .varios .short{
+.formulario .campo .varios .short,
+.formulario .campo input.short{
     width: 80px;
 }
 .formulario .campo a{
@@ -146,6 +148,7 @@
     }
     .formulario .campo .varios .long,
     .formulario .campo input[type="text"],
+    /* .formulario .campo input[type="number"], */
     .formulario .campo select,
     .formulario .campo textarea{
         width: 60%;

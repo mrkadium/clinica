@@ -56,6 +56,40 @@ public class Tabla {
     private String paginaImprimible;
     private String iconoImprimible;
             
+    public Tabla(String[][] rs, String[] cabeceras){
+       this.rs = rs;
+       this.cabeceras = cabeceras; 
+       this.estilo = "table01";
+       this.ancho = "80%";
+       this.alineacion = 2;
+       
+       cabeceraSeleccionable = "";
+       cabeceraModificable = "";
+       cabeceraEliminable = "";
+       cabeceraImprimible = "";
+       
+       anchocolumnas = null;
+       modificable = false;
+       eliminable = false;
+       seleccionable = false;
+       textoEliminable = "Eliminar";
+       textoModificable = "Modificar";
+       textoSeleccionable = "Seleccionar";
+       iconoEliminable = "";
+       iconoModificable = "";
+       iconoSeleccionable = "";   
+       paginaEliminable = "";
+       paginaModificable = "";
+       paginaSeleccionable = "";
+       filaSeleccionable=false;
+       metodoFilaSeleccionable="=_seleccionar";
+       pie="Resultado";
+       
+       imprimible = false;
+       paginaImprimible = "";
+       iconoImprimible = "";
+    }
+    
     public Tabla(String[][] rs, String ancho, String estilo,int alineacion,String[] cabeceras){
        this.rs = rs;
        this.estilo = estilo; 

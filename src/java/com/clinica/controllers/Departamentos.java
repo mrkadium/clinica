@@ -36,13 +36,16 @@ public class Departamentos extends HttpServlet {
 
                 String[] cabeceras = new String[]{"ID","Departamento"};
 
-                Tabla t = new Tabla(resultSet,"80%",Tabla.STYLE.TABLE01,Tabla.ALIGN.LEFT,cabeceras);
+                Tabla t = new Tabla(resultSet, cabeceras);
 
-                request.setAttribute("tabla", t.getTabla());
-                request.getRequestDispatcher("home/principal.jsp").forward(request, response);
+                String tabla = resultSet != null ? t.getTabla() : "No hay datos";
+                
+                request.setAttribute("tabla", tabla);
+                request.getRequestDispatcher("views/departamentos/departamentos_consulta.jsp").forward(request, response);
 
                 Operaciones.commit();
             }catch(Exception e){
+                response.getWriter().println(e.getMessage());
                 try {
                     Operaciones.rollback();
                 } catch (SQLException ex) {

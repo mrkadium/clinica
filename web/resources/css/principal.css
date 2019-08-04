@@ -1,20 +1,18 @@
 :root{
-    --nav-color: rgba(255, 255, 255, 0.9);
+    --nav-color: rgba(255, 255, 255, 0.95);
     --nav-color-bold: rgb(200,200,200);
     --footer-color: rgb(75,75,75);
     --footer-color-light: rgba(60,60,60);
     --footer-color-trans: rgba(60,60,60, .5);
     --main-color: rgb(0,164,167);
     --nav-font-color: rgb(150,150,150);
+    --light-green: rgb(97, 205, 97);
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-body{
-    background-color: rgb(230,230,230);
 }
 
 
@@ -23,15 +21,15 @@ body{
 
 /* NAVBAR */
 nav{
-    position: fixed;
+    position: sticky;
+    min-height: 10vh;
     top: 0;
     z-index: 1;
     width: 100%;
-    padding: 10px;
     overflow: hidden;
     background-color: white;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 0 10px -5px black;
@@ -42,6 +40,7 @@ nav .logo{
     display: flex;
     align-items: center;
     height: 10vh;
+    padding: 10px;
     /* padding-left: 20px; */
 }
 nav .logo:hover{
@@ -54,7 +53,7 @@ nav .logo h1{
     color: var(--nav-font-color);
     font-size: 16px;
     margin-left: 10px;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     display: none;
 
     transition: color .3s ease;
@@ -63,22 +62,25 @@ nav .logo:hover h1{
     color: var(--main-color);
 }
 nav .links, nav .iniciarSesion{
-    padding: 0 20px;
+    padding: 0 5px;
     flex: auto;
     display: flex;
     justify-content: flex-end;
 }
 nav .links a, nav .linksMobile a, nav .iniciarSesion a{
     font-weight: bold;
-    letter-spacing: 1px;
-    padding: 10px 20px;
+    /* letter-spacing: 1px; */
+    padding: 10px 10px;
     text-decoration: none;
     color: var(--nav-font-color);
 
     transition: color .3s ease;
 }
-nav .links a:hover, nav .linksMobile a:hover, nav .iniciarSesion a:hover{
+nav .links a:hover, nav .linksMobile a:hover{
     color: var(--main-color);
+}
+nav .iniciarSesion a:hover{
+    color: var(--light-green);
 }
 nav .iniciarSesion{
     flex: none;
@@ -97,13 +99,29 @@ nav .linksMobile{
     flex-wrap: wrap;
     background-color: var(--nav-color);
 }
-nav .linksMobile a{
+nav .linksMobile .sesionUsuario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+nav .linksMobile .sesionUsuario p{
     color: var(--main-color);
 }
-nav .linksMobile .iniciar{
+nav .linksMobile .sesionUsuario p.nombre{
+    font-weight: bold;
+}
+nav .linksMobile a{
+    color: var(--nav-font-color);
+}
+nav .linksMobile hr{
+    width: 60%;
+    border-color: rgba(0, 0, 0, 0.192);
+}
+nav .linksMobile .iniciar:hover{
     color: rgb(97, 205, 97);
 }
-nav .linksMobile .cerrar{
+nav .linksMobile .cerrar:hover{
     color: red;
 }
 
@@ -111,13 +129,13 @@ nav .sesion,
 nav .links,
 nav .iniciarSesion,
 nav .linksMobile,
-.burger .fa-times{
+.burger .icon-cross{
     display: none;
 }
 .burger{
-    position: fixed;
-    top: 20;
-    right: 0;
+    /* position: fixed; */
+    /* top: 20; */
+    /* right: 0; */
     z-index: 1;
     padding: 5px;
     background-color: white;
@@ -137,8 +155,9 @@ nav .linksMobile,
 
 
 .contenedor{
-    margin-top: 10vh;
-    min-height: 90vh;
+    /* margin-top: 10vh; */
+    /* height: 90vh; */
+    min-height: 60vh;
     background-color: white;
 }
 /* MAIN */
@@ -375,7 +394,7 @@ main section#citas{
 
 /* FOOTER */
 footer{
-    min-height: 40vh;
+    min-height: 20vh;
     width: 100%;
     overflow: hidden;
     background-color: var(--footer-color);
@@ -462,11 +481,33 @@ footer{
     nav .logo h1{
         display: block;
     }
-    .burger{
+    .burger, nav div.linksMobile{
         display: none;
     }
     nav .links,
-    nav .iniciarSesion{
+    nav .iniciarSesion
+    /* nav .sesion */
+    {
         display: flex;
+    }
+    nav .sesion{
+        font-size: 14px;
+        border-left: 2px solid var(--nav-color-bold);
+        padding: 10px;
+        color: var(--nav-font-color);
+    }
+    nav .sesion .nombre{
+        font-weight: bold;
+    }
+    nav .sesion .usuario{
+        margin-bottom: 5px;
+    }
+    nav .sesion .cerrar{     
+        margin-top: 10px;
+        color: rgb(250, 70, 70);
+        text-decoration: none;
+    }
+    nav .sesion .cerrar:hover{
+        text-decoration: underline;
     }
 }

@@ -3,7 +3,6 @@
 <%@include file="../WEB-INF/jspf/_navbar.jspf" %>
 
     <div class="contenedor">
-        <h1>${tabla}</h1>
         <main>
             <div class="slider-container">
                 <div class="slider">

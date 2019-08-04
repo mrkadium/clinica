@@ -156,7 +156,8 @@ nav .linksMobile,
 
 .contenedor{
     /* margin-top: 10vh; */
-    height: 90vh;
+    /* height: 90vh; */
+    min-height: 60vh;
     background-color: white;
 }
 /* MAIN */
@@ -393,7 +394,7 @@ main section#citas{
 
 /* FOOTER */
 footer{
-    min-height: 40vh;
+    min-height: 20vh;
     width: 100%;
     overflow: hidden;
     background-color: var(--footer-color);
@@ -480,7 +481,7 @@ footer{
     nav .logo h1{
         display: block;
     }
-    .burger{
+    .burger, nav div.linksMobile{
         display: none;
     }
     nav .links,

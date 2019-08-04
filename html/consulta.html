@@ -47,47 +47,33 @@
             <a href="#" class="cerrar">Cerrar Sesión</a>
         </div>
     </nav>
+
     <div class="contenedor">
         <main>
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="prev"><i class="icon icon-circle-left"></i></div>
-                    <div class="next"><i class="icon icon-circle-right"></i></div>
-                    <div class="slider-content">
-                        <img class="slider-img" alt="">
-                        <div class="slider-info">
-                            <h3>Noticia</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laboriosam facere aperiam beatae nisi aliquam commodi est, possimus necessitatibus tempora quaerat quo odio esse ipsa omnis accusamus rem eius in eligendi error ipsam voluptatem. Commodi, pariatur. Quidem itaque sequi maxime laudantium, accusamus similique nisi? Recusandae hic placeat expedita numquam pariatur.</p>
-                            <a href="" class="vermas vermas-2">Ver más</a>
-                        </div>
+            <div class="fondo">
+                <div class="conf">
+                    <h1>Lista de Departamentos</h1>
+                    <a href=""><i class="fas fa-plus-circle"></i> Agregar</a>
+                    <div class="header">
+                        <form action="">
+                            <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
+                            <select name="" id="category" title="Zona"> 
+                                <option value="0">-- Filtrar por zona --</option>
+                                <c:forEach var="v" items="${Zonas}">
+                                    <option value="${v.zona}">${v.zona}</option>
+                                </c:forEach>
+                            </select>
+                            <input type="reset" id="reset" value="Quitar filtro">
+                        </form>
+                    </div>
+                    <div class="tablas">
+                        
                     </div>
                 </div>
             </div>
-            <section id="servicios">
-                <div class="vanish">
-                    <div class="sec">
-                        <h2>Servicios</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
-                        <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
-                    </div>
-                </div>
-            </section>
-            <section id="citas">
-                <div class="vanish-2">
-                    <h2>Citas</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
-                    <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
-                </div>
-            </section>
-            <section id="acercade">
-                <div class="vanish-other">
-                    <h2>Acerca de nosotros</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
-                    <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
-                </div>
-            </section>
         </main>
     </div>
+
     <footer>
         <p>Clínicas Médicas San Antonio &copy; 2019</p>
         <div class="secciones">
@@ -116,11 +102,6 @@
         const openWindow = function(url){
             location.href = url;
         }
-        document.querySelector('body').addEventListener('change', function(){
-            if(document.querySelector('body').offsetWidth() > 768){
-                document.querySelector('nav .linksMobile').style = 'display: none;';
-            }
-        });
     </script>
 </body>
 </html>

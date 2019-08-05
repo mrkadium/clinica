@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/tablas.css">
     <script src="../js/form.js"></script>
     <script src="../js/main.js"></script>
 </head>
@@ -57,17 +58,300 @@
                     <div class="header">
                         <form action="">
                             <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
-                            <select name="" id="category" title="Zona"> 
-                                <option value="0">-- Filtrar por zona --</option>
+                            <select name="" id="category" title="instructor"> 
+                                <option value="0">-- Filtrar por instructor --</option>
                                 <c:forEach var="v" items="${Zonas}">
-                                    <option value="${v.zona}">${v.zona}</option>
+                                    <option value="Mario">Mario</option>
                                 </c:forEach>
                             </select>
                             <input type="reset" id="reset" value="Quitar filtro">
                         </form>
                     </div>
                     <div class="tablas">
-                        
+                        <table id="table01">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>catedrático</th>
+                                    <th>instructor</th>
+                                    <th>materia</th>
+                                    <th>no. grupo</th>
+                                    <th>id</th>
+                                    <th>catedrático</th>
+                                    <th>instructor</th>
+                                    <th>materia</th>
+                                    <th>no. grupo</th>
+                                    <th>ver más</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Este campo es diferente</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Mario Adalberto Rivera Olivo</td>
+                                    <td>Iván Alvarado</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td>Contenido de campo</td>
+                                    <td><a href="grupo.html" class="btn"><i class="far fa-folder-open"></i></a></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="10">Resultados</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>

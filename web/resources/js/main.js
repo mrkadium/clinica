@@ -1,8 +1,8 @@
 window.onload = function(){
     // BURGER
     const burger = document.querySelector('.burger');
-    const bars = document.querySelector('.burger .fa-bars');
-    const ex = document.querySelector('.burger .fa-times');
+    const bars = document.querySelector('.burger .icon-menu');
+    const ex = document.querySelector('.burger .icon-cross');
     const linksMobile = document.querySelector("nav .linksMobile");
 
     if(burger){
@@ -18,6 +18,73 @@ window.onload = function(){
             }
         });
     }
+
+
+    //BUSCAR
+    const buscar = document.querySelector('#buscar');
+    const category = document.querySelector('#category');
+    const reset = document.querySelector('#reset');
+    const tableHeadRow = document.querySelector('#table01 thead tr');
+
+    function filter(value){
+        let texto = value;
+        texto = texto.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").normalize();
+        let contenido = RegExp(texto, 'i');
+        let filas = document.querySelectorAll("#table01 tbody tr");
+
+        for(i = 0; i < filas.length; i++){
+            let f = filas[i];
+            let filtro = f.textContent.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").normalize();
+            filtro.search(contenido) == '-1' ? f.style = 'display: none;' : f.style = '';
+        }
+    }
+    function filterSelect(value, index){
+        let texto = value;
+        texto = texto.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").normalize();
+        let contenido = RegExp(texto, 'i');
+        let filas = document.querySelectorAll("#table01 tbody tr");
+
+        for(i = 0; i < filas.length; i++){
+            let f = filas[i].cells[index];
+            let filtro = f.textContent.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").normalize();
+            filtro.search(contenido) == '-1' ? filas[i].style = 'display: none;' : filas[i].style = '';
+        }
+    }
+
+    if(buscar){
+        buscar.addEventListener('input', function(){
+            filter(buscar.value);
+        });
+
+        buscar.parentElement.addEventListener('submit', function(e){
+            e.preventDefault();
+        });
+    }
+    if(category){
+        let index = -1;
+        for(i = 0; i < tableHeadRow.cells.length; i++){ //identifica columna del select
+            let aux = tableHeadRow.cells[i];
+            if(aux.textContent === category.getAttribute('title')){
+                if(index == -1){
+                    index = i;
+                }
+            }
+        }
+        category.addEventListener('change', function(){
+            if(index != -1 && category.value != 0){
+                filterSelect(category.value, index);
+            }else{
+                filter('');
+            }
+        });
+    }
+    if(reset){
+        reset.parentElement.addEventListener('reset', function(){
+            filter('');
+        });
+    }
+
+
 
 
     // SLIDER

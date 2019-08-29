@@ -1,8 +1,8 @@
     <c:if test="${resultado!=null}">
         <c:if test="${resultado == 0 || resultado == 2}">
-            <p class="error"><strong>La operación no se realizó <i class="far fa-frown"></i></strong></p>
+            <p class="error"><strong>La operación no se realizó <i class="icon icon-sad"></i></strong></p>
         </c:if>
         <c:if test="${resultado == 1}">
-            <p class="correcto"><strong>Operación realizada correctamente <i class="far fa-smile"></i></strong></p>
+            <p class="correcto"><strong>Operación realizada correctamente <i class="icon icon-smile"></i></strong></p>
         </c:if>
     </c:if>

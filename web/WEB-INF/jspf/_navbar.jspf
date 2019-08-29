@@ -20,15 +20,15 @@
         </div>
         <div class="iniciarSesion">
             <a href="#">Iniciar sesión</a>
-            <a href="#">Regístrate</a>
+            <!--<a href="#">Regístrate</a>-->
         </div>
         <div class="burger">
-            <i class="fas fa-times"></i>
-            <i class="fas fa-bars"></i>
+            <i class="icon icon-cross"></i>
+            <i class="icon icon-menu"></i>
         </div>
         <div class="linksMobile">
             <a href="#" class="iniciar">Iniciar sesión</a>
-            <a href="#" class="iniciar">Regístrate</a>
+            <!--<a href="#" class="iniciar">Regístrate</a>-->
             <a href="#servicios">Servicios</a>
             <a href="#citas">Citas</a>
             <a href="#acercade">Acerca de</a>

@@ -13,15 +13,16 @@
 main .fondo{
     align-items: flex-start;
     align-content: flex-start;
-    color: rgb(177, 221, 223);
 }
-main .error,
-main .correcto{
+main p.error,
+main p.correcto{
     text-align: center;
     margin: 20px 0;
+}
+main p.correcto strong{
     color: var(--correcto);
 }
-main .error{
+main p.error strong{
     color: var(--error);
 }
 .conf{
@@ -138,14 +139,16 @@ main .error{
     background-color: white;
 }
 #table01 tbody tr:hover{
-    background-color: rgb(245,245,245);
+    background-color: rgb(177, 221, 223);
 }
 #table01 tr .btn{
     font-size: 20px;
     color:rgb(150, 150, 150);
+    text-decoration: none;
 }
 #table01 tr .btn:hover{
     color:var(--main-color);
+    cursor: pointer;
 }
 #table01{
     /* border: 1px solid rgb(150, 150, 150); */

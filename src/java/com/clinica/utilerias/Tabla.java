@@ -11,11 +11,11 @@ public class Tabla {
     private String[][] rs;
     
     public static final class ICON {
-        public static final String VER_MAS = "<i title='Ver más' class=\"fas fa-folder-open\"></i>";
-        public static final String IMPRIMIR = "<i title='Imprimir reporte' class=\"fas fa-print\"></i>";
-        public static final String INSERTAR = "<i title='Insertar' class=\"fas fa-plus-circle\"></i>";
-        public static final String MODIFICAR = "<i title='Modificar' class=\"fas fa-pencil-alt\"></i>";
-        public static final String ELIMINAR = "<i title='Eliminar' class=\"fas fa-trash-alt\"></i>";
+        public static final String VER_MAS = "<i title='Ver más' class=\"icon icon-folder-open\"></i>";
+        public static final String IMPRIMIR = "<i title='Imprimir reporte' class=\"icon icon-printer\"></i>";
+        public static final String INSERTAR = "<i title='Insertar' class=\"icon icon-plus\"></i>";
+        public static final String MODIFICAR = "<i title='Modificar' class=\"icon icon-pencil\"></i>";
+        public static final String ELIMINAR = "<i title='Eliminar' class=\"icon icon-bin\"></i>";
     }
 
     public static final class ALIGN {
@@ -63,10 +63,10 @@ public class Tabla {
        this.ancho = "80%";
        this.alineacion = 2;
        
-       cabeceraSeleccionable = "";
-       cabeceraModificable = "";
-       cabeceraEliminable = "";
-       cabeceraImprimible = "";
+       cabeceraSeleccionable = Tabla.ICON.VER_MAS;
+       cabeceraModificable = Tabla.ICON.MODIFICAR;
+       cabeceraEliminable = Tabla.ICON.ELIMINAR;
+       cabeceraImprimible = Tabla.ICON.IMPRIMIR;
        
        anchocolumnas = null;
        modificable = false;
@@ -75,9 +75,9 @@ public class Tabla {
        textoEliminable = "Eliminar";
        textoModificable = "Modificar";
        textoSeleccionable = "Seleccionar";
-       iconoEliminable = "";
-       iconoModificable = "";
-       iconoSeleccionable = "";   
+       iconoEliminable = Tabla.ICON.ELIMINAR;
+       iconoModificable = Tabla.ICON.MODIFICAR;
+       iconoSeleccionable = Tabla.ICON.VER_MAS;   
        paginaEliminable = "";
        paginaModificable = "";
        paginaSeleccionable = "";
@@ -143,9 +143,9 @@ public class Tabla {
        textoEliminable = "Eliminar";
        textoModificable = "Modificar";
        textoSeleccionable = "Seleccionar";
-       iconoEliminable = "";
-       iconoModificable = "";
-       iconoSeleccionable = "";   
+       iconoEliminable = Tabla.ICON.ELIMINAR;
+       iconoModificable = Tabla.ICON.MODIFICAR;
+       iconoSeleccionable = Tabla.ICON.VER_MAS;  
        paginaEliminable = "";
        paginaModificable = "";
        paginaSeleccionable = "";
@@ -153,7 +153,7 @@ public class Tabla {
        
        imprimible = false;
        paginaImprimible = "";
-       iconoImprimible = "";
+       iconoImprimible = Tabla.ICON.IMPRIMIR;
     }    
 
     public String getPageContext() {
@@ -165,7 +165,7 @@ public class Tabla {
     }
     
     private String abrirTabla(){
-        String alin = alineacion==1?"margin:auto":alineacion==2?"margin-left:0":"float:right;margin-top:0";
+//        String alin = alineacion==1?"margin:auto":alineacion==2?"margin-left:0":"float:right;margin-top:0";
         String cab = "<table id='"+estilo+"'>";
         return cab;
     }
@@ -180,22 +180,26 @@ public class Tabla {
             else
                 cab += "<th style='width:"+columnas[i]+"%'>"+cabec[i]+"</th>";
         }
-        if (isEliminable())
-            cab +="<th>";
-            cab += getCabeceraEliminable();
-            cab +="</th>";
-        if (isModificable())
-            cab +="<th>";
-            cab += getCabeceraModificable();
-            cab +="</th>";
-        if (isImprimible())
-            cab +="<th>";
-            cab += getCabeceraImprimible();
-            cab +="</th>";
-        if (isSeleccionable())
+        if (isSeleccionable()){
             cab +="<th>";
             cab += getCabeceraSeleccionable();
             cab +="</th>";
+        }
+        if (isModificable()){
+            cab +="<th>";
+            cab += getCabeceraModificable();
+            cab +="</th>";
+        }
+        if (isEliminable()){
+            cab +="<th>";
+            cab += getCabeceraEliminable();
+            cab +="</th>";
+        }
+        if (isImprimible()){
+            cab +="<th>";
+            cab += getCabeceraImprimible();
+            cab +="</th>";
+        }
         
         cab +="</tr></thead>";
         
@@ -246,6 +250,16 @@ public class Tabla {
                  }
             }
            
+           if (isSeleccionable()){
+                String enlaceSeleccionable;
+                if (getIconoSeleccionable().equals(""))
+                    enlaceSeleccionable = getTextoSeleccionable();
+                else
+                    enlaceSeleccionable = getIconoSeleccionable();               
+                Tabla +="<td>"
+                        + "<a class='btn' onclick=\"abrirVentana('"+getPaginaSeleccionable()+ (getPaginaSeleccionable().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
+                        +enlaceSeleccionable+"</a></td>";  
+           }
            if (isModificable()){
                 String enlaceModificable;
                 if (getIconoModificable().equals(""))
@@ -277,16 +291,6 @@ public class Tabla {
                         + "<a class='btn' onclick=\"return confirm('¿Está seguro? Esta acción no se puede deshacer.')\" href='"+getPaginaEliminable() + (getPaginaEliminable().contains("?") ? "&" : "?") + "id="+rst[0][k]+"'>"
                         +enlaceEliminable+"</a></td>";
            }
-           if (isSeleccionable()){
-                String enlaceSeleccionable;
-                if (getIconoSeleccionable().equals(""))
-                    enlaceSeleccionable = getTextoSeleccionable();
-                else
-                    enlaceSeleccionable = getIconoSeleccionable();               
-                Tabla +="<td>"
-                        + "<a class='btn' onclick=\"abrirVentana('"+getPaginaSeleccionable()+ (getPaginaSeleccionable().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
-                        +enlaceSeleccionable+"</a></td>";  
-           }
             
            Tabla +="</tr>";  
            k++;
@@ -296,7 +300,17 @@ public class Tabla {
             Tabla = e.getMessage();
         }
         return Tabla;
-    }   
+    }
+    private String crearEmptyTabla(){
+        int span = cabeceras.length;
+        if(isModificable())
+            span++;
+        if(isEliminable())
+            span++;
+        if(isImprimible())
+            span++;
+        return "<tbody><tr><td colspan='" + span + "'>No hay datos</td></tr></tbody>";
+    }
     
 //    private String pieTabla(){
 //        int ncol=0;
@@ -317,6 +331,10 @@ public class Tabla {
     
     public String getTabla() throws SQLException{
         return abrirTabla()+EncbzdTabla()+creaTabla()+cerrarTabla();
+    };
+    
+    public String getEmptyTabla() throws SQLException{
+        return abrirTabla()+EncbzdTabla()+crearEmptyTabla()+cerrarTabla();
     };
 
     public boolean isModificable() {

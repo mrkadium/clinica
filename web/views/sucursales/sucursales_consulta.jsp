@@ -1,25 +1,24 @@
 <%@include file="../../WEB-INF/jspf/_header.jspf"%>
-    <title>Departamentos</title>
+    <title>Sucursales</title>
     <link href="resources/css/tablas.css" rel="stylesheet" type="text/css"/>
 <%@include file="../../WEB-INF/jspf/_navbar.jspf"%>
 
 <div class="contenedor">
-    <main>
+    <main> 
         <%@include file="../../WEB-INF/jspf/_message.jspf"%>
         <div class="fondo">
             <div class="conf">
-                <h1>Lista de Departamentos</h1>
-                <a href="${pageContext.servletContext.contextPath}/Departamentos?accion=insertar"><i class="icon icon-plus"></i> Agregar</a>
+                <h1>Lista de Sucursales</h1>
+                <a href="${pageContext.servletContext.contextPath}/Sucursales?accion=insertar"><i class="icon icon-plus"></i> Agregar</a>
                 <div class="header">
                     <form action="">
                         <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
-                        <select name="" id="category" title="Zona"> 
-                            <option value="0">-- Filtrar por zona --</option>
-                            <option value="OCCIDENTAL">OCCIDENTAL</option>
-                            <option value="ORIENTAL">ORIENTAL</option>
-                            <option value="CENTRAL">CENTRAL</option>
+                        <select name="" id="category" title="Departamento"> 
+                            <option value="0">-- Filtrar por departamento --</option>
+                            <c:forEach var="d" items="${Departamentos}">
+                                <option value="${d.departamento}">${d.departamento}</option>
+                            </c:forEach>
                         </select>
-                        <input type="reset" id="reset" value="Quitar filtro">
                     </form>
                 </div>
                 <div class="tablas">

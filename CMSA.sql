@@ -4,7 +4,9 @@ USE cmsa;
 
 CREATE TABLE empresa(
 	idempresa INT PRIMARY KEY AUTO_INCREMENT,
-	nombre VARCHAR(200)
+	nombre VARCHAR(200),
+    facebook VARCHAR(100),
+    whatsapp VARCHAR(20)
 );
 
 CREATE TABLE noticias(

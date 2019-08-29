@@ -3,17 +3,17 @@ package com.clinica.models;
 import com.clinica.annotations.*;
 
 @Entity(table="departamentos")
-public class departamento {
+public class Departamento {
     @PrimaryKey
     @AutoIncrement
     private int iddepartamento;
     private String departamento;
     private String zona;
 
-    public departamento() {
+    public Departamento() {
     }
 
-    public departamento(int iddepartamento, String departamento, String zona) {
+    public Departamento(int iddepartamento, String departamento, String zona) {
         this.iddepartamento = iddepartamento;
         this.departamento = departamento;
         this.zona = zona;

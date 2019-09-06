@@ -83,29 +83,39 @@ public class Sucursales extends HttpServlet {
                 case "insertar":{
                     Operaciones.iniciarTransaccion();
                     
+                    req = "views/sucursales/insertar_modificar.jsp";
+                    
                     sql = "SELECT * FROM departamentos;";
                     rs = Operaciones.consultar(sql, null);
-                    List<Departamento> lista = new ArrayList();
-                    for(int i=0; i<rs[0].length; i++){
-                        lista.add(new Departamento(Integer.parseInt(rs[0][i]), rs[1][i], rs[2][i]));
+                    if(rs != null){
+                        List<Departamento> lista = new ArrayList();
+                        for(int i=0; i<rs[0].length; i++){
+                            lista.add(new Departamento(Integer.parseInt(rs[0][i]), rs[1][i], rs[2][i]));
+                        }
+                        request.setAttribute("Departamentos", lista);
+                    }else{
+                        req = "Sucursales";
                     }
-                    request.setAttribute("Departamentos", lista);
                     
                     sql = "SELECT * FROM municipios;";
                     rs = Operaciones.consultar(sql, null);
-                    List<Municipio> lista2 = new ArrayList();
-                    for(int i=0; i<rs[0].length; i++){
-                        lista2.add(new Municipio(Integer.parseInt(rs[0][i]), rs[1][i], Integer.parseInt(rs[2][i])));
+                    if(rs != null){
+                        List<Municipio> lista2 = new ArrayList();
+                        for(int i=0; i<rs[0].length; i++){
+                            lista2.add(new Municipio(Integer.parseInt(rs[0][i]), rs[1][i], Integer.parseInt(rs[2][i])));
+                        }
+                        request.setAttribute("Municipios", lista2);
+                    }else{
+                        req = "Sucursales";
                     }
-                    request.setAttribute("Municipios", lista2);
-                    
-                    req = "views/sucursales/insertar_modificar.jsp";
                     
                     Operaciones.commit();
                 }
                 break;
                 case "modificar":{
                     Operaciones.iniciarTransaccion();
+                    
+                    req = "views/sucursales/insertar_modificar.jsp";
                                        
                     sql = "SELECT * FROM municipios;";
                     rs = Operaciones.consultar(sql, null);
@@ -117,8 +127,6 @@ public class Sucursales extends HttpServlet {
                     
                     Sucursal v = Operaciones.get(Integer.parseInt(request.getParameter("id")), new Sucursal());
                     request.setAttribute("v", v);
-                    
-                    req = "views/sucursales/insertar_modificar.jsp";
                     
                     Operaciones.commit();
                 }

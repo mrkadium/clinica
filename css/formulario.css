@@ -48,7 +48,8 @@
 }
 .formulario .campo input[type="text"],
 .formulario .campo input[type="number"],
-.formulario .campo select, 
+.formulario .campo select,
+.formulario .campo input[type="date"],
 .formulario .campo textarea{
     border: 2px solid var(--nav-color-bold);
     outline: 0;
@@ -101,6 +102,10 @@
 .formulario .campo input[type="radio"], .formulario .campo input[type="checkbox"]{
     margin-right: 5px;
     margin-bottom: 3px;
+}
+/* date */
+.formulario .campo input[type="date"]{
+    max-width: 200px;
 }
 .ghost-blue{
     border: 1px solid var(--main-color);

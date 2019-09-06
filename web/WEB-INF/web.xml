@@ -12,6 +12,14 @@
         <servlet-name>Error</servlet-name>
         <servlet-class>com.clinica.controllers.Error</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Sucursales</servlet-name>
+        <servlet-class>com.clinica.controllers.Sucursales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Pacientes</servlet-name>
+        <servlet-class>com.clinica.controllers.Pacientes</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>Error</servlet-name>
         <url-pattern>/Error</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Sucursales</servlet-name>
+        <url-pattern>/Sucursales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Pacientes</servlet-name>
+        <url-pattern>/Pacientes</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

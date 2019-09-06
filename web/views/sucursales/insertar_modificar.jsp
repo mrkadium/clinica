@@ -9,7 +9,7 @@
         <div class="campo">
             <label for="idsucursal">ID</label>
             <i></i>
-            <input type="text" name="idsucursal" class="short" id="idsucursal" value="${v.idsucursal}">
+            <input readonly type="text" name="idsucursal" class="short" id="idsucursal" value="${v.idsucursal}">
         </div>
         <div class="campo">
             <label for="departamento">Departamento</label>

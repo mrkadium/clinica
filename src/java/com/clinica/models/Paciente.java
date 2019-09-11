@@ -15,17 +15,13 @@ public class Paciente {
     private String telefono;
     private String email;
     private int idmunicipio;
-    private int idsucursal;
-    private int idempleado;
+    private int codigo_sucursal;
+    private int dui_empleado;
 
     public Paciente() {
     }
 
-    public int getIdpaciente() {
-        return idpaciente;
-    }
-
-    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, int idsucursal, int idempleado) {
+    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, int codigo_sucursal, int dui_empleado) {
         this.idpaciente = idpaciente;
         this.expediente = expediente;
         this.nombres = nombres;
@@ -35,8 +31,12 @@ public class Paciente {
         this.telefono = telefono;
         this.email = email;
         this.idmunicipio = idmunicipio;
-        this.idsucursal = idsucursal;
-        this.idempleado = idempleado;
+        this.codigo_sucursal = codigo_sucursal;
+        this.dui_empleado = dui_empleado;
+    }
+    
+    public int getIdpaciente(){
+        return idpaciente;
     }
 
     public void setIdpaciente(int idpaciente) {
@@ -107,20 +107,22 @@ public class Paciente {
         this.idmunicipio = idmunicipio;
     }
 
-    public int getIdsucursal() {
-        return idsucursal;
+    public int getCodigo_sucursal() {
+        return codigo_sucursal;
     }
 
-    public void setIdsucursal(int idsucursal) {
-        this.idsucursal = idsucursal;
+    public void setCodigo_sucursal(int codigo_sucursal) {
+        this.codigo_sucursal = codigo_sucursal;
     }
 
-    public int getIdempleado() {
-        return idempleado;
+    public int getDui_empleado() {
+        return dui_empleado;
     }
 
-    public void setIdempleado(int idempleado) {
-        this.idempleado = idempleado;
+    public void setDui_empleado(int dui_empleado) {
+        this.dui_empleado = dui_empleado;
     }
+
+    
     
 }

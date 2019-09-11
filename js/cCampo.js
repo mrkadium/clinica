@@ -1,5 +1,5 @@
 const Campo = function(input, tipo, msg, limiteSuperior, limiteInferior, soloNumeros, soloLetras){
-    this.input = tipo == 'radio' ? document.querySelectorAll('input[name=campo6]') : document.querySelector("#"+input);
+    this.input = tipo == 'radio' || tipo == 'checkbox' ? document.querySelectorAll("input[name='"+input+"']") : document.querySelector("#"+input);
     this.i = document.querySelector('label[for=' + input + '] + i');
     this.errorMsg = (msg == undefined || msg == '') ? 'Este campo debe llenarse' : msg;
     this.form = document.querySelector('#formulario');
@@ -27,7 +27,7 @@ const Campo = function(input, tipo, msg, limiteSuperior, limiteInferior, soloNum
 
     this.alertar = function(){
         let eval = true;
-        if(this.tipo != 'radio'){
+        if(this.tipo != 'radio' && this.tipo != 'checkbox'){
             let valor = this.input.value;
             if(valor.length == 0 || valor == 0){
                 foo = this.errorMsg;
@@ -59,7 +59,6 @@ const Campo = function(input, tipo, msg, limiteSuperior, limiteInferior, soloNum
         if(eval){
             foo = '';
         }
-        location.href = '#body';
         this.i.textContent = foo;
         return eval;
     }

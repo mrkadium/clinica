@@ -85,8 +85,6 @@ window.onload = function(){
     }
 
 
-
-
     // SLIDER
     let images = ['img1.jpg','img2.jpg','img3.jpg','img4.jpg'];
     const next = document.querySelector(".slider .next");
@@ -140,46 +138,49 @@ window.onload = function(){
 
     let noticiasArray = [noticia1, noticia2, noticia3, noticia4];
 
-    function changeNew(contador){
-        slider.style = `background-image: url('resources/img/${noticiasArray[contador].img}');`;
-        sliderimg.setAttribute("src", "resources/img/" +  noticiasArray[contador].img);
-        sliderTitle.textContent = noticiasArray[contador].titulo;
-        sliderContent.textContent = noticiasArray[contador].contenido;
-        sliderLink.setAttribute("href", noticiasArray[contador].link);
-    }
-
-    function changeImage(){
-        if(cont < noticiasArray.length - 1){
-            cont++;
-        }else{
-            cont = 0;
+    if(next && prev){
+        function changeNew(contador){
+            slider.style = `background-image: url('../img/${noticiasArray[contador].img}');`;
+            sliderimg.setAttribute("src", "../img/" +  noticiasArray[contador].img);
+            sliderTitle.textContent = noticiasArray[contador].titulo;
+            sliderContent.textContent = noticiasArray[contador].contenido;
+            sliderLink.setAttribute("href", noticiasArray[contador].link);
         }
-        changeNew(cont);
-    }
 
-    next.addEventListener('click', nextImage);
-    function nextImage(){
-        if(cont < images.length - 1){
-            cont++;
-        }else{
-            cont = 0;
+        function changeImage(){
+            if(cont < noticiasArray.length - 1){
+                cont++;
+            }else{
+                cont = 0;
+            }
+            changeNew(cont);
         }
-        changeNew(cont);
-    }
-
-    prev.addEventListener('click', prevImage);
-    function prevImage(){
-        if(cont > 0){
-            cont--;
-        }else{
-            cont = images.length - 1;
+    
+    
+        next.addEventListener('click', nextImage);
+        function nextImage(){
+            if(cont < images.length - 1){
+                cont++;
+            }else{
+                cont = 0;
+            }
+            changeNew(cont);
         }
-        changeNew(cont);
+        
+        prev.addEventListener('click', prevImage);
+        function prevImage(){
+            if(cont > 0){
+                cont--;
+            }else{
+                cont = images.length - 1;
+            }
+            changeNew(cont);
+        }
+    
+        function timeout(){
+            changeImage();
+            setTimeout(timeout, time);
+        }
+        timeout();
     }
-
-    function timeout(){
-        changeImage();
-        setTimeout(timeout, time);
-    }
-    timeout();
 }

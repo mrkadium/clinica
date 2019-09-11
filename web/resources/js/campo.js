@@ -1,5 +1,5 @@
 const Campo = function(input, tipo, msg, limiteSuperior, limiteInferior, soloNumeros, soloLetras){
-    this.input = tipo == 'radio' ? document.querySelectorAll('input[name=campo6]') : document.querySelector("#"+input);
+    this.input = tipo == 'radio' || tipo == 'checkbox' ? document.querySelectorAll("input[name='"+input+"']") : document.querySelector("#"+input);
     this.i = document.querySelector('label[for=' + input + '] + i');
     this.errorMsg = (msg == undefined || msg == '') ? 'Este campo debe llenarse' : msg;
     this.form = document.querySelector('#formulario');

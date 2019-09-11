@@ -48,7 +48,8 @@
 }
 .formulario .campo input[type="text"],
 .formulario .campo input[type="number"],
-.formulario .campo select, 
+.formulario .campo select,
+.formulario .campo input[type="date"],
 .formulario .campo textarea{
     border: 2px solid var(--nav-color-bold);
     outline: 0;
@@ -61,14 +62,16 @@
     width: 100%;
     padding: 0 5px;
 }
-.formulario .campo input[type="text"]:focus, 
+.formulario .campo input[type="text"]:focus,
+.formulario .campo input[type="date"]:focus,
 .formulario .campo select:focus, 
 .formulario .campo textarea:focus{
     box-shadow: 0 0 5px dodgerblue;
     border: 2px solid rgb(158, 202, 247);
     /* background-color: var(--lighter-gray); */
 }
-.formulario .campo input[type="text"]:hover, 
+.formulario .campo input[type="text"]:hover,
+.formulario .campo input[type="date"]:hover,
 .formulario .campo select:hover, 
 .formulario .campo textarea:hover{
     border: 2px solid rgb(158, 202, 247);
@@ -102,6 +105,10 @@
     margin-right: 5px;
     margin-bottom: 3px;
 }
+/* date */
+.formulario .campo input[type="date"]{
+    max-width: 200px;
+}
 .ghost-blue{
     border: 1px solid var(--main-color);
     color: var(--main-color);
@@ -133,6 +140,13 @@
     font-weight: bold;
     text-align: center;
 }
+.botones{
+    margin-top: 20px;
+}
+.botones p{
+    color: var(--main-color);
+    font-weight: bold;
+}
 
 @media only screen and (min-width:768px){
     .formulario{
@@ -159,8 +173,5 @@
         display: inline;
         width: auto;
         margin-left: 10px;
-    }
-    .formulario .campo input.short{
-        width: 80px;
     }
 }

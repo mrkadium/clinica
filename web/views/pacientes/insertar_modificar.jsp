@@ -27,16 +27,58 @@
             <input type="text" name="apellidos" id="apellidos" value="${v.apellidos}">
         </div>
         <div class="campo">
-            <label for="resumen">Resumen</label>
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
             <i></i>
-            <!--<input type="text" name="resumen" id="resumen" value="${v.resumen}">-->            
-            <textarea name="resumen" id="resumen">${v.resumen}</textarea>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="fecha_nacimiento">
         </div>
         <div class="campo">
-            <label for="contenido">Contenido</label>
+            <label for="genero">Contenido</label>
             <i></i>
-            <!--<input type="text" name="contenido" id="contenido" value="${v.contenido}">-->
-            <textarea name="contenido" id="contenido">${v.contenido}</textarea>
+            <select name="genero">
+<!--                    MEJOR HACER UN ARRAY EN EL SERVLET Y LUEGO MANDARLO-->
+                <option value="0">-- SELECCIONAR --</option>
+                <option value="FEMENINO">FEMENINO</option>
+                <option value="MASCULINO">MASCULINO</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <i></i>
+            <input type="text" name="telefono" id="telefono" value="${v.telefono}">
+        </div>
+        <div class="campo">
+            <label for="email">Email</label>
+            <i></i>
+            <input type="text" name="email" id="email" value="${v.email}">
+        </div>
+        <div class="campo">
+            <label for="idmunicipio">Municipio</label>
+            <i></i>
+            <select name="idmunicipio">
+                <option value="0">-- SELECCIONAR --</option>
+                <c:forEach var="m" items="${Municipios}">
+                    <c:if test="${v.idmunicipio == m.idmunicipio}">
+                        <option value="${m.idmunicipio}" selected>${m.municipio}</option>
+                    </c:if>
+                    <c:if test="${v.idmunicipio != m.idmunicipio}">
+                        <option value="${m.idmunicipio}">${m.municipio}</option>
+                    </c:if>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="codigo_sucursal">Sucursal</label>
+            <i></i>
+            <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
+            <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
+            <a onclick="openWindow('${pageContext.servletContext.contextPath}/Pacientes?accion=sucursales');" class="lupa"><i class="icon icon-search"></i></a>
+        </div>
+        <div class="campo">
+            <label for="dui_empleado">Empleado</label>
+            <i></i>
+            <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
+            <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
+            <a onclick="openWindow('${pageContext.servletContext.contextPath}/Pacientes?accion=empleados');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
         <a href="${pageContext.servletContext.contextPath}/Sucursales" class="ghost-red">Cancelar</a>

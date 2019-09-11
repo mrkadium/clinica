@@ -19,6 +19,7 @@ CREATE TABLE noticias(
 CREATE TABLE departamentos(
 	iddepartamento INT(2) PRIMARY KEY AUTO_INCREMENT,
     departamento VARCHAR(20) NOT NULL,
+    abreviatura char(5) NOT NULL,
     zona ENUM('OCCIDENTAL', 'CENTRAL', 'ORIENTAL')
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE municipios(
 
 CREATE TABLE sucursales(
 	idsucursal INT PRIMARY KEY AUTO_INCREMENT,
+    codigo VARCHAR(10) NOT NULL,
     idempresa INT NOT NULL DEFAULT 1,
     idmunicipio INT NOT NULL,
     direccion LONGTEXT,
@@ -55,8 +57,8 @@ CREATE TABLE pacientes(
     telefono CHAR(9),
     email VARCHAR(60),
     idmunicipio INT NOT NULL,
-    idsucursal INT NOT NULL,
-    idempleado INT NOT NULL,
+    codigo INT NOT NULL,
+    duiempleado INT NOT NULL,
     
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
     FOREIGN KEY (idsucursal) REFERENCES sucursales(idsucursal),

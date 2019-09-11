@@ -41,7 +41,7 @@ public class Pacientes extends HttpServlet {
                     
                     sql = "SELECT * FROM pacientes;";
                     rs = Operaciones.consultar(sql, null);
-                    cabeceras = new String[]{"ID","Exp","Nombres","Apellidos","F. nacimiento","Género","Tel","Email", "ID Mun","Mun","Depto"};
+                    cabeceras = new String[]{"ID","Exp","Nombres","Apellidos","F. nacimiento","Género","Tel","Email", "ID Mun","Mun","Depto", "Suc.", "Empl."};
                     
                     Tabla t = new Tabla(rs, cabeceras);
                     t.setModificable(true);
@@ -80,6 +80,10 @@ public class Pacientes extends HttpServlet {
                     
                     Operaciones.commit();
                 }break;
+                case "sucursales":{
+                }break;
+                case "empleados:":{
+                }break;
             }
         }catch(Exception e){
             try {
@@ -112,6 +116,8 @@ public class Pacientes extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
         String idmunicipio = request.getParameter("idmunicipio");
+        String dui_empleado = request.getParameter("dui_empleado");
+        String codigo_sucursal = request.getParameter("codigo_sucursal");
         
         int resultado = 1;
         try{

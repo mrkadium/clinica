@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/formulario.css">
-    <link rel="stylesheet" href="../css/fonts.css">
-    <script src="../js/cCampo.js"></script>
-    <script src="../js/form.js"></script>
-    <script src="../js/main.js"></script>
+    <link rel="stylesheet" href="../web/resources/css/principal.css">
+    <link rel="stylesheet" href="../web/resources/css/formulario.css">
+    <link rel="stylesheet" href="../web/resources/css/fonts.css">
+    <script src="../web/resources/js/campo.js"></script>
+    <script src="../web/resources/js/main.js"></script>
     <title>Form</title>
 </head>
 <body id='body'>
@@ -104,10 +103,10 @@
                 <label for="campo7">Campo7</label>
                 <i></i>
                 <div>
-                    <input type="checkbox" name="bici" id="bici"><label for="bici">Bici</label>
+                    <input type="checkbox" name="campo7" id="bici"><label for="bici">Bici</label>
                 </div>
                 <div>
-                    <input type="checkbox" name="carro"><label for="carro">Carro</label>
+                    <input type="checkbox" name="campo7"><label for="carro">Carro</label>
                 </div>
             </div>
             <div class="campo">
@@ -115,8 +114,11 @@
                 <i></i>
                 <textarea name="campo8" id="campo8" cols="30" rows="10"></textarea>
             </div>
-            <input type="submit" name="" id="" class="ghost-blue" value="Enviar"> 
-            <a href="" class="ghost-red">Cancelar</a>
+            <div class="botones">
+                <input type="submit" name="" id="" class="ghost-blue" value="Enviar"> 
+                <a href="" class="ghost-red">Cancelar</a>
+                <p style="display:none"><i>Procesando...</i></p>
+            </div>
         </form>
     </div>
     <footer>
@@ -157,6 +159,9 @@
     // VALIDACIONES DE FORMULARIO
     const formulario = document.querySelector('#formulario');
     let evaluar = true;
+    const enviar = document.querySelector(".botones input");
+    const cancelar = document.querySelector(".botones a");
+    const procesando = document.querySelector(".botones p");
 
     // (input, tipo, msg, limiteSuperior, limiteInferior, soloNumeros, soloLetras)
     let campos = [
@@ -165,7 +170,7 @@
         new Campo('campo3'),
         new Campo('campo5', 'select'),
         new Campo('campo6', 'radio'),
-        new Campo('campo7'),
+        new Campo('campo7', 'checkbox'),
         new Campo('campo8')
     ];
 
@@ -176,9 +181,17 @@
             }
         }
         if(!evaluar){
+            location.href = '#body';
             e.preventDefault();
+        }else{
+            enviar.style = "display: none";
+            cancelar.style = "display: none";
+            procesando.style = "";
+            alert("");
         }
     });
+
+
 </script>
 </body>
 </html>

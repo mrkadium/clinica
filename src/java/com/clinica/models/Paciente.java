@@ -1,6 +1,6 @@
 package com.clinica.models;
 import com.clinica.annotations.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity(table="Pacientes")
 public class Paciente {
@@ -15,13 +15,13 @@ public class Paciente {
     private String telefono;
     private String email;
     private int idmunicipio;
-    private int codigo_sucursal;
-    private int dui_empleado;
+    private String codigo_sucursal;
+    private String dui_empleado;
 
     public Paciente() {
     }
 
-    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, int codigo_sucursal, int dui_empleado) {
+    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, String codigo_sucursal, String dui_empleado) {
         this.idpaciente = idpaciente;
         this.expediente = expediente;
         this.nombres = nombres;
@@ -107,19 +107,19 @@ public class Paciente {
         this.idmunicipio = idmunicipio;
     }
 
-    public int getCodigo_sucursal() {
+    public String getCodigo_sucursal() {
         return codigo_sucursal;
     }
 
-    public void setCodigo_sucursal(int codigo_sucursal) {
+    public void setCodigo_sucursal(String codigo_sucursal) {
         this.codigo_sucursal = codigo_sucursal;
     }
 
-    public int getDui_empleado() {
+    public String getDui_empleado() {
         return dui_empleado;
     }
 
-    public void setDui_empleado(int dui_empleado) {
+    public void setDui_empleado(String dui_empleado) {
         this.dui_empleado = dui_empleado;
     }
 

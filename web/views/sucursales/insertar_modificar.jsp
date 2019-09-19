@@ -1,10 +1,10 @@
 <%@include file="../../WEB-INF/jspf/_header.jspf"%>
-    <title>Insertar/Modificar sucursal</title>
+    <title>${op} sucursal</title>
     <link href="resources/css/formulario.css" rel="stylesheet" type="text/css"/>
 <%@include file="../../WEB-INF/jspf/_navbar.jspf"%>
 
 <div class="formulario">
-    <h1 id="titulo">Insertar/modificar sucursal</h1>
+    <h1 id="titulo">${op} sucursal</h1>
     <form id="formulario" action="${pageContext.servletContext.contextPath}/Sucursales" method="POST">
         <div class="campo">
             <label for="idsucursal">ID</label>

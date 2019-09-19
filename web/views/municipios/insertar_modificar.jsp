@@ -1,10 +1,10 @@
 <%@include file="../../WEB-INF/jspf/_header.jspf"%>
-    <title>Insertar/Modificar municipio</title>
+    <title>${op} municipio</title>
     <link href="resources/css/formulario.css" rel="stylesheet" type="text/css"/>
 <%@include file="../../WEB-INF/jspf/_navbar.jspf"%>
 
 <div class="formulario">
-    <h1 id="titulo">Insertar/Modificar municipio</h1>
+    <h1 id="titulo">${op} municipio</h1>
     <form id="formulario" action="${pageContext.servletContext.contextPath}/Municipios" method="POST">
         <div class="campo">
             <label for="idmunicipio">ID Municipio</label>

@@ -47,28 +47,6 @@ CREATE TABLE sucursales(
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio)
 );
 
-CREATE TABLE pacientes(
-	idpaciente INT PRIMARY KEY AUTO_INCREMENT,
-	expediente INT NOT NULL UNIQUE,
-    nombres VARCHAR(100) NOT NULL,
-    apellidos VARCHAR(100) NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
-    genero ENUM('FEMENINO', 'MASCULINO'),
-    telefono CHAR(9),
-    email VARCHAR(60),
-    idmunicipio INT NOT NULL,
-    codigo INT NOT NULL,
-    duiempleado INT NOT NULL,
-    
-    FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
-    FOREIGN KEY (idsucursal) REFERENCES sucursales(idsucursal),
-    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
-    
-    INDEX (expediente),
-    INDEX (nombres),
-    INDEX (apellidos)
-);
-
 CREATE TABLE cargos(
 	idcargo INT(4) PRIMARY KEY AUTO_INCREMENT,
     cargo VARCHAR(100) NOT NULL,
@@ -129,6 +107,26 @@ CREATE TABLE especialidades_medico(
     FOREIGN KEY (idmedico) REFERENCES empleados(idempleado),
     
     PRIMARY KEY (idespecialidad, idmedico)
+);
+
+CREATE TABLE pacientes(
+	idpaciente INT PRIMARY KEY AUTO_INCREMENT,
+	expediente INT NOT NULL UNIQUE,
+    nombres VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    genero ENUM('FEMENINO', 'MASCULINO'),
+    telefono CHAR(9),
+    email VARCHAR(60),
+    idmunicipio INT NOT NULL,
+    codigo_sucursal INT NOT NULL,
+    dui_empleado INT NOT NULL,
+    
+    FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
+    
+    INDEX (expediente),
+    INDEX (nombres),
+    INDEX (apellidos)
 );
 
 CREATE TABLE horarios(

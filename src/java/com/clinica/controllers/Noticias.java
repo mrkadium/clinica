@@ -133,7 +133,7 @@ public class Noticias extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        String idnoticia = request.getParameter("idnoticia");
         String titulo = request.getParameter("titulo");
         String resumen = request.getParameter("resumen");
         String contenido = request.getParameter("contenido");
@@ -146,8 +146,8 @@ public class Noticias extends HttpServlet {
             Operaciones.abrirConexion(conn);
             Operaciones.iniciarTransaccion();
             
-            if(id != null && id.equals("")){
-                v = new Noticia(Integer.parseInt(id), titulo, resumen, contenido);
+            if(idnoticia != null && idnoticia.equals("")){
+                v = new Noticia(Integer.parseInt(idnoticia), titulo, resumen, contenido);
                 v = Operaciones.actualizar(v.getIdnoticia(), v);
             }else{
                 v.setTitulo(titulo);

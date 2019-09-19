@@ -14,7 +14,7 @@
         <div class="campo">
             <label for="expediente">Expediente</label>
             <i></i>
-            <input type="text" name="expediente" class="short" id="expediente" value="${v.expediente}">
+            <input type="text" name="expediente" id="expediente" value="${v.expediente}">
         </div>
         <div class="campo">
             <label for="nombres">Nombres</label>
@@ -29,17 +29,17 @@
         <div class="campo">
             <label for="fecha_nacimiento">Fecha de nacimiento</label>
             <i></i>
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="fecha_nacimiento">
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
         </div>
         <div class="campo">
-            <label for="genero">Contenido</label>
+            <label for="genero">Género</label>
             <i></i>
-            <select name="genero">
-<!--                    MEJOR HACER UN ARRAY EN EL SERVLET Y LUEGO MANDARLO-->
-                <option value="0">-- SELECCIONAR --</option>
-                <option value="FEMENINO">FEMENINO</option>
-                <option value="MASCULINO">MASCULINO</option>
-            </select>
+            <div>
+                <input type="radio" name="genero" value="FEMENINO" id="femenino"><label for="femenino">Femenino</label>
+            </div>
+            <div>
+                <input type="radio" name="genero" value="MASCULINO" id="masculino"><label for="masculino">Masculino</label>
+            </div>
         </div>
         <div class="campo">
             <label for="telefono">Teléfono</label>
@@ -69,16 +69,16 @@
         <div class="campo">
             <label for="codigo_sucursal">Sucursal</label>
             <i></i>
-            <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
-            <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
-            <a onclick="openWindow('${pageContext.servletContext.contextPath}/Pacientes?accion=sucursales');" class="lupa"><i class="icon icon-search"></i></a>
+            <input type="text" class="short" name="codigo_sucursal" id="codigo_sucursal" readonly tabindex="-1">
+            <input type="text" class="long" name="direccion" id="direccion" readonly tabindex="-1">
+            <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=sucursales');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
             <label for="dui_empleado">Empleado</label>
             <i></i>
-            <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
-            <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
-            <a onclick="openWindow('${pageContext.servletContext.contextPath}/Pacientes?accion=empleados');" class="lupa"><i class="icon icon-search"></i></a>
+            <input type="text" class="short" name="dui_empleado" id="dui_empleado" readonly tabindex="-1">
+            <input type="text" class="long" name="empleado" id="empleado" readonly tabindex="-1">
+            <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=empleados');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
         <a href="${pageContext.servletContext.contextPath}/Sucursales" class="ghost-red">Cancelar</a>
@@ -86,8 +86,16 @@
 </div>
 
 <script>
-    const openWindow = function(url){
-        location.href = url;
+    function abrirVentana(URL){
+        window.open(URL,"ventana1","width=700,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
+    }
+    function setDataSucursal(codigo_sucursal, direccion) {
+        document.getElementById("codigo_sucursal").value = codigo_sucursal;
+        document.getElementById("direccion").value = direccion;
+    }
+    function setDataEmpleado(dui_empleado, empleado) {
+        document.getElementById("dui_empleado").value = dui_empleado;
+        document.getElementById("empleado").value = empleado;
     }
 
     // VALIDACIONES DE FORMULARIO

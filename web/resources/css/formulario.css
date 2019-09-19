@@ -89,6 +89,9 @@
     text-decoration: none;
     color: var(--main-color);
 }
+.lupa:hover{
+    cursor: pointer;
+}
 .lupa i{
     padding: 5px;
     border-radius: 5px;
@@ -167,6 +170,10 @@
     .formulario .campo textarea{
         width: 60%;
         max-width: 500px;
+    }
+    .formulario .campo .varios .short,
+    .formulario .campo input.short{
+        width: 80px;
     }
     .formulario input[type="submit"],
     .ghost-red{

@@ -1,10 +1,10 @@
 <%@include file="../../WEB-INF/jspf/_header.jspf"%>
-    <title>Insertar/Modificar noticia</title>
+    <title>${op} noticia</title>
     <link href="resources/css/formulario.css" rel="stylesheet" type="text/css"/>
 <%@include file="../../WEB-INF/jspf/_navbar.jspf"%>
 
 <div class="formulario">
-    <h1 id="titulo">Insertar/modificar noticia</h1>
+    <h1 id="titulo">${op} noticia</h1>
     <form id="formulario" action="${pageContext.servletContext.contextPath}/Noticias" method="POST">
         <div class="campo">
             <label for="idnoticia">ID</label>

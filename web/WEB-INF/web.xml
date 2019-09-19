@@ -20,6 +20,14 @@
         <servlet-name>Pacientes</servlet-name>
         <servlet-class>com.clinica.controllers.Pacientes</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cargos</servlet-name>
+        <servlet-class>com.clinica.controllers.Cargos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Especialidades</servlet-name>
+        <servlet-class>com.clinica.controllers.Especialidades</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -48,6 +56,14 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/Error</location>
     </error-page>
+    <servlet-mapping>
+        <servlet-name>Cargos</servlet-name>
+        <url-pattern>/Cargos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Especialidades</servlet-name>
+        <url-pattern>/Especialidades</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

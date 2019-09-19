@@ -7,6 +7,7 @@ import com.clinica.opearaciones.Operaciones;
 import com.clinica.utilerias.Tabla;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -25,11 +26,10 @@ public class Pacientes extends HttpServlet {
             request.getSession().removeAttribute("resultado");
         }        
         
-        String req = "views/pacientes/pacientes_consulta.jsp";
+        String req = "views/pacientes/";
         String sql = "";
         String[][] rs;
         String[] cabeceras;
-        int resultado = 1;
         try{
             Conexion conn = new ConexionPool();
             conn.conectar();
@@ -52,6 +52,7 @@ public class Pacientes extends HttpServlet {
                     
                     String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();                    
                     request.setAttribute("tabla", tabla);
+                    req += "pacientes_consulta.jsp";
                     
                     Operaciones.commit();
                 }break;
@@ -63,12 +64,11 @@ public class Pacientes extends HttpServlet {
                     Operaciones.iniciarTransaccion();
                     
                     String id = request.getParameter("id");
-                    Paciente v = new Paciente();
-                    v = Operaciones.get(Integer.parseInt(id), new Paciente());
+                    Paciente v = Operaciones.get(Integer.parseInt(id), new Paciente());
                     request.setAttribute("v", v);
                     
                     request.getSession().setAttribute("op", "Insertar");
-                    req = "views/pacientes/insertar_modificar.jsp";
+                    req += "insertar_modificar.jsp";
                     
                     Operaciones.commit();
                 }break;
@@ -76,27 +76,64 @@ public class Pacientes extends HttpServlet {
                     Operaciones.iniciarTransaccion();
                     
                     String id = request.getParameter("id");
-                    Operaciones.eliminar(Integer.parseInt(id), new Paciente());
+                    Paciente p = Operaciones.eliminar(Integer.parseInt(id), new Paciente());
+                    
+                    int resultado = p.getIdpaciente() != 0 ? 1 : 0;
+                    request.getSession().setAttribute("resultado", resultado);                    
+                    req = "Pacientes";
                     
                     Operaciones.commit();
                 }break;
                 case "sucursales":{
+                    Operaciones.iniciarTransaccion();
+                    
+                    sql = "SELECT codigo, "
+                            + "CONCAT(a.direccion,', ', b.municipio,', ', c.departamento) as dir "
+                            + "FROM sucursales a, municipios b, departamentos c "
+                            + "WHERE "
+                            + "a.idmunicipio = b.idmunicipio "
+                            + "AND b.iddepartamento = c.iddepartamento";
+                    rs = Operaciones.consultar(sql, null);
+                    
+                    cabeceras = new String[]{"COD", "Dirección"};
+                    Tabla t = new Tabla(rs, cabeceras);
+                    t.setFilaSeleccionable(true);
+                    
+                    String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();
+                    request.setAttribute("tabla", tabla);
+                    
+                    req += "sucursales.jsp";
+                    
+                    Operaciones.commit();
                 }break;
-                case "empleados:":{
+                case "empleados":{
+                    Operaciones.iniciarTransaccion();
+                    
+                    sql = "SELECT dui, CONCAT(apellidos,',',nombres) as empleado FROM empleados;";
+                    rs = Operaciones.consultar(sql, null);
+                    
+                    cabeceras = new String[]{"DUI", "Empleado"};
+                    Tabla t = new Tabla(rs, cabeceras);
+                    t.setFilaSeleccionable(true);
+                    
+                    String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();
+                    request.setAttribute("tabla", tabla);
+                    
+                    req += "empleados.jsp";
+                    
+                    Operaciones.commit();
                 }break;
             }
         }catch(Exception e){
             try {
                 Operaciones.rollback();
                 req = "Pacientes";
-                resultado = 0;
             } catch (SQLException ex) {
                 Logger.getLogger(Pacientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try {
                 Operaciones.cerrarConexion();
-                request.setAttribute("resultado", resultado);
                 request.getRequestDispatcher(req).forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(Pacientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +144,7 @@ public class Pacientes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id") != null ? request.getParameter("id") : "";
+        String id = request.getParameter("idpaciente") != null ? request.getParameter("idpaciente") : "";
         String expediente = request.getParameter("expediente");
         String nombres = request.getParameter("nombres");
         String apellidos = request.getParameter("apellidos");
@@ -126,7 +163,24 @@ public class Pacientes extends HttpServlet {
             Operaciones.abrirConexion(conn);
             Operaciones.iniciarTransaccion();
             
-            
+            Paciente p = new Paciente();
+            p.setExpediente(Long.parseLong(expediente));
+            p.setNombres(nombres);
+            p.setApellidos(apellidos);
+            p.setFecha_nacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fecha_nacimiento));
+            p.setGenero(genero);
+            p.setTelefono(telefono);
+            p.setEmail(email);
+            p.setIdpaciente(Integer.parseInt(idmunicipio));
+            p.setDui_empleado(dui_empleado);
+            p.setCodigo_sucursal(codigo_sucursal);
+            if(id != null && !id.equals("")){
+                p.setIdpaciente(Integer.parseInt(id));
+                p = Operaciones.actualizar(Integer.parseInt(id), p);
+            }else{
+                p = Operaciones.insertar(p);
+            }
+            resultado = p.getIdpaciente() != 0 ? 1 : 0;
             
             Operaciones.commit();
         }catch(Exception e){

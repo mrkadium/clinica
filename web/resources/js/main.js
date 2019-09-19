@@ -140,8 +140,8 @@ window.onload = function(){
 
     if(next && prev){
         function changeNew(contador){
-            slider.style = `background-image: url('../img/${noticiasArray[contador].img}');`;
-            sliderimg.setAttribute("src", "../img/" +  noticiasArray[contador].img);
+            slider.style = `background-image: url('resources/img/${noticiasArray[contador].img}');`;
+            sliderimg.setAttribute("src", "resources/img/" +  noticiasArray[contador].img);
             sliderTitle.textContent = noticiasArray[contador].titulo;
             sliderContent.textContent = noticiasArray[contador].contenido;
             sliderLink.setAttribute("href", noticiasArray[contador].link);

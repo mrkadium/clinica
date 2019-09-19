@@ -22,13 +22,13 @@ public class Error extends HttpServlet {
         
         switch(statusCode){
             case 404:
-                request.getRequestDispatcher("error/error404.html").forward(request, response);
+                request.getRequestDispatcher("error/error404.jsp").forward(request, response);
                 break;
             case 500:
-                request.getRequestDispatcher("error/error500.html").forward(request, response);
+                request.getRequestDispatcher("error/error500.jsp").forward(request, response);
                 break;
             default:
-                request.getRequestDispatcher("error/error500.html").forward(request, response);
+                request.getRequestDispatcher("error/error500.jsp").forward(request, response);
                 break;
         }
     }

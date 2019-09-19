@@ -257,7 +257,7 @@ public class Tabla {
                 else
                     enlaceSeleccionable = getIconoSeleccionable();               
                 Tabla +="<td>"
-                        + "<a class='btn' onclick=\"abrirVentana('"+getPaginaSeleccionable()+ (getPaginaSeleccionable().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
+                        + "<a class='btn' onclick=\"openWindow('"+getPaginaSeleccionable()+ (getPaginaSeleccionable().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
                         +enlaceSeleccionable+"</a></td>";  
            }
            if (isModificable()){
@@ -278,7 +278,7 @@ public class Tabla {
                     enlaceImprimible = getIconoImprimible();               
                 Tabla +="<td>"
 //                        + "<a class='btn' href='"+getPaginaImprimible() + (getPaginaImprimible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"'>"
-                        + "<a class='btn' onclick=\"abrirVentana('"+getPaginaImprimible() + (getPaginaImprimible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
+                        + "<a class='btn' onclick=\"openWindow('"+getPaginaImprimible() + (getPaginaImprimible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
                         +enlaceImprimible+"</a></td>";
            }
            if (isEliminable()){

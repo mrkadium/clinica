@@ -19,7 +19,6 @@ CREATE TABLE noticias(
 CREATE TABLE departamentos(
 	iddepartamento INT(2) PRIMARY KEY AUTO_INCREMENT,
     departamento VARCHAR(20) NOT NULL,
-    abreviatura char(5) NOT NULL,
     zona ENUM('OCCIDENTAL', 'CENTRAL', 'ORIENTAL')
 );
 
@@ -35,7 +34,7 @@ CREATE TABLE municipios(
 
 CREATE TABLE sucursales(
 	idsucursal INT PRIMARY KEY AUTO_INCREMENT,
-    codigo VARCHAR(10) NOT NULL,
+    codigo CHAR(6), -- C19-01
     idempresa INT NOT NULL DEFAULT 1,
     idmunicipio INT NOT NULL,
     direccion LONGTEXT,
@@ -60,6 +59,7 @@ CREATE TABLE empleados(
     idjefe INT,
     idsucursal INT,
     idcargo INT(4) NOT NULL,
+    codigo CHAR(15), -- RO97-C19-01-001 (SI SÓLO TIENE UN APELLIDO, SE REPETIRÁ LA INICIAL)
     jvpm INT(11),
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
@@ -69,8 +69,8 @@ CREATE TABLE empleados(
     nit CHAR(17) NOT NULL,
     idmunicipio INT(3) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
-    fechacontratacion DATE,
-    fechasalida DATE,
+    fecha_contratacion DATE,
+    fecha_salida DATE,
     estado ENUM('ACTIVO', 'INACTIVO'),
     
     FOREIGN KEY (idjefe) REFERENCES empleados(idempleado),
@@ -119,8 +119,8 @@ CREATE TABLE pacientes(
     telefono CHAR(9),
     email VARCHAR(60),
     idmunicipio INT NOT NULL,
-    codigo_sucursal INT NOT NULL,
-    dui_empleado INT NOT NULL,
+    codigo_sucursal VARCHAR(10) NOT NULL,
+    codigo_empleado CHAR(18) NOT NULL,
     
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
     
@@ -133,8 +133,8 @@ CREATE TABLE horarios(
 	idhorario INT PRIMARY KEY AUTO_INCREMENT,
     idespecialidad INT,
     idsucursal INT,
-    horainicial VARCHAR(100),
-    horafinal VARCHAR(100),
+    hora_inicio VARCHAR(100),
+    hora_fin VARCHAR(100),
     dias VARCHAR(100),
     
     FOREIGN KEY (idespecialidad) REFERENCES especialidades(idespecialidad),
@@ -143,13 +143,18 @@ CREATE TABLE horarios(
 
 CREATE TABLE roles(
 	idrol INT PRIMARY KEY AUTO_INCREMENT,
-    rol VARCHAR(40) NOT NULL
+    rol VARCHAR(40) NOT NULL,
+    descripcion VARCHAR(254)
 );
 
 CREATE TABLE menus(
 	idmenu INT PRIMARY KEY AUTO_INCREMENT,
     menu VARCHAR(100) NOT NULL,
-	idpadre INT NOT NULL
+	idpadre INT,
+    descripcion VARCHAR(254),
+    url VARCHAR(254),
+    
+    FOREIGN KEY (idpadre) REFERENCES menus(idmenu)
 );
 
 CREATE TABLE permisos(
@@ -164,9 +169,9 @@ CREATE TABLE permisos(
 CREATE TABLE usuarios(
 	idusuario INT PRIMARY KEY AUTO_INCREMENT,
     idempleado INT NOT NULL,
-    idrol INT NOT NULL,
     usuario VARCHAR(20) BINARY NOT NULL UNIQUE,
     clave VARCHAR(64) NOT NULL,
+    idrol INT NOT NULL,
     estado ENUM('ACTIVO', 'BLOQUEADO'),
     
     FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
@@ -200,10 +205,10 @@ CREATE TABLE consumibles(
     nombre VARCHAR(200) NOT NULL,
     alias VARCHAR(100) NOT NULL,
     presentacion ENUM('N/A', 'LÍQUIDO', 'JARABE', 'POLVO', 'PASTILLA', 'CÁPSULA'),
-    idmarca INT(11) NOT NULL,
-    preciocompra DECIMAL(10,2) NOT NULL,
-    precioventasugerido DECIMAL(10,2) NOT NULL,
-    precioventa DECIMAL(10,2) NOT NULL,
+    idmarca INT(11),
+    precio_compra DECIMAL(10,2) NOT NULL,
+    precio_sugerido DECIMAL(10,2) NOT NULL,
+    precio_venta DECIMAL(10,2) NOT NULL,
     
     FOREIGN KEY (idmarca) REFERENCES marcas(idmarca),
     
@@ -214,10 +219,10 @@ CREATE TABLE consumibles(
 CREATE TABLE compras(
 	idcompra INT(11) PRIMARY KEY AUTO_INCREMENT,
     fecha DATETIME NOT NULL,
-    idlaboratorio INT(11) NOT NULL,
-    subtotal DECIMAL(10,2) NOT NULL,
-    descuentos DECIMAL(10,2) NOT NULL,
-    total DECIMAL(10,2) NOT NULL,
+    idlaboratorio INT(11) NOT NULL, -- DISTRIBUIDOR O EMPRESA QUE VENDE EL PRODUCTO
+    subtotal DECIMAL(10,2),
+    descuentos DECIMAL(10,2),
+    total DECIMAL(10,2),
     
     FOREIGN KEY (idlaboratorio) REFERENCES laboratorios(idlaboratorio)
 );
@@ -225,11 +230,11 @@ CREATE TABLE compras(
 CREATE TABLE detalles_compra(
 	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT,
     idcompra INT(11) NOT NULL,
-    idconsumibLe INT(11) NOT NULL,
-    fechacaducidad DATE,
+    idconsumible INT(11) NOT NULL,
+    fecha_caducidad DATE,
     cantidad INT(11) NOT NULL,
-    preciocompra DECIMAL(10,2) NOT NULL,
-    precioventasugerido DECIMAL(10,2) NOT NULL,
+    precio_compra DECIMAL(10,2) NOT NULL,
+    precio_sugerido DECIMAL(10,2) NOT NULL,
     gravado DECIMAL(10,2),
     
     FOREIGN KEY (idcompra) REFERENCES compras(idcompra),
@@ -248,19 +253,20 @@ CREATE TABLE detalles_inventario(
 	iddetalle_inventario INT(11) PRIMARY KEY AUTO_INCREMENT,
     idinventario INT NOT NULL,
     idconsumible INT(11) NOT NULL,
-    fechacaducidad DATE,
+    cantidad INT NOT NULL,
+    fecha_caducidad DATE,
     
     FOREIGN KEY (idinventario) REFERENCES inventarios(idinventario),
     FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
 
-CREATE TABLE ventas(
+CREATE TABLE ventas( -- FACTURA
 	idventa INT(11) PRIMARY KEY AUTO_INCREMENT,
     numero INT NOT NULL,
     fecha DATETIME NOT NULL,
     idpaciente INT NOT NULL,
 	paciente VARCHAR(200) NOT NULL,
-	direccion LONGTEXT NOT NULL,
+	direccion LONGTEXT,
 	telefono VARCHAR(20),
 	idempleado INT NOT NULL,
 	subtotal DECIMAL(10,2),
@@ -281,10 +287,10 @@ CREATE TABLE detalles_venta(
 	precio DECIMAL(10,2),
 	excento DECIMAL(10,2),
 	gravado	DECIMAL(10,2),
-	nosujeto DECIMAL(10,2),
-	montoIVA DECIMAL(10,2),
-	montoFOVIAL DECIMAL(10,2),
-	montoGUERRA DECIMAL(10,2),
+	no_sujeto DECIMAL(10,2),
+	monto_iva DECIMAL(10,2),
+	monto_fovial DECIMAL(10,2),
+	monto_guerra DECIMAL(10,2),
     
     FOREIGN KEY (idventa) REFERENCES ventas(idventa),
     FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
@@ -293,8 +299,8 @@ CREATE TABLE detalles_venta(
 CREATE TABLE abonos(
 	idabono INT PRIMARY KEY AUTO_INCREMENT,
     idventa	INT(11),
-	fechaabono DATE,
-	abono DECIMAL(10,2),
+	fecha DATETIME,
+	monto DECIMAL(10,2),
     
     FOREIGN KEY (idventa) REFERENCES ventas(idventa)
 );
@@ -312,12 +318,12 @@ CREATE TABLE empleados_consulta(
 
 CREATE TABLE detalles_consulta(
 	idconsulta INT(11) PRIMARY KEY,
-    razonconsulta LONGTEXT,
+    razon_consulta LONGTEXT,
 	temperatura	VARCHAR(10),
-	frecuenciacardiaca VARCHAR(20),
-	frecuenciarespiratoria VARCHAR(20),
-	presionarterial	VARCHAR(20),
-	saturacionoxigeno VARCHAR(20),
+	frecuencia_cardiaca VARCHAR(20),
+	frecuencia_respiratoria VARCHAR(20),
+	presion_arterial	VARCHAR(20),
+	saturacion_oxigeno VARCHAR(20),
 	diagnostico LONGTEXT,
 	tratamiento LONGTEXT,
 	observaciones LONGTEXT,
@@ -335,12 +341,17 @@ CREATE TABLE examenes_consulta(
 	idconsulta INT NOT NULL,
     idexamen INT NOT NULL,
     estado ENUM('PENDIENTE', 'REVISADO'),
-    fecharevision DATE,
+    fecha_revision DATE,
     resultados LONGTEXT,
     
     FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
     FOREIGN KEY (idexamen) REFERENCES examenes(idexamen)
 );
+
+-- TRIGGER PARA CÓDIGO DE SUCURSAL
+
+-- TRIGGER PARA CÓDIGO DE EMPLEADO
+
 
 /*
 -- TRIGGERS

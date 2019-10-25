@@ -98,5 +98,12 @@
             formulario.submit();
         }
     });
+    
+    const departamentos = document.querySelectorAll("#iddepartamento option");
+    const municipios = document.querySelectorAll("#idmunicipio option")
+    
+    departamentos.addEventListener('change', function(){
+        
+    });
 </script>
 <%@include file="../../WEB-INF/jspf/_footer.jspf"%>

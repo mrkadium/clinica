@@ -1,0 +1,17 @@
+.areas{grid-area: areas;}
+.areas .area{margin-bottom: 50px;}
+.areas .area h3{color: rgb(120,120,120);}
+.campos{grid-area: campos;}
+.areas .area .botones-area{
+    margin-top: 20px;
+}
+
+@media only screen and (min-width: 768px){
+    #formulario{
+        display: grid;
+        grid-template:
+        "campos areas" auto
+        "botones botones" auto
+        / 1fr 1fr;
+    }
+}

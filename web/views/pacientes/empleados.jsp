@@ -16,20 +16,24 @@
     </style>
     <title>Seleccionar Empleado</title>
 </head>
-<body>        
-    <main>
-        <div class="fondo">
-            <div class="header">
-                <h1>Selección de empleado</h1>
-                <form action="">
-                    <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
-                </form>
+<body>
+    <div class="contenedor">
+        <main> 
+            <div class="fondo">
+                <div class="conf">
+                    <h1>Selección de empleado</h1>
+                    <div class="header">
+                        <form action="">
+                            <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
+                        </form>
+                    </div>
+                    <div class="tablas">
+                        ${tabla}
+                    </div>
+                </div>
             </div>
-            <div class="tablas">
-                ${tabla}
-            </div>
-        </div>
-    </main>            
+        </main>
+    </div>          
     <script>
         function _Seleccionar_(row){
             var dui_empleado = row.cells[0].innerHTML;

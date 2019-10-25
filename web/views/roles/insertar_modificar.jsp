@@ -1,23 +1,28 @@
 <%@include file="../../WEB-INF/jspf/_header.jspf"%>
-    <title>${op} especialidad</title>
+    <title>${op} rol</title>
     <link href="resources/css/formulario.css" rel="stylesheet" type="text/css"/>
 <%@include file="../../WEB-INF/jspf/_navbar.jspf"%>
 
 <div class="formulario">
-    <h1 id="titulo">${op} especialidad</h1>
-    <form id="formulario" action="${pageContext.servletContext.contextPath}/Especialidades" method="POST">
+    <h1 id="titulo">${op} rol</h1>
+    <form id="formulario" action="${pageContext.servletContext.contextPath}/Roles" method="POST">
         <div class="campo">
-            <label for="idespecialidad">ID Especialidad</label>
+            <label for="idrol">ID Rol</label>
             <i></i>
-            <input type="text" class="short" name="idespecialidad" id="idespecialidad" value="${v.idespecialidad}" readonly tabindex="-1">
+            <input type="text" class="short" name="idrol" id="idrol" value="${v.idrol}" readonly tabindex="-1">
         </div>
         <div class="campo">
-            <label for="especialidad">Especialidad</label>
+            <label for="rol">Rol</label>
             <i></i>
-            <input type="text" name="especialidad" id="especialidad" value="${v.especialidad}">
+            <input type="text" name="rol" id="rol" value="${v.rol}">
+        </div>
+        <div class="campo">
+            <label for="descripcion">Descripción</label>
+            <i></i>
+            <textarea name="descripcion" id="descripcion">${v.descripcion}</textarea>
         </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
-        <a href="${pageContext.servletContext.contextPath}/Especialidades" class="ghost-red">Cancelar</a>
+        <a href="${pageContext.servletContext.contextPath}/Roles" class="ghost-red">Cancelar</a>
     </form>
 </div>
 
@@ -31,7 +36,7 @@
 
     // (input, tipo, msg, limiteSuperior, limiteInferior, soloNumeros, soloLetras)
     let campos = [
-        new Campo('especialidad', 'texto')
+        new Campo('rol', 'texto')
     ];
 
     formulario.addEventListener('submit', function(e){

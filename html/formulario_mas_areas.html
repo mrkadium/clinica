@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../web/resources/css/principal.css">
+    <link rel="stylesheet" href="../web/resources/css/formulario.css">
+    <link rel="stylesheet" href="../web/resources/css/varios_formularios.css">
+    <link rel="stylesheet" href="../web/resources/css/tablas.css">
+    <link rel="stylesheet" href="../web/resources/css/fonts.css">
+    <script src="../web/resources/js/campo.js"></script>
+    <script src="../web/resources/js/main.js"></script>
+    <title>Form</title>
+</head>
+<body id='body'>
+    <nav>
+        <div class="logo" onclick="openWindow('principal.html');">
+            <img src="../img/Clínica.png" alt="">
+            <h1>Clínicas Médicas San Antonio</h1>
+        </div>
+        <div class="links">
+            <a href="#servicios">Servicios</a>
+            <a href="#citas">Citas</a>
+            <a href="#acercade">Acerca de</a>
+        </div>
+        <div class="sesion">
+            <img src="">
+            <div class="sesionUsuario">
+                <p class="nombre">Mario Adalberto Rivera Olivo</p>
+                <p class="usuario">[mario.rivera]</p>
+                <a href="#" class="cerrar">Cerrar Sesión</a>
+            </div>
+        </div>
+        <div class="iniciarSesion">
+            <a href="#">Iniciar sesión</a>
+            <a href="#">Regístrate</a>
+        </div>
+        <div class="burger">
+            <i class="icon icon-cross"></i>
+            <i class="icon icon-menu"></i>
+        </div>
+        <div class="linksMobile">
+            <a href="#" class="iniciar">Iniciar sesión</a>
+            <a href="#" class="iniciar">Regístrate</a>
+            <hr>
+            <a href="#servicios">Servicios</a>
+            <a href="#citas">Citas</a>
+            <a href="#acercade">Acerca de</a>
+            <hr>
+            <a href="#" class="cerrar">Cerrar Sesión</a>
+        </div>
+    </nav>
+    <div class="formulario">
+        <h1 id="titulo">Formulario</h1>
+        <form id="formulario" action="">
+            <div class="campos">
+                <div class="campo">
+                    <label for="campo1">Campo1</label>
+                    <i></i>
+                    <div class="varios">
+                        <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
+                        <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
+                        <a href="#" class="lupa"><i class="icon icon-search"></i></a>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="campo2">Campo2</label>
+                    <i></i>
+                    <input type="text" name="campo2" id="campo2">
+                </div>
+                <div class="campo">
+                    <label for="campof">CampoFecha</label>
+                    <i></i>
+                    <input type="date" name="campof" id="campof">
+                </div>
+                <div class="campo">
+                    <label for="campo3">Campo3</label>
+                    <i></i>
+                    <input type="text" name="campo3" id="campo3">
+                </div>
+                <div class="campo">
+                    <label for="campo3.5">Campo3</label>
+                    <i></i>
+                    <input type="number" class="short" min="5" max="10" value="5" name="campo3.5" id="campo3.5">
+                </div>
+                <div class="campo">
+                    <label for="campo5">Campo5</label>
+                    <i></i>
+                    <select name="campo5" id="campo5">
+                        <option value="0">-- Seleccionar --</option>
+                        <option value="1">Avión</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="campo6">Campo6</label>
+                    <i></i>
+                    <div>
+                        <input type="radio" name="campo6" id="radio1" checked><label for="radio1">Excelente</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="campo6" id="radio2"><label for="radio2">Malo</label>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="campo7">Campo7</label>
+                    <i></i>
+                    <div>
+                        <input type="checkbox" name="campo7" id="bici"><label for="bici">Bici</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="campo7"><label for="carro">Carro</label>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="campo8">Campo8</label>
+                    <i></i>
+                    <textarea name="campo8" id="campo8" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="areas">
+                <div class="area">
+                    <h1 id="titulo">Contactos</h1>
+                    <div class="tablas">
+                        <table id="table01">
+                            <thead>
+                                <tr>
+                                    <th>Contacto</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>76408243</td>
+                                    <td>Teléfono</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="botones-area">
+                        <div>
+                            <h3>Agregar</h3>
+                        </div>
+                        <div class="campos">
+                            <div class="campo">
+                                <label for="campo5">Campo5</label>
+                                <i></i>
+                                <input type="text" name="campo2" id="campo2">
+                                <select name="campo5" id="campo5">
+                                    <option value="0">-- Seleccionar --</option>
+                                    <option value="1">EMAIL</option>
+                                    <option value="1">TELÉFONO</option>
+                                </select>
+                                <i class="icon icon-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="area">
+                    <h1 id="titulo">Especialidades</h1>
+                    <div class="tablas">
+                        <table id="table01">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Especialidad</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="idespecialidad" id="" value="1" style="width: 30px; text-align:center; border: 0; outline: none;" readonly></td>
+                                    <td>Medicina general</td>
+                                    <td>Descripción de Medicina general</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="campos-area">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
+                <a href="" class="ghost-red">Cancelar</a>
+                <p style="display:none"><i>Procesando...</i></p>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>Clínicas Médicas San Antonio &copy; 2019</p>
+        <div class="secciones">
+            <div class="contactos">
+                <h4>Contáctanos:</h4>
+                <a href="#"><i class="icon icon-facebook2"></i> Facebook | Clínicas Médicas San Antonio</a>
+                <a href="#"><i class="icon icon-whatsapp"></i> Whatsapp | +503 7043 9084</a>
+                <!-- <h4>Horarios de atención:</h4>
+                <div class="contactos">
+                    <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
+                    <p><i class="icon icon-hour-glass"></i> Sábado y domingo: 8:30 AM - 12:30 PM</p>
+                </div> -->
+            </div>
+            <div class="horarios">
+                <h4>Horarios de atención:</h4>
+                <div class="contactos">
+                    <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
+                    <p><i class="icon icon-hour-glass"></i> Sábado y domingo: 8:30 AM - 12:30 PM</p>
+                </div>
+            </div>
+            <div class="direccion">
+                <h4>Visítanos:</h4>
+                <div class="contactos">
+                    <a href="#"><i class="icon icon-earth"></i> Calla a Colonia El Carmen, N#3</a>
+                    <!-- <div id="map" style="height: 200px; width: 100%;"></div> -->
+                </div>
+            </div>
+        </div>
+</footer>
+
+<script>
+    const openWindow = function(url){
+        location.href = url;
+    }
+
+    // VALIDACIONES DE FORMULARIO
+    const formulario = document.querySelector('#formulario');
+    let evaluar = true;
+    const enviar = document.querySelector(".botones input");
+    const cancelar = document.querySelector(".botones a");
+    const procesando = document.querySelector(".botones p");
+
+    // (input, tipo, msg, limiteSuperior, limiteInferior, soloNumeros, soloLetras)
+    let campos = [
+        new Campo('campo1', 'lupa'),
+        new Campo('campo2', 'texto', '', 30, 6),
+        new Campo('campo3'),
+        new Campo('campo5', 'select'),
+        new Campo('campo6', 'radio'),
+        new Campo('campo7', 'checkbox'),
+        new Campo('campo8')
+    ];
+
+    formulario.addEventListener('submit', function(e){
+        for(c of campos){
+            if(c.alertar() == false){
+                evaluar = false;
+            }
+        }
+        if(!evaluar){
+            location.href = '#body';
+            e.preventDefault();
+        }else{
+            enviar.style = "display: none";
+            cancelar.style = "display: none";
+            procesando.style = "";
+            alert("");
+        }
+    });
+
+
+</script>
+</body>
+</html>

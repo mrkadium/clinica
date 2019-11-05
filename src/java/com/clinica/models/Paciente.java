@@ -16,12 +16,12 @@ public class Paciente {
     private String email;
     private int idmunicipio;
     private String codigo_sucursal;
-    private String dui_empleado;
+    private String codigo_empleado;
 
     public Paciente() {
     }
 
-    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, String codigo_sucursal, String dui_empleado) {
+    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, String codigo_sucursal, String codigo_empleado) {
         this.idpaciente = idpaciente;
         this.expediente = expediente;
         this.nombres = nombres;
@@ -32,10 +32,10 @@ public class Paciente {
         this.email = email;
         this.idmunicipio = idmunicipio;
         this.codigo_sucursal = codigo_sucursal;
-        this.dui_empleado = dui_empleado;
+        this.codigo_empleado = codigo_empleado;
     }
-    
-    public int getIdpaciente(){
+
+    public int getIdpaciente() {
         return idpaciente;
     }
 
@@ -115,14 +115,13 @@ public class Paciente {
         this.codigo_sucursal = codigo_sucursal;
     }
 
-    public String getDui_empleado() {
-        return dui_empleado;
+    public String getCodigo_empleado() {
+        return codigo_empleado;
     }
 
-    public void setDui_empleado(String dui_empleado) {
-        this.dui_empleado = dui_empleado;
+    public void setCodigo_empleado(String codigo_empleado) {
+        this.codigo_empleado = codigo_empleado;
     }
 
-    
     
 }

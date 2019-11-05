@@ -14,14 +14,14 @@
             cursor: pointer;
         }
     </style>
-    <title>Seleccionar Jefe</title>
+    <title>Seleccionar Sucursal</title>
 </head>
 <body>
     <div class="contenedor">
         <main> 
             <div class="fondo">
                 <div class="conf">
-                    <h1>Selección de jefe</h1>
+                    <h1>Selección de sucursal</h1>
                     <div class="header">
                         <form action="">
                             <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
@@ -33,12 +33,12 @@
                 </div>
             </div>
         </main>
-    </div>          
+    </div>
     <script>
         function _Seleccionar_(row){
-            var codigo_empleado = row.cells[0].innerHTML;
-            var empleado = row.cells[1].innerHTML;
-            window.opener.setDataEmpleado(codigo_empleado, empleado);
+            var idsucursal = row.cells[0].innerHTML;
+            var direccion = row.cells[1].innerHTML;
+            window.opener.setDataSucursal(idsucursal, direccion);
             window.close();
         }
     </script>

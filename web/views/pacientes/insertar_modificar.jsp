@@ -51,7 +51,7 @@
             <i></i>
             <input type="text" name="email" id="email" value="${v.email}">
         </div>
-        <div class="campo">
+<!--        <div class="campo">
             <label for="idmunicipio">Municipio</label>
             <i></i>
             <select name="idmunicipio">
@@ -65,6 +65,13 @@
                     </c:if>
                 </c:forEach>
             </select>
+        </div>-->
+        <div class="campo">
+            <label for="idmunicipio">Municipio</label>
+            <i></i>
+            <input type="text" class="short" name="idmunicipio" id="idmunicipio" readonly tabindex="-1">
+            <input type="text" class="long" name="municipio" id="municipio" readonly tabindex="-1">
+            <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=municipios');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
             <label for="codigo_sucursal">Sucursal</label>
@@ -74,9 +81,9 @@
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=sucursales');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
-            <label for="dui_empleado">Empleado</label>
+            <label for="codigo_empleado">Empleado</label>
             <i></i>
-            <input type="text" class="short" name="dui_empleado" id="dui_empleado" readonly tabindex="-1">
+            <input type="text" class="short" name="codigo_empleado" id="codigo_empleado" readonly tabindex="-1">
             <input type="text" class="long" name="empleado" id="empleado" readonly tabindex="-1">
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=empleados');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
@@ -89,12 +96,16 @@
     function abrirVentana(URL){
         window.open(URL,"ventana1","width=700,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
     }
+    function setDataMunicipio(idmunicipio, municipio) {
+        document.getElementById("idmunicipio").value = idmunicipio;
+        document.getElementById("municipio").value = municipio;
+    }
     function setDataSucursal(codigo_sucursal, direccion) {
         document.getElementById("codigo_sucursal").value = codigo_sucursal;
         document.getElementById("direccion").value = direccion;
     }
-    function setDataEmpleado(dui_empleado, empleado) {
-        document.getElementById("dui_empleado").value = dui_empleado;
+    function setDataEmpleado(codigo_empleado, empleado) {
+        document.getElementById("codigo_empleado").value = codigo_empleado;
         document.getElementById("empleado").value = empleado;
     }
 

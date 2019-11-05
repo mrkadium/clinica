@@ -13,6 +13,12 @@
                 <div class="header">
                     <form action="">
                         <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
+                        <select name="" id="category" title="Departamento"> 
+                            <option value="0">-- Filtrar por departamento --</option>
+                            <c:forEach var="d" items="${Departamentos}">
+                                <option value="${d.departamento}">${d.departamento}</option>
+                            </c:forEach>
+                        </select>
                     </form>
                 </div>
                 <div class="tablas">

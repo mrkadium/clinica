@@ -83,10 +83,13 @@ public class Persistencia extends ManejadorSentencias{
                         Field field =
                         entity.getClass().getDeclaredField(fs[i].getName());
                         field.setAccessible(true);
-                        System.out.println(valor);
+//                        System.out.println(valor);
                         if (valor instanceof Long){
                             valor =Integer.parseInt(valor.toString());
                         }
+//                        if(valor == null && field.getType() == int.class){
+//                            valor = 
+//                        }
                         field.set(entity, valor);
                     }
                 }

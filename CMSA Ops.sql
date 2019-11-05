@@ -29,17 +29,17 @@ INSERT INTO municipios(municipio, iddepartamento) VALUES
 ('ACAJUTLA',3),
 ('SAN ANTONIO DEL MONTE',3);
 
-INSERT INTO sucursales(codigo, idempresa, idmunicipio, direccion, telefono1, telefono2, email) VALUES
-('C19-01', 1, 7, 'Cuesta desde el Hospital Nacional Mazzini hacia El Carmen', '2456987', '2123658', 'clinica@gmail.com');
+INSERT INTO sucursales(idempresa, idmunicipio, direccion, telefono1, telefono2, email) VALUES
+(1, 7, 'Cuesta desde el Hospital Nacional Mazzini hacia El Carmen', '2456987', '2123658', 'clinica@gmail.com');
 
 INSERT INTO cargos(cargo, descripcion) VALUES
 ('DOCTOR', 'Cargo que tiene cada doctor dentro de la clínica'),
 ('ENFERMERO', 'Cargo que tiene cada enfermero dentro de la clínica'),
 ('ORDENANZA', 'Cargo que tienen las personas que se encargan del aseo y orden de la clínica');
 
-INSERT INTO empleados(idsucursal, idcargo, codigo, jvpm, nombres, apellidos, genero, fecha_nacimiento, dui, nit, idmunicipio, direccion, fecha_contratacion, estado) VALUES
-(1, 1, 'AG87-C19-01-001', '15143', 'Jeannette Alexandra', 'Áviles García', 'FEMENINO', '1987-01-01', '00000000-0', '0101-010101-001-0', 2, 'cualquiera', '2019-01-15', 'ACTIVO'),
-(1, 2, 'AA87-C19-01-001', NULL, 'Luis Carlos', 'Áviles', 'MASCULINO', '1987-01-01', '00000000-0', '0101-010101-001-0', 7, 'cualquiera', '2019-01-15', 'ACTIVO');
+INSERT INTO empleados(idjefe, idsucursal, idcargo, codigo, jvpm, nombres, apellidos, genero, fecha_nacimiento, dui, nit, idmunicipio, direccion, fecha_contratacion, estado) VALUES
+(NULL, 1, 1, 'AG87-C19-01-001', '15143', 'Jeannette Alexandra', 'Áviles García', 'FEMENINO', '1987-01-01', '00000000-0', '0101-010101-001-0', 2, 'cualquiera', '2019-01-15', 'ACTIVO'),
+(1, 1, 2, 'AA87-C19-01-001', NULL, 'Luis Carlos', 'Áviles', 'MASCULINO', '1987-01-01', '00000000-0', '0101-010101-001-0', 7, 'cualquiera', '2019-01-15', 'ACTIVO');
 
 INSERT INTO contactos(tipo, contacto, idempleado) VALUES
 ('TELEFONO', '7111-1111', 1);

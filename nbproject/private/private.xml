@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Soldier4/Documents/NetBeansProjects/ClinicasMedicas/src/java/com/clinica/controllers/Empleados.java</file>
+            <file>file:/C:/Users/Soldier4/Documents/NetBeansProjects/ClinicasMedicas/web/views/empleados/insertar_modificar.jsp</file>
+            <file>file:/C:/Users/Soldier4/Documents/NetBeansProjects/ClinicasMedicas/src/java/com/clinica/models/Empleado.java</file>
+            <file>file:/C:/Users/Soldier4/Documents/NetBeansProjects/ClinicasMedicas/src/java/com/clinica/opearaciones/Persistencia.java</file>
+            <file>file:/C:/Users/Soldier4/Documents/NetBeansProjects/ClinicasMedicas/src/java/com/clinica/utilerias/Select.java</file>
+            <file>file:/C:/Users/Soldier4/Documents/NetBeansProjects/ClinicasMedicas/src/java/com/clinica/opearaciones/Operaciones.java</file>
+        </group>
     </open-files>
 </project-private>

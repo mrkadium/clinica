@@ -19,7 +19,7 @@
         <div class="campo">
             <label for="descripcion">Descripción</label>
             <i></i>
-            <input type="text" name="descripcion" id="descripcion" value="${v.descripcion}">
+            <textarea type="text" name="descripcion" id="descripcion">${v.descripcion}</textarea>
         </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
         <a href="${pageContext.servletContext.contextPath}/Cargos" class="ghost-red">Cancelar</a>

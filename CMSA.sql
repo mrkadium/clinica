@@ -19,7 +19,7 @@ CREATE TABLE noticias(
 CREATE TABLE departamentos(
 	iddepartamento INT(2) PRIMARY KEY AUTO_INCREMENT,
     departamento VARCHAR(20) NOT NULL,
-    zona ENUM('OCCIDENTAL', 'CENTRAL', 'ORIENTAL')
+    zona ENUM('Occidental', 'Central', 'Oriental')
 );
 
 CREATE TABLE municipios(
@@ -63,7 +63,7 @@ CREATE TABLE empleados(
     jvpm INT(11),
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
-    genero ENUM('FEMENINO', 'MASCULINO'),
+    genero ENUM('Femenino', 'Masculino'),
     fecha_nacimiento DATE NOT NULL,
     dui CHAR(10) NOT NULL,
     nit CHAR(17) NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE empleados(
     direccion VARCHAR(100) NOT NULL,
     fecha_contratacion DATE,
     fecha_salida DATE,
-    estado ENUM('ACTIVO', 'INACTIVO'),
+    estado ENUM('Activo', 'Inactivo'),
     
     FOREIGN KEY (idjefe) REFERENCES empleados(idempleado),
     FOREIGN KEY (idsucursal) REFERENCES sucursales(idsucursal),
@@ -85,7 +85,7 @@ CREATE TABLE empleados(
 
 CREATE TABLE contactos(
 	idcontacto INT PRIMARY KEY AUTO_INCREMENT,
-    tipo ENUM('EMAIL', 'TELEFONO') NOT NULL,
+    tipo ENUM('Email', 'Telefono') NOT NULL,
     contacto VARCHAR(200) NOT NULL,
     idempleado INT(11) NOT NULL,
     
@@ -115,7 +115,7 @@ CREATE TABLE pacientes(
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
-    genero ENUM('FEMENINO', 'MASCULINO'),
+    genero ENUM('Femenino', 'Masculino'),
     telefono CHAR(9),
     email VARCHAR(60),
     idmunicipio INT NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE usuarios(
     usuario VARCHAR(20) BINARY NOT NULL UNIQUE,
     clave VARCHAR(64) NOT NULL,
     idrol INT NOT NULL,
-    estado ENUM('ACTIVO', 'BLOQUEADO'),
+    estado ENUM('Activo', 'Bloqueado'),
     
     FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
     FOREIGN KEY (idrol) REFERENCES roles(idrol),
@@ -201,10 +201,10 @@ CREATE TABLE marcas(
 
 CREATE TABLE consumibles(
 	idconsumible INT(11) PRIMARY KEY AUTO_INCREMENT,
-    tipo ENUM('PRODUCTO', 'SERVICIO') NOT NULL,
+    tipo ENUM('Producto', 'Servicio') NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     alias VARCHAR(100) NOT NULL,
-    presentacion ENUM('N/A', 'LÍQUIDO', 'JARABE', 'POLVO', 'PASTILLA', 'CÁPSULA'),
+    presentacion ENUM('N/A', 'Líquido', 'Jarabe', 'Polvo', 'Pastilla', 'Cápsula'),
     idmarca INT(11),
     precio_compra DECIMAL(10,2) NOT NULL,
     precio_sugerido DECIMAL(10,2) NOT NULL,
@@ -273,7 +273,7 @@ CREATE TABLE ventas( -- FACTURA
 	descuentos DECIMAL(10,2),
 	total DECIMAL(10,2),
 	deuda DECIMAL(10,2),
-    estado ENUM('PENDIENTE', 'CANCELADA'),
+    estado ENUM('Pendiente', 'Cancelada'),
 	
     FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
     FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
@@ -340,7 +340,7 @@ CREATE TABLE examenes(
 CREATE TABLE examenes_consulta(
 	idconsulta INT NOT NULL,
     idexamen INT NOT NULL,
-    estado ENUM('PENDIENTE', 'REVISADO'),
+    estado ENUM('Pendiente', 'Revisado'),
     fecha_revision DATE,
     resultados LONGTEXT,
     
@@ -349,11 +349,58 @@ CREATE TABLE examenes_consulta(
 );
 
 -- TRIGGER PARA CÓDIGO DE SUCURSAL
+DROP TRIGGER IF EXISTS bi_sucursales_codigo;
+DELIMITER //
+CREATE TRIGGER bi_sucursales_codigo
+BEFORE INSERT ON sucursales
+FOR EACH ROW
+BEGIN
+	DECLARE id CHAR(3);
+	DECLARE correlativo INT;
+    DECLARE char_correlativo VARCHAR(3);
+    SET id = CONCAT('C', SUBSTRING(YEAR(NOW()), 3));
+    SET correlativo = (SELECT COUNT(*) FROM sucursales WHERE SUBSTRING(codigo, 1, 3) = id);
+    SET correlativo = correlativo + 1;
+    
+    IF (correlativo < 10) THEN
+		SET char_correlativo = CONCAT('0',correlativo);
+	ELSEIF (correlativo < 100) THEN
+		SET char_correlativo = CONCAT('',correlativo);
+	END IF;
+    
+    SET NEW.codigo = CONCAT(id, '-', char_correlativo);
+END;
+//
 
 -- TRIGGER PARA CÓDIGO DE EMPLEADO
+DROP TRIGGER IF EXISTS bi_empleados_codigo;
+DELIMITER //
+CREATE TRIGGER bi_empleados_codigo
+BEFORE INSERT ON empleados
+FOR EACH ROW
+BEGIN
+	DECLARE idemp VARCHAR(12);
+    DECLARE codigo_sucursal VARCHAR(10);
+    DECLARE correlativo INT;
+    DECLARE char_correlativo VARCHAR(3);
+    
+    SET codigo_sucursal = (SELECT codigo FROM sucursales WHERE idsucursal = NEW.idsucursal);
+    SET idemp = CONCAT(SUBSTRING(NEW.nombres,1,1),SUBSTRING(NEW.apellidos,1,1), SUBSTRING(YEAR(NEW.fecha_nacimiento), 3), '-', codigo_sucursal);
+    SET correlativo = (SELECT COUNT(*) FROM empleados WHERE SUBSTRING(codigo, 1, 11) = idemp) + 1;
+    
+    IF (correlativo < 10) THEN
+		SET char_correlativo = CONCAT('00',correlativo);
+	ELSEIF (correlativo < 100) THEN
+		SET char_correlativo = CONCAT('0',correlativo);
+	ELSE
+		SET char_correlativo = CONCAT('',correlativo);
+	END IF;
+    
+    SET NEW.codigo = CONCAT(idemp,'-',char_correlativo);
+END;
+//
 
-
-/*
+/* --OTROS TRIGGERS
 -- TRIGGERS
 DELIMITER //
 CREATE TRIGGER bi_operaciones

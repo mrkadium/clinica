@@ -28,6 +28,26 @@
         <servlet-name>Especialidades</servlet-name>
         <servlet-class>com.clinica.controllers.Especialidades</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Empleados</servlet-name>
+        <servlet-class>com.clinica.controllers.Empleados</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Reportes</servlet-name>
+        <servlet-class>com.clinica.controllers.Reportes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Filtro</servlet-name>
+        <servlet-class>com.clinica.controllers.Filtro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Miniviews</servlet-name>
+        <servlet-class>com.clinica.controllers.Miniviews</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Contactos</servlet-name>
+        <servlet-class>com.clinica.controllers.Contactos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -63,6 +83,26 @@
     <servlet-mapping>
         <servlet-name>Especialidades</servlet-name>
         <url-pattern>/Especialidades</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Empleados</servlet-name>
+        <url-pattern>/Empleados</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reportes</servlet-name>
+        <url-pattern>/Reportes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Filtro</servlet-name>
+        <url-pattern>/Filtro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Miniviews</servlet-name>
+        <url-pattern>/Miniviews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Contactos</servlet-name>
+        <url-pattern>/Contactos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

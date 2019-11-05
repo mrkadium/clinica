@@ -1,5 +1,5 @@
-<%@include file="../../WEB-INF/jspf/_header.jspf"%>
-    <title>Empleados</title>
+<%@include file="../../WEB-INF/jspf/_header.jspf" %>
+    <title>Contactos</title>
     <link href="resources/css/tablas.css" rel="stylesheet" type="text/css"/>
 <%@include file="../../WEB-INF/jspf/_navbar.jspf"%>
 
@@ -8,8 +8,8 @@
         <%@include file="../../WEB-INF/jspf/_message.jspf"%>
         <div class="fondo">
             <div class="conf">
-                <h1>Lista de Empleados</h1>
-                <a href="${pageContext.servletContext.contextPath}/Empleados?accion=insertar"><i class="icon icon-plus"></i> Agregar</a>
+                <h1>Lista de Contactos</h1>
+                <a href="${pageContext.servletContext.contextPath}/Contactos?accion=insertar"><i class="icon icon-plus"></i> Agregar</a>
                 <div class="header">
                     <form action="">
                         <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
@@ -22,10 +22,5 @@
         </div>
     </main>
 </div>
-<script>
-    const openWindow = function(url){
-        location.href = url;
-    }
-</script>
 
 <%@include file="../../WEB-INF/jspf/_footer.jspf"%>

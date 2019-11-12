@@ -1,6 +1,6 @@
     <c:if test="${resultado!=null}">
         <c:if test="${resultado == 0 || resultado == 2}">
-            <p class="error"><strong>La operación no se realizó <i class="icon icon-sad"></i></strong></p>
+            <p class="error"><strong>La operación no se realizó. Puede que el registro esté siendo utilizado en otra tabla <i class="icon icon-sad"></i></strong></p>
         </c:if>
         <c:if test="${resultado == 1}">
             <p class="correcto"><strong>Operación realizada correctamente <i class="icon icon-smile"></i></strong></p>

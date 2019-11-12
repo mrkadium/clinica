@@ -140,6 +140,9 @@ main .error{
 #table01 tbody tr:hover{
     background-color: rgb(245,245,245);
 }
+#table01 tbody tr:hover td{
+    color: var(--main-color-dark);
+}
 #table01 tr .btn{
     font-size: 20px;
     color:rgb(150, 150, 150);

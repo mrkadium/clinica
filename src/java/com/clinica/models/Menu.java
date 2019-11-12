@@ -7,14 +7,14 @@ public class Menu {
     @AutoIncrement
     private int idmenu;
     private String menu;
-    private int idpadre;
+    private Integer idpadre;
     private String descripcion;
     private String url;
 
     public Menu() {
     }
 
-    public Menu(int idmenu, String menu, int idpadre, String descripcion, String url) {
+    public Menu(int idmenu, String menu, Integer idpadre, String descripcion, String url) {
         this.idmenu = idmenu;
         this.menu = menu;
         this.idpadre = idpadre;
@@ -38,11 +38,11 @@ public class Menu {
         this.menu = menu;
     }
 
-    public int getIdpadre() {
+    public Integer getIdpadre() {
         return idpadre;
     }
 
-    public void setIdpadre(int idpadre) {
+    public void setIdpadre(Integer idpadre) {
         this.idpadre = idpadre;
     }
 

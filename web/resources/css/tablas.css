@@ -10,6 +10,9 @@
     --correcto: rgb(97,206,97);
     --error: rgb(241, 117, 117);
 }
+.contenedor{
+    min-height: 90vh;
+}
 main .fondo{
     align-items: flex-start;
     align-content: flex-start;

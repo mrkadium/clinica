@@ -36,9 +36,9 @@
     </div>
     <script>
         function _Seleccionar_(row){
-            var codigo_sucursal = row.cells[0].innerHTML;
+            var idsucursal = row.cells[0].innerHTML;
             var direccion = row.cells[1].innerHTML;
-            window.opener.setDataSucursal(codigo_sucursal, direccion);
+            window.opener.setDataSucursal(idsucursal, direccion);
             window.close();
         }
     </script>

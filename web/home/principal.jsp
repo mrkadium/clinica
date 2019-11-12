@@ -28,17 +28,21 @@
                 </div>
             </section>
             <section id="citas">
-                <div class="vanish-2">
-                    <h2>Citas</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
-                    <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
+                <div class="vanish">
+                    <div class="sec">
+                        <h2>Citas</h2>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
+                        <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
+                    </div>
                 </div>
             </section>
             <section id="acercade">
-                <div class="vanish-other">
-                    <h2>Acerca de nosotros</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
-                    <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
+                <div class="vanish">
+                    <div class="sec">
+                        <h2>Acerda de nosotros</h2>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit repudiandae pariatur distinctio adipisci vero quaerat alias, at exercitationem inventore earum!</p>
+                        <a href="" class="vermas">Ver más <i class="icon icon-circle-with-plus"></i></a>
+                    </div>
                 </div>
             </section>
         </main>

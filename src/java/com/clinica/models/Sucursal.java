@@ -6,7 +6,7 @@ public class Sucursal {
     @PrimaryKey
     @AutoIncrement
     private int idsucursal;
-    private int idempresa;
+    private Integer idempresa;
     private int idmunicipio;
     private String direccion;
     private String telefono1;
@@ -16,7 +16,7 @@ public class Sucursal {
     public Sucursal() {
     }
 
-    public Sucursal(int idsucursal, int idempresa, int idmunicipio, String direccion, String telefono1, String telefono2, String email) {
+    public Sucursal(int idsucursal, Integer idempresa, int idmunicipio, String direccion, String telefono1, String telefono2, String email) {
         this.idsucursal = idsucursal;
         this.idempresa = idempresa;
         this.idmunicipio = idmunicipio;
@@ -34,11 +34,11 @@ public class Sucursal {
         this.idsucursal = idsucursal;
     }
 
-    public int getIdempresa() {
+    public Integer getIdempresa() {
         return idempresa;
     }
 
-    public void setIdempresa(int idempresa) {
+    public void setIdempresa(Integer idempresa) {
         this.idempresa = idempresa;
     }
 

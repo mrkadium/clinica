@@ -41,10 +41,18 @@ public class Menus extends HttpServlet {
                 case "":{
                     Operaciones.iniciarTransaccion();
                     
-                    sql = "SELECT a.idmenu, a.menu, a.descripcion, a.url, a.idpadre, b.menu FROM menus a, menus b WHERE a.idpadre = b.idmenu";
+                    sql = "SELECT \n" +
+                    "	a.idmenu, a.menu, \n" +
+                    "	IF(a.idpadre IS NULL, '-', a.idpadre) as idpadre,\n" +
+                    "	IF(a.idpadre IS NULL, '-', b.menu) as padre,\n" +
+                    "	a.descripcion, a.url\n" +
+                    "FROM menus a LEFT JOIN menus b \n" +
+                    "ON a.idpadre = b.idmenu\n" +
+                    "ORDER BY a.idmenu\n" +
+                    ";";
                     rs = Operaciones.consultar(sql, null);
                     
-                    cabeceras = new String[]{"ID Menú","Menú","Descripción","URL","ID Padre","Padre"};
+                    cabeceras = new String[]{"ID Menú","Menú","ID Padre","Padre","Descripción","URL"};
                     Tabla t = new Tabla(rs, cabeceras);
                     t.setModificable(true);
                     t.setEliminable(true);
@@ -82,6 +90,32 @@ public class Menus extends HttpServlet {
                     request.getSession().setAttribute("resultado", resultado);
                     
                     res = true;
+                    Operaciones.commit();
+                }break;
+                case "padres":{
+                    Operaciones.iniciarTransaccion();
+                    
+                    sql = "SELECT \n" +
+                    "	a.idmenu, a.menu, \n" +
+                    "	IF(a.idpadre IS NULL, '-', a.idpadre) as idpadre,\n" +
+                    "	IF(a.idpadre IS NULL, '-', b.menu) as padre,\n" +
+                    "	a.descripcion, a.url\n" +
+                    "FROM menus a LEFT JOIN menus b \n" +
+                    "ON a.idpadre = b.idmenu\n" +
+                    "ORDER BY a.idmenu\n" +
+                    ";";
+                    rs = Operaciones.consultar(sql, null);
+                    
+                    cabeceras = new String[]{"ID Menú","Menú","ID Padre","Padre","Descripción","URL"};
+                    Tabla t = new Tabla(rs, cabeceras);
+                    t.setFilaSeleccionable(true);
+                    t.setMetodoFilaSeleccionable("_Seleccionar_");
+                    
+                    String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();
+                    request.setAttribute("tabla", tabla);
+                    
+                    req += "empleados.jsp";
+                    
                     Operaciones.commit();
                 }break;
             }

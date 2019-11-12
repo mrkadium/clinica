@@ -1,3 +1,5 @@
+USE cmsa;
+
 INSERT INTO empresa(nombre, facebook, whatsapp) VALUES
 ('Clínicas Médicas San Antonio', 'Clínicas Médicas San Antonio', '+503 7654 3210');
 
@@ -50,8 +52,8 @@ INSERT INTO especialidades(especialidad) VALUES
 INSERT INTO especialidades_medico(idespecialidad, idmedico) VALUES
 (1, 1);
 
-INSERT INTO pacientes(expediente, nombres, apellidos, fecha_nacimiento, genero, telefono, email, idmunicipio, codigo_sucursal, codigo_empleado) VALUES
-(1, 'Mario Adalberto', 'Rivera Olivo', '1997-08-13', 'MASCULINO', '7777-8888', 'mario@gmail.com', 3, 'C19-01', 'AA87-C19-01-001');
+INSERT INTO pacientes(expediente, nombres, apellidos, fecha_nacimiento, genero, telefono, email, idmunicipio, idsucursal, idempleado) VALUES
+(1, 'Mario Adalberto', 'Rivera Olivo', '1997-08-13', 'MASCULINO', '7777-8888', 'mario@gmail.com', 3, '1', '1');
 
 INSERT INTO horarios(idespecialidad, idsucursal, hora_inicio, hora_fin, dias) VALUES
 (1, 1, '6:30 AM', '6:30 PM', 'LUNES, MIÉRCOLES Y SÁBADO'),
@@ -62,11 +64,12 @@ INSERT INTO roles(rol, descripcion) VALUES
 ('LIMITADO', 'Sólo puede acceder a ver las consultas pendientes');
 
 INSERT INTO menus(menu, idpadre, descripcion, url) VALUES
-('Home', NULL, 'Pantalla principal', '/Home'),
-('Configuraciones', 1, 'Muestra todas las características que se pueden configurar en el sistema', '/Home?accion=configuraciones');
+('Consultas', NULL, 'Muestra las distintas operaciones que puede realizarse con respecto a las consultas', '/Consultas'),
+('Configuraciones', NULL, 'Muestra todas las características que se pueden configurar en el sistema', '/Configuraciones'),
+('Reportes', NULL, 'Muestra los distintos reportes que puede realizar', '/Reportes');
 
 INSERT INTO permisos(idrol, idmenu) SELECT 1, idmenu FROM menus;
-INSERT INTO permisos(idrol, idmenu) SELECT 1, idmenu FROM menus WHERE idmenu IN (1);
+INSERT INTO permisos(idrol, idmenu) SELECT 2, idmenu FROM menus WHERE idmenu IN (1);
 
 INSERT INTO usuarios(idempleado, usuario, clave, idrol, estado) VALUES
 (1, 'alexandra.aviles', sha2('admin', 256), 1, 'ACTIVO'), -- Será para los pacientes

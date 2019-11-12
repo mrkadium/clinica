@@ -6,6 +6,7 @@ import com.clinica.models.Departamento;
 import com.clinica.models.Municipio;
 import com.clinica.models.Sucursal;
 import com.clinica.opearaciones.Operaciones;
+import com.clinica.utilerias.Select;
 import com.clinica.utilerias.Tabla;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,10 +33,11 @@ public class Sucursales extends HttpServlet {
             request.getSession().removeAttribute("resultado");
         }
         
-        String req = "views/sucursales/sucursales_consulta.jsp";
+        String req = "views/sucursales/";
         String sql = "";
         String[][] rs;
         String[] cabeceras;
+        boolean res = false;
         try{
             Conexion conn = new ConexionPool();
             conn.conectar();
@@ -77,13 +79,15 @@ public class Sucursales extends HttpServlet {
                     String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();                    
                     request.setAttribute("tabla", tabla);
                     
+                    req += "sucursales_consulta.jsp";
+                    
                     Operaciones.commit();
                 }
                 break;
                 case "insertar":{
                     Operaciones.iniciarTransaccion();
                     
-                    req = "views/sucursales/insertar_modificar.jsp";
+                    req += "insertar_modificar.jsp";
                     
                     sql = "SELECT * FROM departamentos;";
                     rs = Operaciones.consultar(sql, null);
@@ -109,24 +113,23 @@ public class Sucursales extends HttpServlet {
                         req = "Sucursales";
                     }
                     
+                    request.setAttribute("op", "Modificar");
+                    
                     Operaciones.commit();
                 }
                 break;
                 case "modificar":{
                     Operaciones.iniciarTransaccion();
                     
-                    req = "views/sucursales/insertar_modificar.jsp";
-                                       
-                    sql = "SELECT * FROM municipios;";
-                    rs = Operaciones.consultar(sql, null);
-                    List<Municipio> lista2 = new ArrayList();
-                    for(int i=0; i<rs[0].length; i++){
-                        lista2.add(new Municipio(Integer.parseInt(rs[0][i]), rs[1][i], Integer.parseInt(rs[2][i])));
-                    }
-                    request.setAttribute("Municipios", lista2);
+                    req += "insertar_modificar.jsp";
                     
                     Sucursal v = Operaciones.get(Integer.parseInt(request.getParameter("id")), new Sucursal());
+                    Municipio m = Operaciones.get(v.getIdmunicipio(), new Municipio());
+                    
                     request.setAttribute("v", v);
+                    request.setAttribute("m", m);
+                    
+                    request.setAttribute("op", "Modificar");
                     
                     Operaciones.commit();
                 }
@@ -138,20 +141,46 @@ public class Sucursales extends HttpServlet {
                     int resultado = s.getIdsucursal() != 0 ? 1 : 0;
                     request.getSession().setAttribute("resultado", resultado);
                     
+                    res = true;
+                    
                     Operaciones.commit();
                 }
                 break;
+                case "municipios":{
+                    Operaciones.iniciarTransaccion();
+                    
+                    sql = "SELECT a.idmunicipio, a.municipio, b.departamento FROM municipios a, departamentos b WHERE a.iddepartamento = b.iddepartamento;";
+                    rs = Operaciones.consultar(sql, null);
+                    
+                    cabeceras = new String[]{"ID", "Municipio", "Departamento"};
+                    Tabla t = new Tabla(rs, cabeceras);
+                    t.setFilaSeleccionable(true);
+                    t.setMetodoFilaSeleccionable("_Seleccionar_");
+                    
+                    String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();
+                    request.setAttribute("tabla", tabla);
+                    
+                    request.setAttribute("Departamentos", Select.departamentos());
+                    
+                    req += "municipios.jsp";
+                    
+                    Operaciones.commit();
+                }break;
             }
         }catch(Exception e){
             try {
                 Operaciones.rollback();
+                res = true;
             } catch (SQLException ex) {
                 Logger.getLogger(Sucursales.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try {
                 Operaciones.cerrarConexion();
-                request.getRequestDispatcher(req).forward(request, response);
+                if(!res)
+                    request.getRequestDispatcher(req).forward(request, response);
+                else
+                    response.sendRedirect(request.getContextPath()+"/Sucursales");
             } catch (SQLException ex) {
                 Logger.getLogger(Sucursales.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -161,7 +190,7 @@ public class Sucursales extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id") != null ? request.getParameter("id") : "";
+        String idsucursal = request.getParameter("idsucursal");
         String idmunicipio = request.getParameter("idmunicipio");
         String direccion = request.getParameter("direccion");
         String telefono1 = request.getParameter("telefono1");
@@ -176,13 +205,14 @@ public class Sucursales extends HttpServlet {
             Operaciones.iniciarTransaccion();
             
             Sucursal s = new Sucursal();
+            s.setIdempresa(1);
             s.setIdmunicipio(Integer.parseInt(idmunicipio));
             s.setDireccion(direccion);
             s.setTelefono1(telefono1);
             s.setTelefono2(telefono2);
             s.setEmail(email);
-            if(!id.equals("")){
-                s.setIdsucursal(Integer.parseInt(id));
+            if(idsucursal != null && !idsucursal.equals("")){
+                s.setIdsucursal(Integer.parseInt(idsucursal));
                 s = Operaciones.actualizar(s.getIdsucursal(), s);
             }else{
                 s = Operaciones.insertar(s);

@@ -88,6 +88,7 @@ public class Roles extends HttpServlet {
             try {
                 Operaciones.rollback();
                 res = true;
+                request.getSession().setAttribute("resultado",0);
             } catch (SQLException ex) {
                 Logger.getLogger(Roles.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -5,6 +5,42 @@
         <servlet-class>com.clinica.controllers.Home</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Servicios</servlet-name>
+        <servlet-class>com.clinica.controllers.Home</servlet-class>
+        <init-param>
+            <param-name>accion</param-name>
+            <param-value>servicios</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>Usuarios</servlet-name>
+        <servlet-class>com.clinica.controllers.Usuarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Laboratorios</servlet-name>
+        <servlet-class>com.clinica.controllers.Laboratorios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Marcas</servlet-name>
+        <servlet-class>com.clinica.controllers.Marcas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servicios</servlet-name>
+        <url-pattern>/Servicios</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.clinica.controllers.Login</servlet-class>
+        <init-param>
+            <param-name>accion</param-name>
+            <param-value>logout</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.clinica.controllers.Login</servlet-class>
     </servlet>
@@ -103,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>Contactos</servlet-name>
         <url-pattern>/Contactos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Usuarios</servlet-name>
+        <url-pattern>/Usuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Laboratorios</servlet-name>
+        <url-pattern>/Laboratorios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Marcas</servlet-name>
+        <url-pattern>/Marcas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

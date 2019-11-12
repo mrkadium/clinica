@@ -20,8 +20,8 @@
             <label for="idpadre">Menú padre</label>
             <i></i>
             <input type="text" class="short" name="idpadre" id="idpadre" readonly tabindex="-1" value="${padre.idpadre}">
-            <input type="text" class="long" name="direccion" id="direccion" readonly tabindex="-1" value="${padre.padre}">
-            <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Menus?accion=sucursales');" class="lupa"><i class="icon icon-search"></i></a>
+            <input type="text" class="long" name="padre" id="padre" readonly tabindex="-1" value="${padre.padre}">
+            <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Menus?accion=padres');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
             <label for="descripcion">Descripción</label>
@@ -39,6 +39,13 @@
 </div>
 
 <script>
+    function abrirVentana(URL){
+        window.open(URL,"ventana1","width=700,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
+    }
+    function setDataPadre(idmenu, menu) {
+        document.getElementById("idpadre").value = idmenu;
+        document.getElementById("padre").value = menu;
+    }
     const openWindow = function(url){
         location.href = url;
     }

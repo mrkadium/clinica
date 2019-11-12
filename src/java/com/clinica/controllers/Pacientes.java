@@ -3,8 +3,10 @@ package com.clinica.controllers;
 import com.clinica.conexion.Conexion;
 import com.clinica.conexion.ConexionPool;
 import com.clinica.models.Departamento;
+import com.clinica.models.Empleado;
 import com.clinica.models.Municipio;
 import com.clinica.models.Paciente;
+import com.clinica.models.Sucursal;
 import com.clinica.opearaciones.Operaciones;
 import com.clinica.utilerias.Tabla;
 import java.io.IOException;
@@ -34,6 +36,7 @@ public class Pacientes extends HttpServlet {
         String sql = "";
         String[][] rs;
         String[] cabeceras;
+        boolean res = false;
         try{
             Conexion conn = new ConexionPool();
             conn.conectar();
@@ -44,14 +47,16 @@ public class Pacientes extends HttpServlet {
                     Operaciones.iniciarTransaccion();
                     
                     sql = "SELECT\n" +
-                        "	a.idpaciente, a.expediente, CONCAT(a.nombres, ' ', a.apellidos) AS paciente,\n" +
-                        "    a.fecha_nacimiento, a.genero, a.telefono, a.email,\n" +
-                        "    b.municipio, c.departamento, a.codigo_sucursal, CONCAT(d.nombres, ' ', d.apellidos) AS empleado\n" +
-                        "FROM pacientes a, municipios b, departamentos c, empleados d\n" +
-                        "WHERE\n" +
-                        "	a.idmunicipio = b.idmunicipio\n" +
-                        "    AND b.iddepartamento = c.iddepartamento\n" +
-                        "    AND a.codigo_empleado = d.codigo";
+                    "	a.idpaciente, a.expediente, CONCAT(a.nombres, ' ', a.apellidos) AS paciente,\n" +
+                    "    a.fecha_nacimiento, a.genero, a.telefono, a.email,\n" +
+                    "    b.municipio, c.departamento, e.codigo, CONCAT(d.nombres, ' ', d.apellidos) AS empleado\n" +
+                    "FROM pacientes a, municipios b, departamentos c, empleados d, sucursales e\n" +
+                    "WHERE\n" +
+                    "	a.idmunicipio = b.idmunicipio\n" +
+                    "    AND a.idsucursal = e.idsucursal\n" +
+                    "    AND b.iddepartamento = c.iddepartamento\n" +
+                    "    AND a.idempleado = d.idempleado\n" +
+                    ";";
                     rs = Operaciones.consultar(sql, null);
                     cabeceras = new String[]{"ID","Exp","Paciente","F. nacimiento","Género","Tel","Email","Mun.", "Depto.", "Suc.", "Empl."};
                     
@@ -70,14 +75,21 @@ public class Pacientes extends HttpServlet {
                 }break;
                 case "insertar":{
                     request.getSession().setAttribute("op", "Insertar");
-                    req = "views/pacientes/insertar_modificar.jsp";
+                    req += "insertar_modificar.jsp";
                 }break;
                 case "modificar":{
                     Operaciones.iniciarTransaccion();
                     
                     String id = request.getParameter("id");
                     Paciente v = Operaciones.get(Integer.parseInt(id), new Paciente());
+                    Municipio m = Operaciones.get(v.getIdmunicipio(), new Municipio());
+                    Empleado e = Operaciones.get(v.getIdempleado(), new Empleado());
+                    Sucursal s = Operaciones.get(v.getIdsucursal(), new Sucursal());
+                    
                     request.setAttribute("v", v);
+                    request.setAttribute("m", m);
+                    request.setAttribute("e", e);
+                    request.setAttribute("s", s);
                     
                     request.getSession().setAttribute("op", "Modificar");
                     req += "insertar_modificar.jsp";
@@ -92,14 +104,14 @@ public class Pacientes extends HttpServlet {
                     
                     int resultado = p.getIdpaciente() != 0 ? 1 : 0;
                     request.getSession().setAttribute("resultado", resultado);                    
-                    req = "Pacientes";
+                    res = true;
                     
                     Operaciones.commit();
                 }break;
                 case "sucursales":{
                     Operaciones.iniciarTransaccion();
                     
-                    sql = "SELECT codigo, "
+                    sql = "SELECT idsucursal, "
                             + "CONCAT(a.direccion,', ', b.municipio,', ', c.departamento) as dir "
                             + "FROM sucursales a, municipios b, departamentos c "
                             + "WHERE "
@@ -122,7 +134,7 @@ public class Pacientes extends HttpServlet {
                 case "empleados":{
                     Operaciones.iniciarTransaccion();
                     
-                    sql = "SELECT codigo, CONCAT(apellidos,', ',nombres) as empleado FROM empleados;";
+                    sql = "SELECT idempleado, CONCAT(apellidos,', ',nombres) as empleado FROM empleados;";
                     rs = Operaciones.consultar(sql, null);
                     
                     cabeceras = new String[]{"COD", "Empleado"};
@@ -167,14 +179,18 @@ public class Pacientes extends HttpServlet {
         }catch(Exception e){
             try {
                 Operaciones.rollback();
-                req = "Pacientes";
+                res = true;
+                request.getSession().setAttribute("resultado", 0);
             } catch (SQLException ex) {
                 Logger.getLogger(Pacientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }finally{
             try {
                 Operaciones.cerrarConexion();
-                request.getRequestDispatcher(req).forward(request, response);
+                if(!res)
+                    request.getRequestDispatcher(req).forward(request, response);
+                else
+                    response.sendRedirect(request.getContextPath()+"/Pacientes");
             } catch (SQLException ex) {
                 Logger.getLogger(Pacientes.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -193,8 +209,8 @@ public class Pacientes extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
         String idmunicipio = request.getParameter("idmunicipio");
-        String codigo_empleado = request.getParameter("codigo_empleado");
-        String codigo_sucursal = request.getParameter("codigo_sucursal");
+        String idempleado = request.getParameter("idempleado");
+        String idsucursal = request.getParameter("idsucursal");
         
         int resultado = 1;
         try{
@@ -212,8 +228,8 @@ public class Pacientes extends HttpServlet {
             p.setTelefono(telefono);
             p.setEmail(email);
             p.setIdmunicipio(Integer.parseInt(idmunicipio));
-            p.setCodigo_empleado(codigo_empleado);
-            p.setCodigo_sucursal(codigo_sucursal);
+            p.setIdsucursal(Integer.parseInt(idsucursal));
+            p.setIdempleado(Integer.parseInt(idempleado));
             if(id != null && !id.equals("")){
                 p.setIdpaciente(Integer.parseInt(id));
                 p = Operaciones.actualizar(Integer.parseInt(id), p);

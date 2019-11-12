@@ -12,34 +12,11 @@
             <input readonly type="text" name="idsucursal" class="short" id="idsucursal" value="${v.idsucursal}">
         </div>
         <div class="campo">
-            <label for="departamento">Departamento</label>
-            <i></i>
-            <select name="departamento" id="departamento">
-                <option value="0">-- Seleccionar --</option>
-                <c:forEach var="d" items="${Departamentos}">
-                    <c:if test="${d.iddepartamento == v.iddepartamento}">
-                        <option value="${d.iddepartamento}" selected>${d.departamento}</option>
-                    </c:if>
-                    <c:if test="${d.iddepartamento != v.iddepartamento}">
-                        <option value="${d.iddepartamento}">${d.departamento}</option>
-                    </c:if>
-                </c:forEach>
-            </select>
-        </div>
-        <div class="campo">
             <label for="idmunicipio">Municipio</label>
             <i></i>
-            <select name="idmunicipio" id="idmunicipio">
-                <option value="0">-- Seleccionar --</option>
-                <c:forEach var="m" items="${Municipios}">
-                    <c:if test="${m.idmunicipio == v.idmunicipio}">
-                        <option value="${m.idmunicipio}" selected>${m.municipio}</option>
-                    </c:if>
-                    <c:if test="${m.idmunicipio != v.idmunicipio}">
-                        <option value="${m.idmunicipio}">${m.municipio}</option>
-                    </c:if>
-                </c:forEach>
-            </select>
+            <input type="text" class="short" name="idmunicipio" id="idmunicipio" value="${v.idmunicipio}" readonly tabindex="-1">
+            <input type="text" class="long" name="municipio" id="municipio" value="${m.municipio}" readonly tabindex="-1">
+            <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Sucursales?accion=municipios');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
             <label for="direccion">Dirección</label>
@@ -67,6 +44,13 @@
 </div>
 
 <script>
+    function abrirVentana(URL){
+        window.open(URL,"ventana1","width=700,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
+    }
+    function setDataMunicipio(idmunicipio, municipio) {
+        document.getElementById("idmunicipio").value = idmunicipio;
+        document.getElementById("municipio").value = municipio;
+    }
     const openWindow = function(url){
         location.href = url;
     }

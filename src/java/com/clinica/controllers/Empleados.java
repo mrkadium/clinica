@@ -189,13 +189,7 @@ public class Empleados extends HttpServlet {
                     String tabla = rs != null ? t.getTabla() : t.getEmptyTabla();
                     request.setAttribute("tabla", tabla);
                     
-                    sql = "SELECT * FROM departamentos;";
-                    rs = Operaciones.consultar(sql, null);
-                    List<Departamento> lista2 = new ArrayList();
-                    for(int i=0; i<rs[0].length; i++){
-                        lista2.add(new Departamento(Integer.parseInt(rs[0][i]), rs[1][i], rs[2][i]));
-                    }
-                    request.setAttribute("Departamentos", lista2);
+                    request.setAttribute("Departamentos", Select.departamentos());
                     
                     req += "municipios.jsp";
                     

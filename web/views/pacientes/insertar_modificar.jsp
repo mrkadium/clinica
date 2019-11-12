@@ -29,16 +29,16 @@
         <div class="campo">
             <label for="fecha_nacimiento">Fecha de nacimiento</label>
             <i></i>
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="${v.fecha_nacimiento}">
         </div>
         <div class="campo">
             <label for="genero">Género</label>
             <i></i>
             <div>
-                <input type="radio" name="genero" value="FEMENINO" id="femenino"><label for="femenino">Femenino</label>
+                <input type="radio" name="genero" value="Femenino" id="femenino" ${v.genero== 'Femenino' ? 'checked' : ''}><label for="femenino">Femenino</label>
             </div>
             <div>
-                <input type="radio" name="genero" value="MASCULINO" id="masculino"><label for="masculino">Masculino</label>
+                <input type="radio" name="genero" value="Masculino" id="masculino" ${v.genero == 'Masculino' ? 'checked' : ''}><label for="masculino">Masculino</label>
             </div>
         </div>
         <div class="campo">
@@ -51,40 +51,25 @@
             <i></i>
             <input type="text" name="email" id="email" value="${v.email}">
         </div>
-<!--        <div class="campo">
-            <label for="idmunicipio">Municipio</label>
-            <i></i>
-            <select name="idmunicipio">
-                <option value="0">-- SELECCIONAR --</option>
-                <c:forEach var="m" items="${Municipios}">
-                    <c:if test="${v.idmunicipio == m.idmunicipio}">
-                        <option value="${m.idmunicipio}" selected>${m.municipio}</option>
-                    </c:if>
-                    <c:if test="${v.idmunicipio != m.idmunicipio}">
-                        <option value="${m.idmunicipio}">${m.municipio}</option>
-                    </c:if>
-                </c:forEach>
-            </select>
-        </div>-->
         <div class="campo">
             <label for="idmunicipio">Municipio</label>
             <i></i>
-            <input type="text" class="short" name="idmunicipio" id="idmunicipio" readonly tabindex="-1">
-            <input type="text" class="long" name="municipio" id="municipio" readonly tabindex="-1">
+            <input type="text" class="short" name="idmunicipio" id="idmunicipio" value="${v.idmunicipio}" readonly tabindex="-1">
+            <input type="text" class="long" name="municipio" id="municipio" value="${m.municipio}" readonly tabindex="-1">
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=municipios');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
-            <label for="codigo_sucursal">Sucursal</label>
+            <label for="idsucursal">Sucursal</label>
             <i></i>
-            <input type="text" class="short" name="codigo_sucursal" id="codigo_sucursal" readonly tabindex="-1">
-            <input type="text" class="long" name="direccion" id="direccion" readonly tabindex="-1">
+            <input type="text" class="short" name="idsucursal" id="idsucursal" value="${v.idsucursal}" readonly tabindex="-1">
+            <input type="text" class="long" name="direccion_suc" id="direccion_suc" value="${s.direccion}" readonly tabindex="-1">
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=sucursales');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
-            <label for="codigo_empleado">Empleado</label>
+            <label for="idempleado">Empleado</label>
             <i></i>
-            <input type="text" class="short" name="codigo_empleado" id="codigo_empleado" readonly tabindex="-1">
-            <input type="text" class="long" name="empleado" id="empleado" readonly tabindex="-1">
+            <input type="text" class="short" name="idempleado" id="idempleado" value="${v.idempleado}" readonly tabindex="-1">
+            <input type="text" class="long" name="empleado" id="empleado" value="${e.nombres} ${e.apellidos}" readonly tabindex="-1">
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=empleados');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
@@ -100,12 +85,12 @@
         document.getElementById("idmunicipio").value = idmunicipio;
         document.getElementById("municipio").value = municipio;
     }
-    function setDataSucursal(codigo_sucursal, direccion) {
-        document.getElementById("codigo_sucursal").value = codigo_sucursal;
-        document.getElementById("direccion").value = direccion;
+    function setDataSucursal(idsucursal, direccion) {
+        document.getElementById("idsucursal").value = idsucursal;
+        document.getElementById("direccion_suc").value = direccion;
     }
-    function setDataEmpleado(codigo_empleado, empleado) {
-        document.getElementById("codigo_empleado").value = codigo_empleado;
+    function setDataEmpleado(idempleado, empleado) {
+        document.getElementById("idempleado").value = idempleado;
         document.getElementById("empleado").value = empleado;
     }
 

@@ -111,20 +111,8 @@
             <label for="estado">Estado</label>
             <i></i>
             <select name="estado" id="estado">
-                <c:if test="${v.estado!=null}">
-                    <c:if test="${v.estado=='Activo'}">
-                        <option value="Activo" selected>Activo</option>
-                        <option value="Inactivo">Inactivo</option>
-                    </c:if>
-                    <c:if test="${v.estado!='Activo'}">
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo" selected>Inactivo</option>
-                    </c:if>
-                </c:if>
-                <c:if test="${v.estado == null}">
-                    <option value="Activo">Activo</option>
-                    <option value="Inactivo">Inactivo</option>
-                </c:if>
+                <option value="Activo" ${v.estado == 'Activo' ? 'selected' : ''}>Activo</option>
+                <option value="Inactivo" ${v.estado == 'Inactivo' ? 'selected' : ''}>Inactivo</option>
             </select>
         </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
@@ -136,13 +124,13 @@
     function abrirVentana(URL){
         window.open(URL,"ventana1","width=700,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
     }
-    function setDataSucursal(idsucursal, direccion) {
-        document.getElementById("idsucursal").value = idsucursal;
-        document.getElementById("direccion_sucursal").value = direccion;
-    }
     function setDataJefe(idjefe, jefe) {
         document.getElementById("idjefe").value = idjefe;
         document.getElementById("jefe").value = jefe;
+    }
+    function setDataSucursal(idsucursal, direccion_sucursal) {
+        document.getElementById("idsucursal").value = idsucursal;
+        document.getElementById("direccion_sucursal").value = direccion_sucursal;
     }
     function setDataMunicipio(idmunicipio, municipio) {
         document.getElementById("idmunicipio").value = idmunicipio;

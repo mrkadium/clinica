@@ -14,14 +14,14 @@
             cursor: pointer;
         }
     </style>
-    <title>Seleccionar Jefe</title>
+    <title>Seleccionar Empleado</title>
 </head>
 <body>
     <div class="contenedor">
         <main> 
             <div class="fondo">
                 <div class="conf">
-                    <h1>Selección de jefe</h1>
+                    <h1>Selección de empleado</h1>
                     <div class="header">
                         <form action="">
                             <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">

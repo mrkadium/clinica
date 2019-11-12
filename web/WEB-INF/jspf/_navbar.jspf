@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
     <nav>
@@ -6,20 +7,25 @@
             <h1>Clínicas Médicas San Antonio</h1>
         </div>
         <div class="links">
-            <a href="#servicios">Servicios</a>
-            <a href="#citas">Citas</a>
-            <a href="#acercade">Acerca de</a>
+            <c:if test="${permisos != null}">
+                <c:forEach var="p" items="${permisos}">
+                    <a href="${pageContext.servletContext.contextPath}${p.url}">${p.menu}</a>
+                </c:forEach>
+            </c:if>
+            <a href="${pageContext.servletContext.contextPath}/Servicios">Servicios</a>
+            <a href="${pageContext.servletContext.contextPath}/Citas">Citas</a>
+            <a href="${pageContext.servletContext.contextPath}/About">Acerca de</a>
         </div>
         <div class="sesion">
             <img src="">
             <div class="sesionUsuario">
-                <p class="nombre">Mario Adalberto Rivera Olivo</p>
-                <p class="usuario">[mario.rivera]</p>
+                <p class="nombre">${Empleado.nombres} ${Empleado.apellidos}</p>
+                <p class="usuario">[${Usuario.usuario}]</p>
                 <a href="#" class="cerrar">Cerrar Sesión</a>
             </div>
         </div>
         <div class="iniciarSesion">
-            <a href="#">Iniciar sesión</a>
+            <a href="${pageContext.servletContext.contextPath}/Login">Iniciar sesión</a>
             <!--<a href="#">Regístrate</a>-->
         </div>
         <div class="burger">
@@ -27,11 +33,16 @@
             <i class="icon icon-menu"></i>
         </div>
         <div class="linksMobile">
-            <a href="#" class="iniciar">Iniciar sesión</a>
+            <a href="${pageContext.servletContext.contextPath}/Login" class="iniciar">Iniciar sesión</a>
             <!--<a href="#" class="iniciar">Regístrate</a>-->
+            <c:if test="${permisos != null}">
+                <c:forEach var="p" items="${permisos}">
+                    <a href="${pageContext.servletContext.contextPath}${p.url}">${p.menu}</a>
+                </c:forEach>
+            </c:if>
             <a href="#servicios">Servicios</a>
             <a href="#citas">Citas</a>
             <a href="#acercade">Acerca de</a>
-            <a href="#" class="cerrar">Cerrar Sesión</a>
+            <a href="${pageContext.servletContext.contextPath}/Logout" class="cerrar">Cerrar Sesión</a>
         </div>
     </nav>

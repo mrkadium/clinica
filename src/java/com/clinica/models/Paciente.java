@@ -15,13 +15,13 @@ public class Paciente {
     private String telefono;
     private String email;
     private int idmunicipio;
-    private String codigo_sucursal;
-    private String codigo_empleado;
+    private int idsucursal;
+    private int idempleado;
 
     public Paciente() {
-    }
+    }    
 
-    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, String codigo_sucursal, String codigo_empleado) {
+    public Paciente(int idpaciente, long expediente, String nombres, String apellidos, Date fecha_nacimiento, String genero, String telefono, String email, int idmunicipio, int idsucursal, int idempleado) {
         this.idpaciente = idpaciente;
         this.expediente = expediente;
         this.nombres = nombres;
@@ -31,8 +31,8 @@ public class Paciente {
         this.telefono = telefono;
         this.email = email;
         this.idmunicipio = idmunicipio;
-        this.codigo_sucursal = codigo_sucursal;
-        this.codigo_empleado = codigo_empleado;
+        this.idsucursal = idsucursal;
+        this.idempleado = idempleado;
     }
 
     public int getIdpaciente() {
@@ -107,21 +107,19 @@ public class Paciente {
         this.idmunicipio = idmunicipio;
     }
 
-    public String getCodigo_sucursal() {
-        return codigo_sucursal;
+    public int getIdsucursal() {
+        return idsucursal;
     }
 
-    public void setCodigo_sucursal(String codigo_sucursal) {
-        this.codigo_sucursal = codigo_sucursal;
+    public void setIdsucursal(int idsucursal) {
+        this.idsucursal = idsucursal;
     }
 
-    public String getCodigo_empleado() {
-        return codigo_empleado;
+    public int getIdempleado() {
+        return idempleado;
     }
 
-    public void setCodigo_empleado(String codigo_empleado) {
-        this.codigo_empleado = codigo_empleado;
+    public void setIdempleado(int idempleado) {
+        this.idempleado = idempleado;
     }
-
-    
 }

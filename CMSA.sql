@@ -35,7 +35,7 @@ CREATE TABLE municipios(
 CREATE TABLE sucursales(
 	idsucursal INT PRIMARY KEY AUTO_INCREMENT,
     codigo CHAR(6), -- C19-01
-    idempresa INT NOT NULL DEFAULT 1,
+    idempresa INT DEFAULT 1,
     idmunicipio INT NOT NULL,
     direccion LONGTEXT,
     telefono1 VARCHAR(20),
@@ -78,6 +78,7 @@ CREATE TABLE empleados(
     FOREIGN KEY (idcargo) REFERENCES cargos(idcargo),
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
     
+    INDEX (codigo),
     INDEX (jvpm),
     INDEX (nombres),
     INDEX (apellidos)
@@ -119,10 +120,12 @@ CREATE TABLE pacientes(
     telefono CHAR(9),
     email VARCHAR(60),
     idmunicipio INT NOT NULL,
-    codigo_sucursal VARCHAR(10) NOT NULL,
-    codigo_empleado CHAR(18) NOT NULL,
+    idsucursal INT NOT NULL,
+    idempleado INT NOT NULL,
     
     FOREIGN KEY (idmunicipio) REFERENCES municipios(idmunicipio),
+    FOREIGN KEY (idsucursal) REFERENCES sucursales(idsucursal),
+    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
     
     INDEX (expediente),
     INDEX (nombres),

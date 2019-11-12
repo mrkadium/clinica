@@ -152,6 +152,18 @@ nav .linksMobile,
 
 
 
+main section#servicios{
+    background-image: url("../img/img1.jpg");
+    background-size: cover;
+}
+main section#acercade{
+    background-image: url("../img/img4.jpg");
+    background-size: cover;
+}
+main section#citas{
+    background-image: url("../img/img3.jpg");
+    background-size: cover;
+}
 
 
 .contenedor{
@@ -288,18 +300,6 @@ main section .vanish-2 *{
 
 
 
-main section#servicios{
-    background-image: url("../img/img1.jpg");
-    background-size: cover;
-}
-main section#acercade{
-    background-image: url("../img/img4.jpg");
-    background-size: cover;
-}
-main section#citas{
-    background-image: url("../img/img3.jpg");
-    background-size: cover;
-}
 
 
 

@@ -206,7 +206,7 @@ CREATE TABLE consumibles(
 	idconsumible INT(11) PRIMARY KEY AUTO_INCREMENT,
     tipo ENUM('Producto', 'Servicio') NOT NULL,
     nombre VARCHAR(200) NOT NULL,
-    alias VARCHAR(100) NOT NULL,
+    alias VARCHAR(100),
     presentacion ENUM('N/A', 'Líquido', 'Jarabe', 'Polvo', 'Pastilla', 'Cápsula'),
     idmarca INT(11),
     precio_compra DECIMAL(10,2) NOT NULL,

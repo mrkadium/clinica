@@ -2,6 +2,14 @@ package com.clinica.utilerias;
 
 import java.sql.SQLException;
 
+/*ToDo
+    -agregar campo "servle", para tener el nombre del Servlet en todo momento y no tener
+    que estarlo escribiendo a la hora de setear páginia de modificación y eliminación
+    
+    -hacer que la getTabla o getEmptyTabla se generen dentro de la clase, no hacer la validación
+    afuera
+*/
+
 public class Tabla {
     private String estilo;
     private String ancho;
@@ -55,7 +63,10 @@ public class Tabla {
     private boolean imprimible;
     private String paginaImprimible;
     private String iconoImprimible;
-            
+    
+    private boolean chequeable;
+    private String nameChequeable;
+    
     public Tabla(String[][] rs, String[] cabeceras){
        this.rs = rs;
        this.cabeceras = cabeceras; 
@@ -154,6 +165,9 @@ public class Tabla {
        imprimible = false;
        paginaImprimible = "";
        iconoImprimible = Tabla.ICON.IMPRIMIR;
+       
+       chequeable = false;
+       nameChequeable = "";
     }    
 
     public String getPageContext() {
@@ -174,6 +188,13 @@ public class Tabla {
         String[] cabec = cabeceras;
         int[] columnas = anchocolumnas;
         String cab = "<thead><tr>";
+        
+        
+        if (isChequeable()){
+            cab +="<th></th>";
+        }
+        
+        
         for (i=0;i<cabeceras.length;i++){
             if (anchocolumnas==null)
                 cab += "<th>"+cabec[i]+"</th>";
@@ -227,9 +248,17 @@ public class Tabla {
                         Tabla += " onclick='"+metodoFilaSeleccionable+"(this)'>";
                     else
                         Tabla += ">";   
+           if (isChequeable()){              
+                Tabla +="<td><input type='checkbox' name='" + nameChequeable + "' value='" + rst[0][k] + "' " + (rst[numeroColumnas-1][k].equals("1") ? "checked" : "") + ">";
+                Tabla +="</td>";
+           }
             for (int i=0;i<numeroColumnas;i++){                 
                  if (getColumnasSeleccionables()==null)
-                    Tabla +="<td>"+ rst[i][k]+"</td>";
+                    if(isChequeable()){
+                        if(i != numeroColumnas - 1)
+                            Tabla +="<td>"+ rst[i][k]+"</td>";
+                    }else
+                        Tabla +="<td>"+ rst[i][k]+"</td>";
                  else{
                      boolean found=false;
                      for (int j=0;j<getColumnasSeleccionables().length;j++){
@@ -303,6 +332,8 @@ public class Tabla {
     }
     private String crearEmptyTabla(){
         int span = cabeceras.length;
+        if(isChequeable())
+            span++;
         if(isModificable())
             span++;
         if(isEliminable())
@@ -330,6 +361,8 @@ public class Tabla {
     }
     
     public String getTabla() throws SQLException{
+//        if(rs != null) return abrirTabla()+EncbzdTabla()+creaTabla()+cerrarTabla();
+//        else return abrirTabla()+EncbzdTabla()+crearEmptyTabla()+cerrarTabla();
         return abrirTabla()+EncbzdTabla()+creaTabla()+cerrarTabla();
     };
     
@@ -463,6 +496,20 @@ public class Tabla {
     public void setMetodoFilaSeleccionable(String metodoFilaSeleccionable) {
         this.metodoFilaSeleccionable = metodoFilaSeleccionable;
     }    
+    
+    
+    public boolean isChequeable(){
+        return chequeable;
+    }
+    public void setChequeable(boolean chequeable){
+        this.chequeable = chequeable;
+    }
+    public String getNameChequeable(){
+        return nameChequeable;
+    }
+    public void setNameChequeable(String nameChequeable){
+        this.nameChequeable = nameChequeable;
+    }
     
     
 

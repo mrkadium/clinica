@@ -16,24 +16,30 @@
             <a href="${pageContext.servletContext.contextPath}/Citas">Citas</a>
             <a href="${pageContext.servletContext.contextPath}/About">Acerca de</a>
         </div>
-        <div class="sesion">
-            <img src="">
-            <div class="sesionUsuario">
-                <p class="nombre">${Empleado.nombres} ${Empleado.apellidos}</p>
-                <p class="usuario">[${Usuario.usuario}]</p>
-                <a href="#" class="cerrar">Cerrar Sesión</a>
+        <c:if test="${Usuario != null}">
+            <div class="sesion">
+                <img src="">
+                <div class="sesionUsuario">
+                    <p class="nombre">${Empleado.nombres} ${Empleado.apellidos}</p>
+                    <p class="usuario">[${Usuario.usuario}]</p>
+                    <a href="${pageContext.servletContext.contextPath}/Logout" class="cerrar">Cerrar Sesión</a>
+                </div>
             </div>
-        </div>
-        <div class="iniciarSesion">
-            <a href="${pageContext.servletContext.contextPath}/Login">Iniciar sesión</a>
-            <!--<a href="#">Regístrate</a>-->
-        </div>
+        </c:if>
+        <c:if test="${Usuario == null}">
+            <div class="iniciarSesion">
+                <a href="${pageContext.servletContext.contextPath}/Login">Iniciar sesión</a>
+                <!--<a href="#">Regístrate</a>-->
+            </div>
+        </c:if>
         <div class="burger">
             <i class="icon icon-cross"></i>
             <i class="icon icon-menu"></i>
         </div>
         <div class="linksMobile">
-            <a href="${pageContext.servletContext.contextPath}/Login" class="iniciar">Iniciar sesión</a>
+            <c:if test="${Usuario == null}">
+                <a href="${pageContext.servletContext.contextPath}/Login" class="iniciar">Iniciar sesión</a>
+            </c:if>
             <!--<a href="#" class="iniciar">Regístrate</a>-->
             <c:if test="${permisos != null}">
                 <c:forEach var="p" items="${permisos}">
@@ -43,6 +49,8 @@
             <a href="#servicios">Servicios</a>
             <a href="#citas">Citas</a>
             <a href="#acercade">Acerca de</a>
-            <a href="${pageContext.servletContext.contextPath}/Logout" class="cerrar">Cerrar Sesión</a>
+            <c:if test="${Usuario != null}">
+                <a href="${pageContext.servletContext.contextPath}/Logout" class="cerrar">Cerrar Sesión</a>
+            </c:if>
         </div>
     </nav>

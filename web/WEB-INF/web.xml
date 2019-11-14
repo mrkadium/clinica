@@ -24,6 +24,14 @@
         <servlet-name>Marcas</servlet-name>
         <servlet-class>com.clinica.controllers.Marcas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Consumibles</servlet-name>
+        <servlet-class>com.clinica.controllers.Consumibles</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Permisos</servlet-name>
+        <servlet-class>com.clinica.controllers.Permisos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servicios</servlet-name>
         <url-pattern>/Servicios</url-pattern>
@@ -83,6 +91,10 @@
     <servlet>
         <servlet-name>Contactos</servlet-name>
         <servlet-class>com.clinica.controllers.Contactos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Horarios</servlet-name>
+        <servlet-class>com.clinica.controllers.Horarios</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -151,6 +163,18 @@
     <servlet-mapping>
         <servlet-name>Marcas</servlet-name>
         <url-pattern>/Marcas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Horarios</servlet-name>
+        <url-pattern>/Horarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Consumibles</servlet-name>
+        <url-pattern>/Consumibles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Permisos</servlet-name>
+        <url-pattern>/Permisos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

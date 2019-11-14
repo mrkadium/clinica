@@ -188,6 +188,12 @@ main .error{
         display: none;
     }
 }
+@media only screen and (min-width:768px){
+    .conf{
+        width: 90%;
+        margin: 0 auto;
+    }
+}
 @media only screen and (min-width: 1000px){
     .header #buscar{
         width:50vw;

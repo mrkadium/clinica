@@ -40,6 +40,8 @@ nav .logo{
     display: flex;
     align-items: center;
     height: 10vh;
+    min-height: 60px;
+    max-height: 80px;
     padding: 10px;
     /* padding-left: 20px; */
 }
@@ -122,10 +124,34 @@ nav .linksMobile .iniciar:hover{
     color: rgb(97, 205, 97);
 }
 nav .linksMobile .cerrar:hover{
-    color: red;
+    color: rgb(241, 117, 117);
 }
 
-nav .sesion,
+nav .sesion{
+    display: flex;
+    font-size: 14px;
+    text-align: center;
+    /* border-left: 2px solid var(--nav-color-bold); */
+    padding: 10px;
+    color: var(--nav-font-color);
+}
+nav .sesion .nombre{
+    color: var(--main-color);
+    font-weight: bold;
+}
+nav .sesion .usuario{
+    margin-bottom: 5px;
+}
+nav .sesion .cerrar{     
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--footer-color-trans);
+    text-decoration: none;
+}
+nav .sesion .cerrar:hover{
+    color: rgb(241, 117, 117);
+}
+/* nav .sesion, */
 nav .links,
 nav .iniciarSesion,
 nav .linksMobile,
@@ -147,6 +173,9 @@ nav .linksMobile,
 }
 .burger:hover{
     color: var(--main-color);
+}
+.burger:hover .icon-cross{
+    color: rgb(241, 117, 117);
 }
 
 
@@ -485,15 +514,17 @@ footer{
         display: none;
     }
     nav .links,
-    nav .iniciarSesion
-    /* nav .sesion */
+    nav .iniciarSesion,
+    nav .sesion
     {
         display: flex;
     }
     nav .sesion{
+        margin: 5px 0;
         font-size: 14px;
+        text-align: left;
         border-left: 2px solid var(--nav-color-bold);
-        padding: 10px;
+        padding: 7px;
         color: var(--nav-font-color);
     }
     nav .sesion .nombre{
@@ -504,10 +535,9 @@ footer{
     }
     nav .sesion .cerrar{     
         margin-top: 10px;
-        color: rgb(250, 70, 70);
         text-decoration: none;
     }
     nav .sesion .cerrar:hover{
-        text-decoration: underline;
+        color: rgb(241, 117, 117);
     }
 }

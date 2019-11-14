@@ -8,19 +8,19 @@ public class Horario {
     private int idhorario;
     private int idsucursal;
     private int idespecialidad;
-    private String horainicio;
-    private String horafinal;
+    private String hora_inicio;
+    private String hora_fin;
     private String dias;
 
     public Horario() {
     }
 
-    public Horario(int idhorario, int idsucursal, int idespecialidad, String horainicio, String horafinal, String dias) {
+    public Horario(int idhorario, int idsucursal, int idespecialidad, String hora_inicio, String hora_fin, String dias) {
         this.idhorario = idhorario;
         this.idsucursal = idsucursal;
         this.idespecialidad = idespecialidad;
-        this.horainicio = horainicio;
-        this.horafinal = horafinal;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
         this.dias = dias;
     }
 
@@ -48,20 +48,20 @@ public class Horario {
         this.idespecialidad = idespecialidad;
     }
 
-    public String getHorainicio() {
-        return horainicio;
+    public String getHora_inicio() {
+        return hora_inicio;
     }
 
-    public void setHorainicio(String horainicio) {
-        this.horainicio = horainicio;
+    public void setHora_inicio(String hora_inicio) {
+        this.hora_inicio = hora_inicio;
     }
 
-    public String getHorafinal() {
-        return horafinal;
+    public String getHora_fin() {
+        return hora_fin;
     }
 
-    public void setHorafinal(String horafinal) {
-        this.horafinal = horafinal;
+    public void setHora_fin(String hora_fin) {
+        this.hora_fin = hora_fin;
     }
 
     public String getDias() {
@@ -70,6 +70,5 @@ public class Horario {
 
     public void setDias(String dias) {
         this.dias = dias;
-    }
-    
+    }    
 }

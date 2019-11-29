@@ -101,13 +101,12 @@ CREATE TABLE especialidades(
 );
 
 CREATE TABLE especialidades_medico(
+	idespecialidad_medico INT PRIMARY KEY AUTO_INCREMENT,
 	idespecialidad INT NOT NULL,
     idmedico INT NOT NULL,
     
     FOREIGN KEY (idespecialidad) REFERENCES especialidades(idespecialidad),
-    FOREIGN KEY (idmedico) REFERENCES empleados(idempleado),
-    
-    PRIMARY KEY (idespecialidad, idmedico)
+    FOREIGN KEY (idmedico) REFERENCES empleados(idempleado)
 );
 
 CREATE TABLE pacientes(
@@ -230,6 +229,27 @@ CREATE TABLE compras(
     FOREIGN KEY (idlaboratorio) REFERENCES laboratorios(idlaboratorio)
 );
 
+DROP TRIGGER IF EXISTS bi_compras;
+DELIMITER //
+CREATE TRIGGER bi_compras
+BEFORE INSERT ON compras
+FOR EACH ROW
+BEGIN
+	IF(NEW.subtotal IS NULL) THEN
+		SET NEW.subtotal = 0;
+    END IF;
+	IF(NEW.descuentos IS NULL) THEN
+		SET NEW.descuentos = 0;
+    END IF;
+	IF(NEW.total IS NULL) THEN
+		SET NEW.total = 0;
+    END IF;
+    
+    INSERT INTO inventarios VALUES (NEW.idcompra, NEW.fecha, NEW.idlaboratorio);
+END;
+//
+DELIMITER ;
+
 CREATE TABLE detalles_compra(
 	iddetalle_compra INT(11) PRIMARY KEY AUTO_INCREMENT,
     idcompra INT(11) NOT NULL,
@@ -238,11 +258,34 @@ CREATE TABLE detalles_compra(
     cantidad INT(11) NOT NULL,
     precio_compra DECIMAL(10,2) NOT NULL,
     precio_sugerido DECIMAL(10,2) NOT NULL,
-    gravado DECIMAL(10,2),
+    total DECIMAL(10,2),
     
     FOREIGN KEY (idcompra) REFERENCES compras(idcompra),
     FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
+
+
+DROP TRIGGER IF EXISTS bi_detalles_compras;
+DELIMITER //
+CREATE TRIGGER bi_detalles_compra
+BEFORE INSERT ON detalles_compra
+FOR EACH ROW
+BEGIN
+	DECLARE t_venta DECIMAL(10,2);    
+    SET t_venta = (NEW.cantidad*NEW.precio_compra);
+    SET NEW.total = t_venta;
+    
+    UPDATE compras SET subtotal = subtotal + t_venta, total = total + t_venta WHERE idcompra = NEW.idcompra;  
+    
+    -- ACTUALIZAR EL CONSUMIBLE CON EL NUEVO PRECIO DE VENTA QUE VA EN LA COMPRA
+    UPDATE consumibles SET precio_venta = NEW.precio_sugerido WHERE idconsumible = NEW.idconsumible;
+    
+    
+    INSERT INTO detalles_inventario(idinventario, idconsumible, cantidad, fecha_caducidad) VALUES 
+    (NEW.idcompra, NEW.idconsumible, NEW.cantidad, NEW.fecha_caducidad);
+END;
+//
+DELIMITER ;
 
 CREATE TABLE inventarios(
 	idinventario INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -276,11 +319,33 @@ CREATE TABLE ventas( -- FACTURA
 	descuentos DECIMAL(10,2),
 	total DECIMAL(10,2),
 	deuda DECIMAL(10,2),
-    estado ENUM('Pendiente', 'Cancelada'),
+    estado ENUM('Pendiente', 'Cancelada') DEFAULT 'Pendiente',
 	
     FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
     FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
 );
+
+DROP TRIGGER IF EXISTS bi_ventas;
+DELIMITER //
+CREATE TRIGGER bi_ventas
+BEFORE INSERT ON ventas
+FOR EACH ROW
+BEGIN
+	DECLARE n INT;
+    DECLARE cant INT;
+    
+	SET cant = (SELECT COUNT(*) FROM ventas ORDER BY numero LIMIT 1);
+    IF(cant > 0) THEN
+		SET n = (SELECT numero FROM ventas ORDER BY numero LIMIT 1);
+    ELSE
+		SET n = 0;
+    END IF;
+	SET n = n+1;
+    SET NEW.numero = n;
+    SET NEW.estado = 'Pendiente';
+END;
+//
+DELIMITER ;
 
 CREATE TABLE detalles_venta(
 	iddetalle_venta INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -289,15 +354,58 @@ CREATE TABLE detalles_venta(
     cantidad INT(11),
 	precio DECIMAL(10,2),
 	excento DECIMAL(10,2),
-	gravado	DECIMAL(10,2),
+	total	DECIMAL(10,2),
 	no_sujeto DECIMAL(10,2),
 	monto_iva DECIMAL(10,2),
-	monto_fovial DECIMAL(10,2),
-	monto_guerra DECIMAL(10,2),
     
     FOREIGN KEY (idventa) REFERENCES ventas(idventa),
     FOREIGN KEY (idconsumible) REFERENCES consumibles(idconsumible)
 );
+
+DROP TRIGGER IF EXISTS bi_detalles_venta;
+DELIMITER //
+CREATE TRIGGER bi_detalles_venta
+BEFORE INSERT ON detalles_venta
+FOR EACH ROW
+BEGIN
+	-- HAY QUE REDUCIR EL INVENTARIO, CAMBIAR EL SUBTOTAL Y EL TOTAL
+	DECLARE t_venta DECIMAL(10,2);        
+    DECLARE id_detalle_inventario INT;
+    DECLARE cantidad_venta DECIMAL(10,2);
+    DECLARE cantidad_inventario DECIMAL(10,2);
+    
+    SET NEW.precio = (SELECT precio_venta FROM consumibles WHERE idconsumible = NEW.idconsumible);
+    SET t_venta = (NEW.cantidad*NEW.precio);
+    SET NEW.total = t_venta;
+    SET cantidad_venta = NEW.cantidad;
+    
+    UPDATE ventas SET subtotal = subtotal + t_venta, total = total + t_venta, deuda = deuda + t_venta WHERE idventa = NEW.idventa;    
+    
+    loop1: LOOP
+		SET id_detalle_inventario = (SELECT iddetalle_inventario FROM detalles_inventario WHERE idconsumible = NEW.idconsumible AND cantidad > 0 AND idconsumible IN (SELECT idconsumible FROM consumibles WHERE tipo = 'PRODUCTO') LIMIT 1);
+		SET cantidad_inventario = (SELECT cantidad FROM detalles_inventario WHERE idconsumible = NEW.idconsumible AND cantidad > 0 AND idconsumible IN (SELECT idconsumible FROM consumibles WHERE tipo = 'PRODUCTO') LIMIT 1);
+        IF(cantidad_inventario IS NOT NULL) THEN
+			IF(cantidad_venta > 0) THEN
+				IF(cantidad_venta >= cantidad_inventario) THEN
+					SET cantidad_venta = cantidad_venta - cantidad_inventario;
+                    UPDATE detalles_inventario SET cantidad = 0 WHERE iddetalle_inventario = id_detalle_inventario;
+                    ITERATE loop1;
+				ELSE
+					SET cantidad_inventario = cantidad_inventario - cantidad_venta;
+                    UPDATE detalles_inventario SET cantidad = cantidad_inventario WHERE iddetalle_inventario = id_detalle_inventario;
+                    LEAVE loop1;
+                END IF;
+			ELSE
+				LEAVE loop1;
+            END IF;
+		ELSE
+			LEAVE loop1;
+        END IF;
+    END LOOP loop1;
+    
+END;
+//
+DELIMITER ;
 
 CREATE TABLE abonos(
 	idabono INT PRIMARY KEY AUTO_INCREMENT,
@@ -307,6 +415,27 @@ CREATE TABLE abonos(
     
     FOREIGN KEY (idventa) REFERENCES ventas(idventa)
 );
+
+DROP TRIGGER IF EXISTS bi_abonos;
+DELIMITER //
+CREATE TRIGGER bi_abonos
+BEFORE INSERT ON abonos
+FOR EACH ROW
+BEGIN
+	-- REDUCIR LA DEUDA DE LA VENTA CON CADA ABONO
+    -- HASTA QUE LA SUMA DE ABONOS = TOTAL SE CAMBIARÁ DE 'PENDIENTE' A CANCELADA
+    DECLARE deuda_venta DECIMAL(10,2);
+    SET deuda_venta = (SELECT deuda FROM ventas WHERE idventa = NEW.idventa);
+    SET deuda_venta = deuda_venta - NEW.monto;
+    
+    UPDATE ventas SET deuda = deuda_venta WHERE idventa = NEW.idventa;
+    
+    IF(deuda_venta = 0) THEN
+		UPDATE ventas SET estado = 'Cancelada' WHERE idventa = NEW.idventa;
+    END IF;
+END;
+//
+DELIMITER ;
 
 -- SI ES CONSULTA
 CREATE TABLE empleados_consulta(
@@ -350,6 +479,22 @@ CREATE TABLE examenes_consulta(
     FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
     FOREIGN KEY (idexamen) REFERENCES examenes(idexamen)
 );
+
+CREATE TABLE consultas(
+	idconsulta INT PRIMARY KEY AUTO_INCREMENT,
+    idpaciente INT NOT NULL,
+    idservicio INT NOT NULL,
+    iddoctor INT,
+    fecha_hora DATETIME NOT NULL,
+    programada BOOL DEFAULT FALSE,
+    estado ENUM('PENDIENTE', 'ATENDIDA'),
+    
+	FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
+    FOREIGN KEY (idservicio) REFERENCES consumibles(idconsumible),
+    FOREIGN KEY (iddoctor) REFERENCES empleados(idempleado)
+);
+
+
 
 -- TRIGGER PARA CÓDIGO DE SUCURSAL
 DROP TRIGGER IF EXISTS bi_sucursales_codigo;

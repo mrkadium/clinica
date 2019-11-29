@@ -76,17 +76,17 @@
                             </div>
                         </div>
                     </form>
-                    <a href=""><i class="fas fa-plus-circle"></i> Agregar</a>
+                    <a onclick="abrirVentana('tiny_form.html');"><i class="fas fa-plus-circle"></i> Agregar</a>
                     <div class="header">
                         <form action="">
-                            <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
+                            <!-- <input type="text" id="buscar" autocomplete="off" placeholder="Buscar..."> -->
                             <!-- <select name="" id="category" title="instructor"> 
                                 <option value="0">-- Filtrar por instructor --</option>
                                 <c:forEach var="v" items="${Zonas}">
                                     <option value="Mario">Mario</option>
                                 </c:forEach>
                             </select> -->
-                            <input type="reset" id="reset" value="Quitar filtro">
+                            <!-- <input type="reset" id="reset" value="Quitar filtro"> -->
                         </form>
                     </div>
                     <div class="tablas">
@@ -405,6 +405,9 @@
     </footer>
 
     <script>
+        function abrirVentana(URL){
+            window.open(URL,"ventana1","width=500,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
+        }
         const openWindow = function(url){
             location.href = url;
         }

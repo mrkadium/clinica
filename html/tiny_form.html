@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../web/resources/css/principal.css">
+    <link rel="stylesheet" href="../web/resources/css/formulario.css">
+    <link rel="stylesheet" href="../web/resources/css/tablas.css">
+    <link rel="stylesheet" href="../web/resources/css/formulario_con_tabla.css">
+    </head>
+    <body>
+    <div class="formulario">
+        <h1 id="titulo">Formulario</h1>
+        <form id="formulario" action="">
+            <div class="campo">
+                <label for="campo1">Campo1</label>
+                <i></i>
+                <div class="varios">
+                    <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
+                    <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
+                    <a href="#" class="lupa"><i class="icon icon-search"></i></a>
+                </div>
+            </div>
+            <div class="campo">
+                <label for="campo2">Campo2</label>
+                <i></i>
+                <input type="text" name="campo2" id="campo2">
+            </div>
+            <div class="campo" id="tabla">
+                <label for="campo2">Consumibles</label>
+                <i></i>
+                <a  onclick="abrirVentana('tiny_form2.html');" class="agregar"><i class="icon icon-plus"></i> Agregar</a>
+                <div class="tablas">
+                    <table id="table01">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Consumible</th>
+                                <th>P. compra</th>
+                                <th>P. sugerido</th>
+                                <th>Cantidad</th>
+                                <th>Fecha cad.</th>
+                                <th><i class="icon icon-bin"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr>
+                                <td><input type="text" readonly class="min" name="idproducto" id="" value="1"></td>
+                                <td>Contenido de campo</td>
+                                <td>$5.00</td>
+                                <td><input type="text" readonly name="precio_compra" value="$5.55" id=""></td>
+                                <td><input type="text" value="5" name="" id=""></td>
+                                <td><input type="text" readonly name="fecha_caducidad" class="min" value="18/10/2022" id=""></td>
+                                <td><a href="#" class="btn"><i class="icon icon-bin"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" readonly class="min" name="idproducto" id="" value="2"></td>
+                                <td>Contenido de campo</td>
+                                <td>$5.00</td>
+                                <td><input type="text" readonly name="precio_compra" class="min" value="$115.55" id=""></td>
+                                <td><input type="text" value="5" name="" id=""></td>
+                                <td>18/10/2022</td>
+                                <td><a href="#" class="btn"><i class="icon icon-bin"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" readonly class="min" name="idproducto" id="" value="3"></td>
+                                <td>Contenido de campo</td>
+                                <td>$5.00</td>
+                                <td><input type="text" readonly name="precio_compra" value="$5.55" id=""></td>
+                                <td><input type="text" value="5" name="" id=""></td>
+                                <td>18/10/2022</td>
+                                <td><a href="#" class="btn"><i class="icon icon-bin"></i></a></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <label for="">Total: $</label>
+                <input type="text" readonly id="total" value="0" name="total" class="short" id="campo3">
+                <label for="">Descuento: $</label>
+                <input type="text" readonly id="descuento" value="0" name="descuento" class="short" id="campo3">
+            </div>
+            <div class="campo">
+                <label for="campof">CampoFecha</label>
+                <i></i>
+                <input type="date" name="campof" id="campof">
+            </div>
+            <div class="campo">
+                <label for="campo3">Campo3</label>
+                <i></i>
+                <input type="text" name="campo3" id="campo3">
+            </div>
+            <div class="campo">
+                <label for="campo3.5">Campo3</label>
+                <i></i>
+                <input type="number" class="short" min="5" max="10" value="5" name="campo3.5" id="campo3.5">
+            </div>
+            <div class="campo">
+                <label for="campo5">Campo5</label>
+                <i></i>
+                <select name="campo5" id="campo5">
+                    <option value="0">-- Seleccionar --</option>
+                    <option value="1">Avión</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="campo6">Campo6</label>
+                <i></i>
+                <div>
+                    <input type="radio" name="campo6" id="radio1" checked><label for="radio1">Excelente</label>
+                </div>
+                <div>
+                    <input type="radio" name="campo6" id="radio2"><label for="radio2">Malo</label>
+                </div>
+            </div>
+            <div class="campo">
+                <label for="campo7">Campo7</label>
+                <i></i>
+                <div>
+                    <input type="checkbox" name="campo7" id="bici"><label for="bici">Bici</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="campo7"><label for="carro">Carro</label>
+                </div>
+            </div>
+            <div class="campo">
+                <label for="campo8">Campo8</label>
+                <i></i>
+                <textarea name="campo8" id="campo8" cols="30" rows="10"></textarea>
+            </div>
+            <div class="botones">
+                <input type="submit" name="" id="" class="ghost-blue" value="Enviar"> 
+                <a href="" class="ghost-red">Cancelar</a>
+                <p style="display:none"><i>Procesando...</i></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        function abrirVentana(URL){
+            window.open(URL,"ventana1","width=500,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
+        }
+
+        const table_body = document.querySelector("#table01 tbody");
+        const total = document.querySelector("#total");
+        const descuento = document.querySelector("#descuento");
+
+        function setDataConsumible(idconsumible, nombre, precio_compra, precio_sugerido, cantidad, fecha_caducidad){
+            //agregarlo a la tabla   
+            table_body.innerHTML += 
+            `<tr>
+                <td><input type='text' readonly value='1' name=''></td>
+                <td><input type='text' class='min' readonly value='Paracetamol' name=''></td>
+                <td><input type='text' readonly value='$0.50' name=''></td>
+                <td><input type='text' readonly value='$0.75' name=''></td>
+                <td><input type='text' readonly value='200' name=''></td>
+                <td><input type='date' readonly value='2019-10-10' name=''></td>
+                <td><a  id='100' onclick='eliminarFila(this);' class="btn"><i class="icon icon-bin"></i></a></td>
+            </tr>`;
+            total.value = parseFloat(total.value) + (parseFloat(0.50) * parseInt(200));
+        }
+
+        function eliminarFila(boton){
+            var subtotal = boton.getAttribute("id");
+            total.value = parseFloat(total.value) - parseFloat(subtotal);
+            boton.parentElement.parentElement.remove();
+        }
+    </script>
+    </body>
+</html>

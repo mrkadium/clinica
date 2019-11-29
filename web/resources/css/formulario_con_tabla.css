@@ -1,0 +1,47 @@
+:root{
+    --nav-color: rgba(255, 255, 255, 0.95);
+    --nav-color-bold: rgb(200,200,200);
+    --footer-color: rgb(75,75,75);
+    --footer-color-light: rgba(60,60,60);
+    --footer-color-trans: rgba(60,60,60, .5);
+    --main-color: rgb(0,164,167);
+    --nav-font-color: rgb(150,150,150);
+    --light-green: rgb(97, 205, 97);
+}
+.agregar{
+    color: var(--main-color);
+    display: block;
+    margin: 10px 20px;
+    width: 120px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.agregar:hover{
+    text-decoration: underline;
+}
+#tabla{
+    margin-bottom: 20px;
+}
+#tabla table tbody td input{
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    outline: 0;
+    font-size: 15px;
+}
+.min{
+    min-width: 100px;
+}
+
+@media only screen and (min-width: 768px){
+    .tablas{
+        width: 60%;
+        /* min-width: 800px; */
+        max-width: 1000px;
+        max-height: 600px;
+        overflow-y: scroll;
+    }
+    .min{
+        min-width: 100px;
+    }
+}

@@ -32,6 +32,22 @@
         <servlet-name>Permisos</servlet-name>
         <servlet-class>com.clinica.controllers.Permisos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Especialidades_medico</servlet-name>
+        <servlet-class>com.clinica.controllers.Especialidades_medico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Compras</servlet-name>
+        <servlet-class>com.clinica.controllers.Compras</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Inventarios</servlet-name>
+        <servlet-class>com.clinica.controllers.Inventarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Ventas</servlet-name>
+        <servlet-class>com.clinica.controllers.Ventas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servicios</servlet-name>
         <url-pattern>/Servicios</url-pattern>
@@ -175,6 +191,22 @@
     <servlet-mapping>
         <servlet-name>Permisos</servlet-name>
         <url-pattern>/Permisos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Especialidades_medico</servlet-name>
+        <url-pattern>/Especialidades_medico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Compras</servlet-name>
+        <url-pattern>/Compras</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Inventarios</servlet-name>
+        <url-pattern>/Inventarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Ventas</servlet-name>
+        <url-pattern>/Ventas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

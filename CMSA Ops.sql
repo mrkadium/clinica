@@ -22,14 +22,182 @@ INSERT INTO departamentos(departamento, zona) VALUES
 ('MORAZÁN','ORIENTAL'),
 ('LA UNIÓN','ORIENTAL');
 
-INSERT INTO municipios(municipio, iddepartamento) VALUES
-('SONSONATE',3),
-('SONZACATE',3),
-('NAHULINGO',3),
-('IZALCO',3),
-('NAHUIZALCO',3),
-('ACAJUTLA',3),
-('SAN ANTONIO DEL MONTE',3);
+/*
+INSERT INTO departamentos (departamento, zona) VALUES							
+	(	"	Ahuachapán	"	,	"	OCCIDENTAL	"	)	,
+	(	"	Cabañas	"	,	"	CENTRAL	"	)	,
+	(	"	Chalatenango	"	,	"	CENTRAL	"	)	,
+	(	"	Cuscatlán	"	,	"	CENTRAL	"	)	,
+	(	"	Morazán	"	,	"	ORIENTAL	"	)	,
+	(	"	La Libertad	"	,	"	CENTRAL	"	)	,
+	(	"	La Paz	"	,	"	CENTRAL	"	)	,
+	(	"	La Unión	"	,	"	ORIENTAL	"	)	,
+	(	"	San Miguel	"	,	"	ORIENTAL	"	)	,
+	(	"	San Salvador	"	,	"	CENTRAL	"	)	,
+	(	"	San Vicente	"	,	"	CENTRAL	"	)	,
+	(	"	Santa Ana	"	,	"	OCCIDENTAL	"	)	,
+	(	"	Sonsonate	"	,	"	OCCIDENTAL	"	)	,
+	(	"	Usulután	"	,	"	ORIENTAL	"	)
+;
+*/
+
+INSERT INTO municipios(municipio, iddepartamento) VALUES					
+("	Ahuachapán	",	1	)	,
+("	Apaneca	",	1	)	,
+("	Atiquizaya	",	1	)	,
+("	Concepción de Ataco	",	1	)	,
+("	El Refugio	",	1	)	,
+("	Guaymango	",	1	)	,
+("	Jujutla	",	1	)	,
+("	San Francisco Menéndez	",	1	)	,
+("	San Lorenzo	",	1	)	,
+("	San Pedro Puxtla	",	1	)	,
+("	Tacuba	",	1	)	,
+("	Turín	",	1	)	,
+("	Cinquera	",	2	)	,
+("	Villa Dolores	",	2	)	,
+("	Guacotecti	",	2	)	,
+("	Ilobasco	",	2	)	,
+("	Jutiapa	",	2	)	,
+("	San Isidro	",	2	)	,
+("	Sensuntepeque	",	2	)	,
+("	Tejutepeque	",	2	)	,
+("	Victoria	",	2	)	,
+("	Citalá	",	3	)	,
+("	Comalapa	",	3	)	,
+("	Concepción Quezaltepeque	",	3	)	,
+("	Dulce Nombre de María	",	3	)	,
+("	El Carrizal	",	3	)	,
+("	El Paraíso	",	3	)	,
+("	La Laguna	",	3	)	,
+("	La Palma	",	3	)	,
+("	La Reina	",	3	)	,
+("	Las Vueltas	",	3	)	,
+("	Nombre de Jesús	",	3	)	,
+("	Nueva Concepción	",	3	)	,
+("	Nueva Trinidad	",	3	)	,
+("	Ojos de Agua	",	3	)	,
+("	Potonico	",	3	)	,
+("	San Antonio de la Cruz	",	3	)	,
+("	San Antonio Los Ranchos	",	3	)	,
+("	San Fernando	",	3	)	,
+("	San Francisco Lempa	",	3	)	,
+("	San Francisco Morazán	",	3	)	,
+("	San Ignacio	",	3	)	,
+("	San Isidro Labrador	",	3	)	,
+("	San José Cancasque	",	3	)	,
+("	San José Las Flores	",	3	)	,
+("	San Luis del Carmen	",	3	)	,
+("	San Miguel de Mercedes	",	3	)	,
+("	San Rafael	",	3	)	,
+("	Santa Rita	",	3	)	,
+("	Tejutla	",	3	)	,
+("	Candelaria	",	4	)	,
+("	Cojutepeque	",	4	)	,
+("	El Carmen	",	4	)	,
+("	El Rosario	",	4	)	,
+("	Monte San Juan	",	4	)	,
+("	Oratorio de Concepción	",	4	)	,
+("	San Bartolomé Perulapía	",	4	)	,
+("	San Cristóbal	",	4	)	,
+("	San José Guayabal	",	4	)	,
+("	San Pedro Perulapán	",	4	)	,
+("	San Rafael Cedros	",	4	)	,
+("	San Ramón	",	4	)	,
+("	Santa Cruz Analquito	",	4	)	,
+("	Santa Cruz Michapa	",	4	)	,
+("	Suchitoto	",	4	)	,
+("	Tenancingo	",	4	)	,
+("	Arambala	",	5	)	,
+("	Cacaopera	",	5	)	,
+("	Chilanga	",	5	)	,
+("	Corinto	",	5	)	,
+("	Delicias de Concepción	",	5	)	,
+("	El Divisadero	",	5	)	,
+("	El Rosario	",	5	)	,
+("	Gualococti	",	5	)	,
+("	Guatajiagua	",	5	)	,
+("	Joateca	",	5	)	,
+("	Jocoaitique	",	5	)	,
+("	Jocoro	",	5	)	,
+("	Lolotiquillo	",	5	)	,
+("	Meanguera	",	5	)	,
+("	Osicala	",	5	)	,
+("	Perquín	",	5	)	,
+("	San Carlos	",	5	)	,
+("	San Fernando	",	5	)	,
+("	San Francisco Gotera	",	5	)	,
+("	San Isidro	",	5	)	,
+("	San Simón	",	5	)	,
+("	Sensembra	",	5	)	,
+("	Sociedad	",	5	)	,
+("	Torola	",	5	)	,
+("	Yamabal	",	5	)	,
+("	Yoloaiquín	",	5	)	,
+("	Antiguo Cuscatlán	",	6	)	,
+("	Chiltiupán	",	6	)	,
+("	Ciudad Arce	",	6	)	,
+("	Colón	",	6	)	,
+("	Comasagua	",	6	)	,
+("	Huizúcar	",	6	)	,
+("	Jayaque	",	6	)	,
+("	Jicalapa	",	6	)	,
+("	La Libertad	",	6	)	,
+("	Santa Tecla	",	6	)	,
+("	Nuevo Cuscatlán	",	6	)	,
+("	San Juan Opico	",	6	)	,
+("	Quezaltepeque	",	6	)	,
+("	Sacacoyo	",	6	)	,
+("	San José Villanueva	",	6	)	,
+("	San Matías	",	6	)	,
+("	San Pablo Tacachico	",	6	)	,
+("	Talnique	",	6	)	,
+("	Tamanique	",	6	)	,
+("	Teotepeque	",	6	)	,
+("	Tepecoyo	",	6	)	,
+("	Zaragoza	",	6	)	,
+("	Cuyultitán	",	7	)	,
+("	El Rosario / Rosario de La Paz	",	7	)	,
+("	Jerusalén	",	7	)	,
+("	Mercedes La Ceiba	",	7	)	,
+("	Olocuilta	",	7	)	,
+("	Paraíso de Osorio	",	7	)	,
+("	San Antonio Masahuat	",	7	)	,
+("	San Emigdio	",	7	)	,
+("	San Francisco Chinameca	",	7	)	,
+("	San Juan Nonualco	",	7	)	,
+("	San Juan Talpa	",	7	)	,
+("	San Juan Tepezontes	",	7	)	,
+("	San Luis La Herradura	",	7	)	,
+("	San Luis Talpa	",	7	)	,
+("	San Miguel Tepezontes	",	7	)	,
+("	San Pedro Masahuat	",	7	)	,
+("	San Pedro Nonualco	",	7	)	,
+("	San Rafael Obrajuelo	",	7	)	,
+("	Santa María Ostuma	",	7	)	,
+("	Santiago Nonualco	",	7	)	,
+("	Tapalhuaca	",	7	)	,
+("	Zacatecoluca	",	7	)	,
+("	Anamorós	",	8	)	,
+("	Bolívar	",	8	)	,
+("	Concepción de Oriente	",	8	)	,
+("	Conchagua	",	8	)	,
+("	El Carmen	",	8	)	,
+("	El Sauce	",	8	)	,
+("	Intipucá	",	8	)	,
+("	La Unión	",	8	)	,
+("	Lilisque	",	8	)	,
+("	Meanguera del Golfo	",	8	)	,
+("	Nueva Esparta	",	8	)	,
+("	Pasaquina	",	8	)	,
+("	Polorós	",	8	)	,
+("	San Alejo	",	8	)	,
+("	San José	",	8	)	,
+("	Santa Rosa de Lima	",	8	)	,
+("	Yayantique	",	8	)	,
+("	Yucuaiquín	",	8	)	
+;
+
 
 INSERT INTO sucursales(idempresa, idmunicipio, direccion, telefono1, telefono2, email) VALUES
 (1, 7, 'Cuesta desde el Hospital Nacional Mazzini hacia El Carmen', '2456987', '2123658', 'clinica@gmail.com');
@@ -84,38 +252,43 @@ INSERT INTO marcas(marca) VALUES
 ('Enron');
 
 INSERT INTO consumibles(tipo, nombre, alias, presentacion, idmarca, precio_compra, precio_sugerido, precio_venta) VALUES
-('SERVICIO', 'Consulta general', 'General', 'N/A', 1, 0, 0, 10), -- QUIZÁ AL INSERTAR UN SERVICIO, QUE SE INSERTE EL INVENTARIO
-('PRODUCTO', 'Suero oral 400ml', 'Suero oral', 'LÍQUIDO', 2, 2, 2.50, 2.80);
+ -- QUIZÁ AL INSERTAR UN SERVICIO, QUE SE INSERTE EL INVENTARIO. A LOS SERVICIOS DEFINIRLES EL PRECIO DE VENTA, YA QUE NO SE COMPRAN
+('SERVICIO', 'Consulta general', 'General', 'N/A', 1, 0, 0, 10),
+('PRODUCTO', 'Suero oral 400ml', 'Suero oral', 'Líquido', 2, 0, 0, 0),
+('PRODUCTO','Acetaminofén','Paracetamol','Pastilla',2,0,0,0);
 
 INSERT INTO compras(fecha, idlaboratorio) VALUES
 (NOW(), 2);
 
-INSERT INTO detalles_compra(idcompra, idconsumible, fecha_caducidad, cantidad, precio_compra, precio_sugerido, gravado) VALUES
-(1, 2, NULL, 50, 2, 2.50, 100);
+INSERT INTO detalles_compra(idcompra, idconsumible, fecha_caducidad, cantidad, precio_compra, precio_sugerido) VALUES
+(1, 2, NOW(), 50, 2, 2.50),
+(1, 3, NOW(), 200, 0.10, 0.15);
 
-INSERT INTO inventarios(fecha, idlaboratorio) VALUES
+/*INSERT INTO inventarios(fecha, idlaboratorio) VALUES
 (NOW(), 2),
 (NOW(), 1);
 
 INSERT INTO detalles_inventario(idinventario, idconsumible, cantidad, fecha_caducidad) VALUES -- PRODUCTOS
 (1, 2, 50, NULL); -- ESTE SERÁ MODIFICADO AL MOMENTO DE CADA VENTA
 INSERT INTO detalles_inventario(idinventario, idconsumible, cantidad) VALUES -- SERVICIOS
-(2, 1, 1);
+(2, 1, 1);*/
+
 
 INSERT INTO ventas(numero, fecha, idpaciente, paciente, direccion, telefono, idempleado, subtotal, descuentos, total, deuda, estado) VALUES
-(1, NOW(), 1, 'Mario Adalberto Rivera Olivo', NULL, NULL, 2, 0, 0, 0, 0, 'PENDIENTE');
+(1, NOW(), 1, 'Mario Adalberto Rivera Olivo', NULL, NULL, 2, 0, 0, 0, 0, 'Pendiente');
 
-INSERT INTO detalles_venta(idventa, idconsumible, cantidad, precio, excento, gravado, no_sujeto, monto_iva, monto_fovial, monto_guerra) VALUES
-(1, 2, 5, 2.80, 0, 14, 0, 0, 0, 0),
-(1, 1, 1, 10, 0, 10, 0, 0, 0, 0);
+INSERT INTO detalles_venta(idventa, idconsumible, cantidad, precio, excento, no_sujeto, monto_iva) VALUES
+(1, 1, 1, 10, 0, 0, 0),
+(1, 2, 45, 2.80, 0, 0, 0),
+(1, 3, 5, 25, 0,0,0);
 
-UPDATE ventas SET subtotal = 24, descuentos = 0, total = 24, deuda = 0, estado = 'CANCELADA' WHERE idventa = 1;
+-- UPDATE ventas SET subtotal = 24, descuentos = 0, total = 24, deuda = 0, estado = 'CANCELADA' WHERE idventa = 1;
 
 INSERT INTO abonos(idventa, fecha, monto) VALUES
-(1, NOW(), 24); -- SI LA SUMA DE LOS ABONOS POR VENTA ES IGUAL AL TOTAL EN LA VENTA, SE CAMBIA LA VENTA DE 'PENDIENTE' A 'CANCELADA' Y LA DEUDA A 0
-
-UPDATE detalles_inventario SET cantidad = (cantidad - 5) WHERE iddetalle_inventario = 1; -- SÓLO SE REDUCEN LOS PRODUCTOS
-
+(1, NOW(), 40); -- SI LA SUMA DE LOS ABONOS POR VENTA ES IGUAL AL TOTAL EN LA VENTA, SE CAMBIA LA VENTA DE 'PENDIENTE' A 'CANCELADA' Y LA DEUDA A 0
+/*
+-- UPDATE detalles_inventario SET cantidad = (cantidad - 5) WHERE iddetalle_inventario = 1; -- SÓLO SE REDUCEN LOS PRODUCTOS
+*/
 INSERT INTO empleados_consulta(idconsulta, idempleado) VALUES
 (1, 1), -- IDCONSULTA ES EL ID DE LA VENTA EN LA QUE SE REGISTRÓ UN SERVICIO
 (1, 2);
@@ -128,3 +301,6 @@ INSERT INTO examenes(examen, descripcion) VALUES
 
 INSERT INTO examenes_consulta(idconsulta, idexamen, estado, fecha_revision, resultados) VALUES
 (1, 1, 'PENDIENTE', '2019-10-25', NULL);
+
+INSERT INTO consultas(idpaciente, idservicio, iddoctor, fecha_hora, programada, estado) VALUES
+(1,1,1, NOW(),FALSE,'PENDIENTE');

@@ -173,6 +173,8 @@ main .error{
 }
 #table01 td>a{
     color: var(--main-color-dark);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 450px){

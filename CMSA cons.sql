@@ -1,3 +1,6 @@
+USE cmsa;
+
+-- PACIENTES
 SELECT
 	a.*,
     b.municipio,
@@ -5,5 +8,82 @@ SELECT
 FROM pacientes a, municipios b, departamentos c
 WHERE
 	a.idmunicipio = b.idmunicipio
-    AND b.idmunicipio = c.idmunicipio
+    AND b.iddepartamento = c.iddepartamento
 ;
+SELECT
+	a.idpaciente,
+	CONCAT(a.nombres,' ', a.apellidos) AS paciente,
+    CONCAT(b.municipio, ', ', c.departamento) AS direccion
+FROM pacientes a, municipios b, departamentos c
+WHERE
+	a.idmunicipio = b.idmunicipio
+    AND b.iddepartamento = c.iddepartamento;
+
+
+-- COMPRAS
+SELECT * FROM compras;
+SELECT
+	a.idcompra, a.fecha, b.nombre,
+    a.subtotal, a.descuentos, a.total,
+    (SELECT SUM(cantidad) FROM detalles_compra WHERE idcompra = a.idcompra) AS cant_productos
+FROM compras a, laboratorios b
+WHERE
+	a.idlaboratorio = b.idlaboratorio
+;
+-- DETALLES_COMPRA
+SELECT * FROM detalles_compra;
+SELECT * FROM consumibles;
+
+
+
+-- INVENTARIOS
+SELECT * FROM inventarios;
+-- DETALLES_INVENTARIO
+SELECT * FROM detalles_inventario;
+SELECT * FROM consumibles;
+SELECT 
+	a.idconsumible, b.nombre, b.tipo,
+    IF(b.tipo = 'Producto', SUM(a.cantidad), 1) as existencias,
+    b.precio_venta
+FROM detalles_inventario a, consumibles b
+WHERE 
+	a.idconsumible = b.idconsumible
+--    AND b.tipo = 'Producto'
+GROUP BY a.idconsumible
+ORDER BY b.tipo DESC
+;
+
+
+
+-- VENTAS
+SELECT * FROM ventas;
+-- DETALLES_VENTA
+SELECT * FROM detalles_venta;
+SELECT a.idconsumible, b.nombre, a.cantidad, a.precio
+FROM detalles_venta a, consumibles b
+WHERE a.idconsumible = b.idconsumible;
+
+
+-- ABONOS
+SELECT * FROM abonos;
+
+
+-- EMPLEADOS_CONSULTA
+SELECT * FROM empleados_consulta;
+SELECT a.*, b.apellidos FROM empleados_consulta a, empleados b WHERE a.idempleado = b.idempleado;
+
+
+-- DETALLES_CONSULTA
+SELECT * FROM detalles_consulta;
+
+
+-- EXÁMENES
+SELECT * FROM examenes;
+
+
+-- EXÁMENES_CONSULTA
+SELECT * FROM examenes_consulta;
+
+
+-- MUNICIPIOS
+SELECT * FROM municipios;

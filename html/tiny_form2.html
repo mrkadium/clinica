@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../web/resources/css/principal.css">
+    <link rel="stylesheet" href="../web/resources/css/formulario.css">
+    <link rel="stylesheet" href="../web/resources/css/tablas.css">
+    <link rel="stylesheet" href="../web/resources/css/formulario_con_tabla.css">
+    </head>
+    <body>
+    <div class="formulario">
+        <h1 id="titulo">Formulario</h1>
+        <form id="formulario" action="">
+            <div class="campo">
+                <label for="campo1">Campo1</label>
+                <i></i>
+                <div class="varios">
+                    <input type="text" class="short" name="campo1" id="campo1" value="1" readonly tabindex="-1">
+                    <input type="text" class="long" name="campo1" id="campo1" readonly tabindex="-1">
+                    <a href="#" class="lupa"><i class="icon icon-search"></i></a>
+                </div>
+            </div>
+            <div class="campo">
+                <label for="campo2">Campo2</label>
+                <i></i>
+                <input type="text" name="campo2" id="campo2">
+            </div>
+            <div class="campo">
+                <label for="campof">CampoFecha</label>
+                <i></i>
+                <input type="date" name="campof" id="campof">
+            </div>
+            <div class="campo">
+                <label for="campo3">Campo3</label>
+                <i></i>
+                <input type="text" name="campo3" id="campo3">
+            </div>
+            <div class="campo">
+                <label for="campo3.5">Campo3</label>
+                <i></i>
+                <input type="number" class="short" min="5" max="10" value="5" name="campo3.5" id="campo3.5">
+            </div>
+            <div class="campo">
+                <label for="campo5">Campo5</label>
+                <i></i>
+                <select name="campo5" id="campo5">
+                    <option value="0">-- Seleccionar --</option>
+                    <option value="1">Avión</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="campo6">Campo6</label>
+                <i></i>
+                <div>
+                    <input type="radio" name="campo6" id="radio1" checked><label for="radio1">Excelente</label>
+                </div>
+                <div>
+                    <input type="radio" name="campo6" id="radio2"><label for="radio2">Malo</label>
+                </div>
+            </div>
+            <div class="campo">
+                <label for="campo7">Campo7</label>
+                <i></i>
+                <div>
+                    <input type="checkbox" name="campo7" id="bici"><label for="bici">Bici</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="campo7"><label for="carro">Carro</label>
+                </div>
+            </div>
+            <div class="campo">
+                <label for="campo8">Campo8</label>
+                <i></i>
+                <textarea name="campo8" id="campo8" cols="30" rows="10"></textarea>
+            </div>
+            <div class="botones">
+                <input type="submit" name="" id="" class="ghost-blue" value="Agregar"> 
+                <a href="" class="ghost-red">Cancelar</a>
+                <p style="display:none"><i>Procesando...</i></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        const formulario = document.querySelector("#formulario");
+
+        formulario.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            let idconsumible = document.querySelector("#campo1").value;
+            let nombre = document.querySelector("#campo5").value;
+            let precio_compra = document.querySelector("#campo1").value;
+            let precio_sugerido = document.querySelector("#campo1").value;
+            let cantidad = document.querySelector("#campo1").value;
+            let fecha_caducidad = document.querySelector("#campo1").value;
+
+            window.opener.setDataConsumible(idconsumible, nombre, precio_compra, precio_sugerido, cantidad, fecha_caducidad);
+            window.close();
+        });
+    </script>
+    </body>
+</html>

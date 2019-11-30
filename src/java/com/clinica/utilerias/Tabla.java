@@ -24,6 +24,7 @@ public class Tabla {
         public static final String INSERTAR = "<i title='Insertar' class=\"icon icon-plus\"></i>";
         public static final String MODIFICAR = "<i title='Modificar' class=\"icon icon-pencil\"></i>";
         public static final String ELIMINAR = "<i title='Eliminar' class=\"icon icon-bin\"></i>";
+        public static final String ACEPTAR = "<i title='Aceptar' class=\"icon icon-new-tab\"></i>";
     }
 
     public static final class ALIGN {

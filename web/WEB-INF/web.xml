@@ -48,6 +48,18 @@
         <servlet-name>Ventas</servlet-name>
         <servlet-class>com.clinica.controllers.Ventas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Consultas</servlet-name>
+        <servlet-class>com.clinica.controllers.Consultas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetalleConsulta</servlet-name>
+        <servlet-class>com.clinica.controllers.Consultas</servlet-class>
+        <init-param>
+            <param-name>accion</param-name>
+            <param-value>detalle_consulta</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servicios</servlet-name>
         <url-pattern>/Servicios</url-pattern>
@@ -207,6 +219,14 @@
     <servlet-mapping>
         <servlet-name>Ventas</servlet-name>
         <url-pattern>/Ventas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Consultas</servlet-name>
+        <url-pattern>/Consultas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetalleConsulta</servlet-name>
+        <url-pattern>/DetalleConsulta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

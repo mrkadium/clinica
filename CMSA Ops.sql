@@ -289,6 +289,10 @@ INSERT INTO abonos(idventa, fecha, monto) VALUES
 /*
 -- UPDATE detalles_inventario SET cantidad = (cantidad - 5) WHERE iddetalle_inventario = 1; -- SÓLO SE REDUCEN LOS PRODUCTOS
 */
+
+INSERT INTO consultas(idpaciente, idservicio, iddoctor, fecha_hora, programada, estado) VALUES
+(1,1,1, NOW(),FALSE,'Atendida');
+
 INSERT INTO empleados_consulta(idconsulta, idempleado) VALUES
 (1, 1), -- IDCONSULTA ES EL ID DE LA VENTA EN LA QUE SE REGISTRÓ UN SERVICIO
 (1, 2);
@@ -301,6 +305,3 @@ INSERT INTO examenes(examen, descripcion) VALUES
 
 INSERT INTO examenes_consulta(idconsulta, idexamen, estado, fecha_revision, resultados) VALUES
 (1, 1, 'PENDIENTE', '2019-10-25', NULL);
-
-INSERT INTO consultas(idpaciente, idservicio, iddoctor, fecha_hora, programada, estado) VALUES
-(1,1,1, NOW(),FALSE,'PENDIENTE');

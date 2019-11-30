@@ -87,3 +87,61 @@ SELECT * FROM examenes_consulta;
 
 -- MUNICIPIOS
 SELECT * FROM municipios;
+
+-- CONSULTAS
+SELECT * FROM consultas;
+SELECT
+    a.idconsulta, a.fecha_hora, 
+    CONCAT(b.nombres,' ',b.apellidos) as paciente,
+    c.nombre, CONCAT(d.nombres,' ',d.apellidos) as doctor, a.programada, a.estado
+FROM consultas a, pacientes b, consumibles c, empleados d
+WHERE
+	a.idpaciente = b.idpaciente
+    AND a.idservicio = c.idconsumible
+    AND a.iddoctor = d.idempleado
+ORDER BY a.fecha_hora
+;
+SELECT
+    a.idconsulta, a.fecha_hora, 
+    CONCAT(b.nombres,' ',b.apellidos) as paciente,
+    c.nombre, IF(a.iddoctor IS NULL,'-',CONCAT(d.nombres,' ',d.apellidos)) as doctor, a.programada, a.estado
+FROM consultas a
+INNER JOIN pacientes b ON a.idpaciente = b.idpaciente
+INNER JOIN consumibles c ON a.idservicio = c.idconsumible
+LEFT JOIN empleados d ON a.iddoctor = d.idempleado
+ORDER BY a.idconsulta
+;
+
+SELECT * FROM detalles_consulta WHERE idconsulta = 1;
+
+SELECT idempleado, CONCAT(nombres,' ',apellidos) AS empleado FROM empleados WHERE jvpm IS NOT NULL;
+
+
+-- EMPLEADOS
+SELECT * FROM empleados;
+
+
+-- EMPLEADOS_CONSULTA (MINIVIEW)
+SELECT * FROM empleados_consulta;
+SELECT 
+	a.idempleado_consulta, a.idempleado, 
+    CONCAT(b.nombres,' ',b.apellidos) AS empleado,
+    c.cargo
+FROM empleados_consulta a, empleados b, cargos c
+WHERE
+	a.idempleado = b.idempleado
+    AND b.idcargo = c.idcargo
+    AND a.idconsulta = 1
+;
+
+SELECT b.* FROM empleados_consulta a, empleados b WHERE a.idempleado = b.idempleado AND a.idconsulta = 1 ORDER BY a.idempleado_consulta;
+SELECT c.* FROM empleados_consulta a, empleados b, cargos c WHERE a.idempleado = b.idempleado AND b.idcargo = c.idcargo AND a.idconsulta = 1 ORDER BY a.idempleado_consulta;
+-- EMPLEADOS (EMPLEADOS_CONSULTA)
+SELECT 
+	b.idempleado, 
+    CONCAT(b.nombres,' ',b.apellidos) AS empleado,
+    c.cargo
+FROM empleados b, cargos c
+WHERE
+	b.idcargo = c.idcargo
+;

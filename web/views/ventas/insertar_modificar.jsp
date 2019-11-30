@@ -93,9 +93,10 @@
                         <c:if test="${Abonos != null}">
                             <c:forEach var="i" items="${Abonos}">
                             <tr>
-                                <td><input type='text' readonly value='${i.idabono}' name='idabono'></td>
+                                <td><input type='text' readonly value='${i.idabono}' name='idmonto'></td>
                                 <td><input type='text' readonly value='${i.monto}' name='montito'></td>
                                 <td><input type='text' readonly value='${i.fecha.toString().substring(0,10)}' name='fechita'></td>
+                                <td></td>
                             </tr>
                             </c:forEach>
                         </c:if>
@@ -168,6 +169,7 @@
                     "<td><a id='" + monto.value + "' onclick='eliminarFilaMonto(this);' class='btn'><i class='icon icon-bin'></i></a></td>" +
                 "</tr>";
             total_abono.value = parseFloat(total_abono.value) + parseFloat(monto.value);
+            deuda.value = d-m;
             monto.value = "";
         }else{
             monto.value = "";
@@ -209,6 +211,7 @@
     function eliminarFilaMonto(boton){
         var montito = boton.getAttribute("id");
         total_abono.value = parseFloat(total_abono.value) - parseFloat(montito);
+        deuda.value = parseFloat(deuda.value) + parseFloat(montito);
         boton.parentElement.parentElement.remove();
         monto.value = "";
     }

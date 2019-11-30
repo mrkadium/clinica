@@ -252,7 +252,24 @@ public class Ventas extends HttpServlet {
             v.setIdempleado(e.getIdempleado());
             if(idventa != null && !idventa.equals("")){
                 v.setIdventa(Integer.parseInt(idventa));
-                v = Operaciones.actualizar(v.getIdventa(), v);
+//                v = Operaciones.actualizar(v.getIdventa(), v);
+                
+                List<Abono> lstAbonosI = new ArrayList();
+                List<Abono> lstAbonosM = new ArrayList();
+                for(int i=0; i<montos.length; i++){
+                    Abono a = new Abono();
+                    a.setIdventa(v.getIdventa());
+                    a.setFecha(new Date());
+                    a.setMonto(new BigDecimal(montos[i]));
+                    if(idmontos[i].equals("0"))
+                        lstAbonosI.add(a);
+                    else
+                        lstAbonosM.add(a);
+                }
+                
+                for(Abono a: lstAbonosI){
+                    a = Operaciones.insertar(a);
+                }
             }else{
                 v = Operaciones.insertar(v); //COMPRA RECIÉN INSERTADA
                 

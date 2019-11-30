@@ -437,19 +437,35 @@ END;
 //
 DELIMITER ;
 
+
 -- SI ES CONSULTA
+CREATE TABLE consultas(
+	idconsulta INT PRIMARY KEY AUTO_INCREMENT,
+    idpaciente INT NOT NULL,
+    idservicio INT NOT NULL,
+    iddoctor INT,
+    fecha_hora DATETIME NOT NULL,
+    programada BOOL DEFAULT FALSE,
+    estado ENUM('Pendiente', 'Atendida'),
+    
+	FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
+    FOREIGN KEY (idservicio) REFERENCES consumibles(idconsumible),
+    FOREIGN KEY (iddoctor) REFERENCES empleados(idempleado)
+);
+
 CREATE TABLE empleados_consulta(
+	idempleado_consulta INT PRIMARY KEY AUTO_INCREMENT,
 	idconsulta INT NOT NULL,
     idempleado INT NOT NULL,
     
-    FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
-    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado),
-    
-    PRIMARY KEY (idconsulta, idempleado)
+    FOREIGN KEY (idconsulta) REFERENCES consultas(idconsulta),
+    FOREIGN KEY (idempleado) REFERENCES empleados(idempleado)
 );
 
 CREATE TABLE detalles_consulta(
-	idconsulta INT(11) PRIMARY KEY,
+	iddetalle_consulta INT(11) PRIMARY KEY AUTO_INCREMENT,
+    idventa INT,
+    idconsulta INT,
     razon_consulta LONGTEXT,
 	temperatura	VARCHAR(10),
 	frecuencia_cardiaca VARCHAR(20),
@@ -460,7 +476,8 @@ CREATE TABLE detalles_consulta(
 	tratamiento LONGTEXT,
 	observaciones LONGTEXT,
     
-    FOREIGN KEY (idconsulta) REFERENCES ventas(idventa)
+    FOREIGN KEY (idventa) REFERENCES ventas(idventa),
+    FOREIGN KEY (idconsulta) REFERENCES consultas(idconsulta)
 );
 
 CREATE TABLE examenes(
@@ -478,20 +495,6 @@ CREATE TABLE examenes_consulta(
     
     FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
     FOREIGN KEY (idexamen) REFERENCES examenes(idexamen)
-);
-
-CREATE TABLE consultas(
-	idconsulta INT PRIMARY KEY AUTO_INCREMENT,
-    idpaciente INT NOT NULL,
-    idservicio INT NOT NULL,
-    iddoctor INT,
-    fecha_hora DATETIME NOT NULL,
-    programada BOOL DEFAULT FALSE,
-    estado ENUM('PENDIENTE', 'ATENDIDA'),
-    
-	FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
-    FOREIGN KEY (idservicio) REFERENCES consumibles(idconsumible),
-    FOREIGN KEY (iddoctor) REFERENCES empleados(idempleado)
 );
 
 

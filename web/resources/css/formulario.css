@@ -82,7 +82,8 @@
     padding: 5px;
 }
 .formulario .campo .varios .short,
-.formulario .campo input.short{
+.formulario .campo input.short,
+.formulario .campo select.short{
     width: 80px;
 }
 .formulario .campo a{

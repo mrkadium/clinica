@@ -41,4 +41,41 @@ public class Select {
         lst.add("Telefono");
         return lst;
     }
+    public static List<String> HORAS() throws Exception{
+        List<String> lst = new ArrayList();
+        lst.add("06");
+        lst.add("07");
+        lst.add("08");
+        lst.add("09");
+        lst.add("10");
+        lst.add("11");
+        lst.add("12");
+        lst.add("13");
+        lst.add("14");
+        lst.add("15");
+        lst.add("16");
+        lst.add("17");
+        lst.add("18");
+        lst.add("19");
+        lst.add("20");
+        lst.add("21");
+        lst.add("22");
+        return lst;
+    }
+    public static List<String> MINUTOS() throws Exception{
+        List<String> lst = new ArrayList();
+        lst.add("00");
+        lst.add("05");
+        lst.add("10");
+        lst.add("15");
+        lst.add("20");
+        lst.add("25");
+        lst.add("30");
+        lst.add("35");
+        lst.add("40");
+        lst.add("45");
+        lst.add("50");
+        lst.add("55");
+        return lst;
+    }
 }

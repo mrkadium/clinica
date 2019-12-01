@@ -6,3 +6,6 @@
             <p class="correcto"><strong>Operación realizada correctamente <i class="icon icon-smile"></i></strong></p>
         </c:if>
     </c:if>
+            <c:if test="${msg != null}">
+                <h4 style="color: rgb(237, 118, 109);"><i class="icon icon-notification"></i> ${msg}</h4>
+            </c:if>

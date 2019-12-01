@@ -7,8 +7,8 @@
             <h1>Clínicas Médicas San Antonio</h1>
         </div>
         <div class="links">
-            <c:if test="${permisos != null}">
-                <c:forEach var="p" items="${permisos}">
+            <c:if test="${MenuPrincipal != null}">
+                <c:forEach var="p" items="${MenuPrincipal}">
                     <a href="${pageContext.servletContext.contextPath}${p.url}">${p.menu}</a>
                 </c:forEach>
             </c:if>

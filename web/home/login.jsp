@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio de sesión</title>
     <link rel="stylesheet" href="resources/css/login.css">
+    <link rel="stylesheet" href="resources/css/fonts.css">
 </head>
 <body>
     <div class="contenedor">
@@ -16,15 +17,13 @@
         <div class="formulario">
             <h2>Clínicas Médicas <span>San Antonio</span></h2>
             <h1>Inicio de sesión</h1>
-            <c:if test="${status == 3}">
-                <h1 style="color: coral">${msg}</h1>
-            </c:if>
+            <%@include file="../WEB-INF/jspf/_message.jspf" %>
             <form action="Login" method="POST">
                 <input type="text" name="user" id="" ${status == 3 ? 'disabled' : ''} placeholder="Usuario" autofocus>
                 <input type="password" name="pass" id="" ${status == 3 ? 'disabled' : ''} placeholder="Contraseña">
                 <input type="submit" value="Ingresar" name="" id="" ${status == 3 ? 'disabled' : ''}>
             </form>
-                <a href="${pageContext.servletContext.contextPath}/Home">Volver a página principal</a>
+            <a id="home" href="${pageContext.servletContext.contextPath}/Home"><i class="icon icon-home3"></i> Volver a página principal</a>
         </div>
     </div>
 </body>

@@ -145,3 +145,9 @@ FROM empleados b, cargos c
 WHERE
 	b.idcargo = c.idcargo
 ;
+
+
+-- MENÚS POR ROL
+SELECT * FROM roles;
+SELECT * FROM menus;
+SELECT * FROM permisos WHERE idrol = 1;

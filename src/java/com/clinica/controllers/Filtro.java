@@ -1,86 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.clinica.controllers;
 
+import com.clinica.conexion.Conexion;
+import com.clinica.conexion.ConexionPool;
+import com.clinica.models.Menu;
+import com.clinica.models.Usuario;
+import com.clinica.opearaciones.Operaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Soldier4
- */
-public class Filtro extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Filtro</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Filtro at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+public class Filtro implements Filter {
+
+    private ServletContext context;
+
+    @Override
+    public void init(FilterConfig fConfig) throws ServletException {
+        this.context = fConfig.getServletContext();
+        this.context.log("Filtro initialized");
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        PrintWriter out = response.getWriter();
+        try{
+            Conexion conn = new ConexionPool();
+            conn.conectar();
+            Operaciones.abrirConexion(conn);
+            Operaciones.iniciarTransaccion();
+            
+            HttpServletRequest req = (HttpServletRequest)request;
+            HttpServletResponse res = (HttpServletResponse)response;
+            
+            String path = req.getServletPath();
+            boolean encontrado = false;
+            List<Menu> permisos = (List<Menu>)req.getSession().getAttribute("permisos");
+            Usuario u = (Usuario)req.getSession().getAttribute("Usuario");
+            
+            if(permisos != null && u != null){
+                for(Menu m: permisos){
+                    if(m.getUrl().equals(path)){
+                        encontrado = true;
+                    }
+                }
+            }
+            if(encontrado)
+                chain.doFilter(request, response);
+            else if(!encontrado && u != null){
+                req.getRequestDispatcher("Home").forward(req, res);
+            }else{
+                req.setAttribute("msg", "Debe iniciar sesión");
+                req.getRequestDispatcher("Login").forward(req, res);
+            }
+            
+            Operaciones.commit();
+        }catch(Exception ex){
+            out.println("ERROR: "+ex.getMessage());
+            try {
+                Operaciones.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(Filtro.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }finally{
+            try {
+                Operaciones.cerrarConexion();
+            } catch (SQLException ex) {
+                Logger.getLogger(Filtro.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    public void destroy() {
+        //we can close resources here
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

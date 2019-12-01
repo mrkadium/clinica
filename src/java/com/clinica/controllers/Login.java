@@ -76,6 +76,7 @@ public class Login extends HttpServlet {
                     response.sendRedirect("Home");
                 }else{
                     request.setAttribute("msg", "Credenciales erróneas");
+                    request.setAttribute("status", 4);
                     request.getRequestDispatcher("home/login.jsp").forward(request, response);
                 }
                 

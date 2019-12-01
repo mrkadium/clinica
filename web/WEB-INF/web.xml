@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    <filter>
+        <filter-name>Filtro</filter-name>
+        <filter-class>com.clinica.controllers.Filtro</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <url-pattern>/Cargos</url-pattern>
+        <url-pattern>/Compras</url-pattern>
+        <url-pattern>/Consultas</url-pattern>
+        <url-pattern>/Consumibles</url-pattern>
+        <url-pattern>/Contactos</url-pattern>
+        <url-pattern>/Departamentos</url-pattern>
+        <url-pattern>/Empleados</url-pattern>
+        <url-pattern>/Empresas</url-pattern>
+        <url-pattern>/Especialidades</url-pattern>
+        <url-pattern>/Especialidades_medico</url-pattern>
+        <url-pattern>/Horarios</url-pattern>
+        <url-pattern>/Inventarios</url-pattern>
+        <url-pattern>/Laboratorios</url-pattern>
+        <url-pattern>/Marcas</url-pattern>
+        <url-pattern>/Menus</url-pattern>
+        <url-pattern>/Municipios</url-pattern>
+        <url-pattern>/Noticias</url-pattern>
+        <url-pattern>/Pacientes</url-pattern>
+        <url-pattern>/Permisos</url-pattern>
+        <url-pattern>/Reportes</url-pattern>
+        <url-pattern>/Roles</url-pattern>
+        <url-pattern>/Sucursales</url-pattern>
+        <url-pattern>/Usuarios</url-pattern>
+        <url-pattern>/Ventas</url-pattern>
+    </filter-mapping>
+    
+    
     <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>com.clinica.controllers.Home</servlet-class>

@@ -134,8 +134,8 @@ WHERE
     AND a.idconsulta = 1
 ;
 
-SELECT b.* FROM empleados_consulta a, empleados b WHERE a.idempleado = b.idempleado AND a.idconsulta = 1 ORDER BY a.idempleado_consulta;
-SELECT c.* FROM empleados_consulta a, empleados b, cargos c WHERE a.idempleado = b.idempleado AND b.idcargo = c.idcargo AND a.idconsulta = 1 ORDER BY a.idempleado_consulta;
+
+
 -- EMPLEADOS (EMPLEADOS_CONSULTA)
 SELECT 
 	b.idempleado, 

@@ -1,22 +1,32 @@
-    <footer>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<footer>
         <p>Clínicas Médicas San Antonio &copy; 2019</p>
         <div class="secciones">
             <div class="contactos">
                 <h4>Contáctanos:</h4>
-                <a href="#"><i class="icon icon-facebook2"></i> Clínicas Médicas San Antonio</a>
-                <a href="#"><i class="icon icon-whatsapp"></i> +503 7043 9084</a>
+                <a href="#"><i class="icon icon-facebook2"></i> ${Empresa.facebook}</a>
+                <a href="#"><i class="icon icon-whatsapp"></i> ${Empresa.whatsapp}</a>
             </div>
             <div class="horarios">
                 <h4>Horarios de atención:</h4>
                 <div class="contactos">
-                    <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
+                    <c:forEach var="h" items="${Horarios}">
+                        <c:if test="${h.idespecialidad == null}">
+                            <p><i class="icon icon-hour-glass"></i> ${h.dias}: ${h.hora_inicio} - ${h.hora_fin}</p>
+                        </c:if>
+                    </c:forEach>
+<!--                    <p><i class="icon icon-hour-glass"></i> Lunes a viernes: 8:30 AM - 6:30 PM</p>
                     <p><i class="icon icon-hour-glass"></i> Sábado y domingo: 8:30 AM - 12:30 PM</p>
+                    <br>
+                    <a href="${pageContext.servletContext.contextPath}/VerHorarios"><i class="icon icon-plus"></i> Ver detalles</a>-->
                 </div>
             </div>
             <div class="direccion">
                 <h4>Visítanos:</h4>
                 <div class="contactos">
-                    <a href="#"><i class="icon icon-earth"></i> Calla a Colonia El Carmen, N#3</a>
+                    <c:forEach var="s" items="${Sucursales}">
+                        <a href="#"><i class="icon icon-earth"></i> ${s.direccion}</a>
+                    </c:forEach>
                 </div>
             </div>
         </div>

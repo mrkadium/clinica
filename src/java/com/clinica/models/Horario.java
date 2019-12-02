@@ -7,7 +7,7 @@ public class Horario {
     @AutoIncrement
     private int idhorario;
     private int idsucursal;
-    private int idespecialidad;
+    private Integer idespecialidad;
     private String hora_inicio;
     private String hora_fin;
     private String dias;
@@ -15,7 +15,7 @@ public class Horario {
     public Horario() {
     }
 
-    public Horario(int idhorario, int idsucursal, int idespecialidad, String hora_inicio, String hora_fin, String dias) {
+    public Horario(int idhorario, int idsucursal, Integer idespecialidad, String hora_inicio, String hora_fin, String dias) {
         this.idhorario = idhorario;
         this.idsucursal = idsucursal;
         this.idespecialidad = idespecialidad;
@@ -40,11 +40,11 @@ public class Horario {
         this.idsucursal = idsucursal;
     }
 
-    public int getIdespecialidad() {
+    public Integer getIdespecialidad() {
         return idespecialidad;
     }
 
-    public void setIdespecialidad(int idespecialidad) {
+    public void setIdespecialidad(Integer idespecialidad) {
         this.idespecialidad = idespecialidad;
     }
 

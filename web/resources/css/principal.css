@@ -550,12 +550,14 @@ footer{
         display: none;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         min-width: 50vw;
         background-color: rgba(255, 255, 255, 0.98);
         position: absolute;
         z-index: 100;
         top: 9vh;
-        height: 10vh;
+        min-height: 10vh;
+        max-width: 65vw;
         /* left: 30px;
         right: 30px; */
         /* width: calc(100vw - 100px); */

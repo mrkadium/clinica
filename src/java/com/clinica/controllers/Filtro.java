@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
@@ -45,6 +46,7 @@ public class Filtro implements Filter {
             HttpServletResponse res = (HttpServletResponse)response;
             
             String path = req.getServletPath();
+            Map params = req.getParameterMap();
             boolean encontrado = false;
             List<Menu> permisos = (List<Menu>)req.getSession().getAttribute("permisos");
             Usuario u = (Usuario)req.getSession().getAttribute("Usuario");
@@ -61,8 +63,8 @@ public class Filtro implements Filter {
             else if(!encontrado && u != null){
                 req.getRequestDispatcher("Home").forward(req, res);
             }else{
-                req.setAttribute("msg", "Debe iniciar sesión");
-                req.getRequestDispatcher("Login").forward(req, res);
+                req.getSession().setAttribute("msg", "Debe iniciar sesión");
+                res.sendRedirect("Login");
             }
             
             Operaciones.commit();

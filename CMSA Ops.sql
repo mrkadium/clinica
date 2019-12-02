@@ -232,9 +232,36 @@ INSERT INTO roles(rol, descripcion) VALUES
 ('LIMITADO', 'Sólo puede acceder a ver las consultas pendientes');
 
 INSERT INTO menus(menu, idpadre, descripcion, url) VALUES
-('Consultas', NULL, 'Muestra las distintas operaciones que puede realizarse con respecto a las consultas', '/Consultas'),
+('Gestión', NULL, 'Muestra las distintas operaciones que puede realizarse con respecto a las consultas', '/Gestion'),
+('Operaciones', NULL, '', '/Operaciones'),
 ('Configuraciones', NULL, 'Muestra todas las características que se pueden configurar en el sistema', '/Configuraciones'),
-('Reportes', NULL, 'Muestra los distintos reportes que puede realizar', '/Reportes');
+('Reportes', NULL, 'Muestra los distintos reportes que puede realizar', '/Reportes'),
+('Cargos', 1, '', '/Cargos'),
+('Compras', 2, '', '/Compras'),
+('Consultas', 2, '', '/Consultas'),
+('Consumibles', 1, '', '/Consumibles'),
+('Contactos', 1, '', '/Contactos'),
+('Departamentos', 1, '', '/Departamentos'),
+('Empleados', 1, '', '/Empleados'),
+('Empresas', 1, '', '/Empresas'),
+('Especialidades', 1, '', '/Especialidades'),
+('Esp. por médico', 1, '', '/Especialidades_medico'),
+('Horarios', 3, '', '/Horarios'),
+('Inventarios', 2, '', '/Inventarios'),
+('Laboratorios', 1, '', '/Laboratorios'),
+('Marcas', 1, '', '/Marcas'),
+('Menus', 1, '', '/Menus'),
+('Municipios', 3, '', '/Municipios'),
+('Noticias', 3, '', '/Noticias'),
+('Pacientes', 1, '', '/Pacientes'),
+('Permisos', 3, '', '/Permisos'),
+('Roles', 1, '', '/Roles'),
+('Sucursales', 1, '', '/Sucursales'),
+('Usuarios', 1, '', '/Usuarios'),
+('Reporte de ventas', 4, '', '/Ventas'),
+('Reporte de consultas', 4, '', '/Ventas'),
+('Constancia de buena salud', 4, '', '/Ventas'),
+('Constancia de incapacidad', 4, '', '/Ventas');
 
 INSERT INTO permisos(idrol, idmenu) SELECT 1, idmenu FROM menus;
 INSERT INTO permisos(idrol, idmenu) SELECT 2, idmenu FROM menus WHERE idmenu IN (1);

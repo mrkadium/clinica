@@ -72,13 +72,13 @@ public class Login extends HttpServlet {
                         }
                     }
                     
-                    List<Menu> MenuPrincipal = new ArrayList();
+//                    List<Menu> MenuPrincipal = new ArrayList();
                     List<Menu_Submenu> Menus_Submenus = new ArrayList();
                     for(Menu m: permisos){
                         Menu_Submenu sm = new Menu_Submenu();
                         if(m.getIdpadre() == null || m.getIdpadre() == 0){
                             sm.setMenu_principal(m);
-                            MenuPrincipal.add(m);
+//                            MenuPrincipal.add(m);
                             Menus_Submenus.add(sm);
                         }
                     }
@@ -95,7 +95,7 @@ public class Login extends HttpServlet {
 //                    }
                     request.getSession().setAttribute("Menus_Submenus", Menus_Submenus);
                     request.getSession().setAttribute("permisos",permisos);
-                    request.getSession().setAttribute("MenuPrincipal",MenuPrincipal);
+//                    request.getSession().setAttribute("MenuPrincipal",MenuPrincipal);
                     response.sendRedirect("Home");
                 }else{
                     request.setAttribute("msg", "Credenciales erróneas");
@@ -123,6 +123,10 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String accion = getServletConfig().getInitParameter("accion") != null ? getServletConfig().getInitParameter("accion") : request.getParameter("accion");
         accion = accion != null ? accion : "";
+        if(request.getSession().getAttribute("msg") != null){
+            request.setAttribute("msg",request.getSession().getAttribute("msg"));
+            request.getSession().removeAttribute("msg");
+        }
         
         switch(accion){
             case "":{

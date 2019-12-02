@@ -151,3 +151,12 @@ WHERE
 SELECT * FROM roles;
 SELECT * FROM menus;
 SELECT * FROM permisos WHERE idrol = 1;
+
+
+-- HORARIOS
+SELECT * FROM horarios;
+SELECT
+	a.idhorario, IF(a.idespecialidad IS NOT NULL, c.especialidad,'-') AS especialidad, b.codigo, a.hora_inicio, a.hora_fin, a.dias
+FROM horarios a
+INNER JOIN sucursales b ON a.idsucursal = b.idsucursal
+LEFT JOIN especialidades c ON a.idespecialidad = c.idespecialidad

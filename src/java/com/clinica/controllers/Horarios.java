@@ -39,15 +39,12 @@ public class Horarios extends HttpServlet{
                 case "":{
                     Operaciones.iniciarTransaccion();
                     
-                    sql = "SELECT\n" +
-                    "	a.idhorario, b.especialidad, c.codigo AS sucursal,\n" +
-                    "    a.hora_inicio, a.hora_fin, a.dias\n" +
-                    "FROM horarios a, especialidades b, sucursales c\n" +
-                    "WHERE\n" +
-                    "	a.idespecialidad = b.idespecialidad\n" +
-                    "    AND a.idsucursal = c.idsucursal\n" +
-                    "ORDER BY a.idespecialidad\n" +
-                    ";";
+                    sql = 
+                        "SELECT\n" +
+                        "	a.idhorario, IF(a.idespecialidad IS NOT NULL, c.especialidad,'-') AS especialidad, b.codigo, a.hora_inicio, a.hora_fin, a.dias\n" +
+                        "FROM horarios a\n" +
+                        "INNER JOIN sucursales b ON a.idsucursal = b.idsucursal\n" +
+                        "LEFT JOIN especialidades c ON a.idespecialidad = c.idespecialidad";
                     rs = Operaciones.consultar(sql, null);                    
                     cabeceras = new String[]{"ID","Especialidad","Sucursal","Desde","Hasta","Día"};
                     Tabla t = new Tabla(rs, cabeceras);
@@ -158,7 +155,8 @@ public class Horarios extends HttpServlet{
             Operaciones.iniciarTransaccion();
             
             Horario h = new Horario();
-            h.setIdespecialidad(Integer.parseInt(idespecialidad));
+            if(!idespecialidad.equals(""))
+                h.setIdespecialidad(Integer.parseInt(idespecialidad));
             h.setIdsucursal(Integer.parseInt(idsucursal));
             h.setHora_inicio(hora_inicio);
             h.setHora_fin(hora_fin);

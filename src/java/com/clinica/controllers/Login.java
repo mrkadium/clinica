@@ -8,6 +8,7 @@ import com.clinica.models.Rol;
 import com.clinica.models.Usuario;
 import com.clinica.opearaciones.Operaciones;
 import com.clinica.utilerias.Hash;
+import com.clinica.utilerias.Menu_Submenu;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,13 +65,35 @@ public class Login extends HttpServlet {
                         rs[2][i] = rs[2][i] != null ? rs[2][i] : "0";
                         permisos.add(new Menu(Integer.parseInt(rs[0][i]), rs[1][i], Integer.parseInt(rs[2][i]), rs[3][i], rs[4][i]));
                     }
-                    
-                    List<Menu> MenuPrincipal = new ArrayList();
+                    List<Menu> SubMenus = new ArrayList();
                     for(Menu m: permisos){
-                        if(m.getIdpadre() == null || m.getIdpadre() == 0)
-                            MenuPrincipal.add(m);
+                        if(m.getIdpadre() != null && m.getIdpadre() != 0){
+                            SubMenus.add(m);
+                        }
                     }
                     
+                    List<Menu> MenuPrincipal = new ArrayList();
+                    List<Menu_Submenu> Menus_Submenus = new ArrayList();
+                    for(Menu m: permisos){
+                        Menu_Submenu sm = new Menu_Submenu();
+                        if(m.getIdpadre() == null || m.getIdpadre() == 0){
+                            sm.setMenu_principal(m);
+                            MenuPrincipal.add(m);
+                            Menus_Submenus.add(sm);
+                        }
+                    }
+                    for(Menu_Submenu sm: Menus_Submenus){
+                        for(Menu m: SubMenus){
+                            if(m.getIdpadre() == sm.getMenu_principal().getIdmenu()){
+                                sm.getSubmenus().add(m);
+                            }
+                        }
+                    }
+//                    for(Menu m: permisos){
+//                        if(m.getIdpadre() == null || m.getIdpadre() == 0)
+//                            MenuPrincipal.add(m);
+//                    }
+                    request.getSession().setAttribute("Menus_Submenus", Menus_Submenus);
                     request.getSession().setAttribute("permisos",permisos);
                     request.getSession().setAttribute("MenuPrincipal",MenuPrincipal);
                     response.sendRedirect("Home");

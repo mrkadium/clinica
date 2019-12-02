@@ -7,9 +7,16 @@
             <h1>Clínicas Médicas San Antonio</h1>
         </div>
         <div class="links">
-            <c:if test="${MenuPrincipal != null}">
-                <c:forEach var="p" items="${MenuPrincipal}">
-                    <a href="${pageContext.servletContext.contextPath}${p.url}">${p.menu}</a>
+            <c:if test="${Menus_Submenus != null && Menus_Submenus.size() != 0}">
+                <c:forEach var="m" items="${Menus_Submenus}">
+                    <a href="${pageContext.servletContext.contextPath}${m.getMenu_principal().getUrl()}">${m.getMenu_principal().getMenu()}</a>
+                    <c:if test="${m.submenus != null && m.submenus.size() != 0}">
+                        <div>
+                            <c:forEach var="sm" items="${m.submenus}">
+                                <a href="${pageContext.servletContext.contextPath}${sm.getUrl()}">${sm.getMenu()}</a>
+                            </c:forEach>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <a href="${pageContext.servletContext.contextPath}/Servicios">Servicios</a>

@@ -65,7 +65,7 @@
         </div>
         
         
-        <div class="campo" id="tabla">
+        <div class="campo" id="tabla doctores">
             <label for="campo2">Doctores/Enfermeros participantes</label>
             <i></i>
             <a  onclick="abrirVentana('${pageContext.servletContext.contextPath}/Consultas?accion=agregarEmpleado');" class="agregar"><i class="icon icon-plus"></i> Agregar</a>
@@ -95,6 +95,40 @@
                 </table>
             </div>
         </div>
+        
+        
+        <div class="campo" id="tabla examenes">
+            <label for="campo2">Exámenes</label>
+            <i></i>
+            <a  onclick="abrirVentana('${pageContext.servletContext.contextPath}/Consultas?accion=agregarExamen');" class="agregar"><i class="icon icon-plus"></i> Agregar</a>
+            <div class="tablas">
+                <table id="table01">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Examen</th>
+                            <th>Fecha revisión</th>
+                            <th>Resultados</th>
+                            <th><i class="icon icon-bin"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:if test="${Examenes_consulta != null}">
+                            <c:forEach var="i" items="${Examenes_consulta}">
+                            <tr>
+                                <td><input type='text' readonly value='${i.idexamen_consulta}' name='idexamen_consulta'></td>
+                                <td style="display:none;"><input type='text' readonly value='${i.idexamen}' name='idexamen'></td>
+                                <td><input type='text' readonly value='${i.examen}' name='examen'></td>
+                                <td><input type='text' readonly value='${i.fecha_revision}' name='fecha_revision'></td>
+                                <td><input type='text' readonly value='${i.resultados}' name='resultados'></td>
+                                <td></td>
+                            </tr>
+                            </c:forEach>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
         <a href="${pageContext.servletContext.contextPath}/Consultas" class="ghost-red">Cancelar</a>
     </form>
@@ -116,11 +150,11 @@
         document.getElementById("idservicio").value = idmunicipio;
         document.getElementById("servicio").value = municipio;
     }
-    const table_body = document.querySelector("#table01 tbody");
+    const table_body = document.querySelector(".doctores .tablas #table01 tbody");
     function setDataEmpleadoConsulta(idempleado, empleado, cargo){
         //agregarlo a la tabla 
         var encontrado = false;
-        let table_filas = document.querySelectorAll("#table01 tbody tr");
+        let table_filas = document.querySelectorAll(".doctores .tablas #table01 tbody tr");
         for(var i=0; i<table_filas.length; i++){
             if(table_filas[i].cells[1].firstChild.value == idempleado){
                 encontrado = true;

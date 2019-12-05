@@ -31,6 +31,7 @@
         <url-pattern>/Sucursales</url-pattern>
         <url-pattern>/Usuarios</url-pattern>
         <url-pattern>/Ventas</url-pattern>
+        <url-pattern>/ConstanciaBuenaSalud</url-pattern>
     </filter-mapping>
     
     
@@ -198,10 +199,53 @@
         <servlet-name>Empleados</servlet-name>
         <url-pattern>/Empleados</url-pattern>
     </servlet-mapping>
+    
+    
     <servlet-mapping>
         <servlet-name>Reportes</servlet-name>
         <url-pattern>/Reportes</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ConstanciaBuenaSalud</servlet-name>
+        <url-pattern>/ConstanciaBuenaSalud</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ConstanciaBuenaSalud</servlet-name>
+        <servlet-class>com.clinica.controllers.Reportes</servlet-class>
+        <init-param>
+            <param-name>accion</param-name>
+            <param-value>buenaSalud</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ConstanciaIncapacidad</servlet-name>
+        <url-pattern>/ConstanciaIncapacidad</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ConstanciaIncapacidad</servlet-name>
+        <servlet-class>com.clinica.controllers.Reportes</servlet-class>
+        <init-param>
+            <param-name>accion</param-name>
+            <param-value>incapacidad</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ConstanciaMedica</servlet-name>
+        <url-pattern>/ConstanciaMedica</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ConstanciaMedica</servlet-name>
+        <servlet-class>com.clinica.controllers.Reportes</servlet-class>
+        <init-param>
+            <param-name>accion</param-name>
+            <param-value>medica</param-value>
+        </init-param>
+    </servlet>
+    
+    
     <servlet-mapping>
         <servlet-name>Filtro</servlet-name>
         <url-pattern>/Filtro</url-pattern>

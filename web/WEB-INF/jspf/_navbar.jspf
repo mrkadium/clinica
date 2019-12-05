@@ -9,11 +9,11 @@
         <div class="links">
             <c:if test="${Menus_Submenus != null && Menus_Submenus.size() != 0}">
                 <c:forEach var="m" items="${Menus_Submenus}">
-                    <a href="${pageContext.servletContext.contextPath}${m.getMenu_principal().getUrl()}">${m.getMenu_principal().getMenu()}</a>
+                    <a href="${pageContext.servletContext.contextPath}${m.menu_principal.url}">${m.menu_principal.menu}</a>
                     <c:if test="${m.submenus != null && m.submenus.size() != 0}">
                         <div>
                             <c:forEach var="sm" items="${m.submenus}">
-                                <a href="${pageContext.servletContext.contextPath}${sm.getUrl()}">${sm.getMenu()}</a>
+                                <a href="${pageContext.servletContext.contextPath}${sm.url}">${sm.menu}</a>
                             </c:forEach>
                         </div>
                     </c:if>

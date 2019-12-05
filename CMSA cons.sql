@@ -159,4 +159,33 @@ SELECT
 	a.idhorario, IF(a.idespecialidad IS NOT NULL, c.especialidad,'-') AS especialidad, b.codigo, a.hora_inicio, a.hora_fin, a.dias
 FROM horarios a
 INNER JOIN sucursales b ON a.idsucursal = b.idsucursal
-LEFT JOIN especialidades c ON a.idespecialidad = c.idespecialidad
+LEFT JOIN especialidades c ON a.idespecialidad = c.idespecialidad;
+
+
+-- CONSTANCIAS
+-- BUENA SALUD
+SELECT CONCAT('Por este medio hago constar que ', a.nombres,' ',a.apellidos, ' consta de buena salud') as texto
+FROM pacientes a;
+SELECT 
+	IF((SELECT x.genero FROM empleados x WHERE x.idempleado = 1) = 'MASCULINO', 'Dr.', 'Dra.') as sexo,
+    (SELECT x.jvpm FROM empleados x WHERE x.idempleado = 1) as jvpm,
+    (SELECT CONCAT(x.nombres,' ',x.apellidos) FROM empleados x WHERE x.idempleado = 1) as doctor,
+	CONCAT(nombres,' ',apellidos) AS paciente,
+	IF(MONTH(NOW()) - MONTH(fecha_nacimiento) < 0, YEAR(NOW()) - YEAR(fecha_nacimiento) - 1, 
+		IF(MONTH(NOW()) - MONTH(fecha_nacimiento) = 0 AND DAY(NOW()) - DAY(fecha_nacimiento) < 0, YEAR(NOW()) -  YEAR(fecha_nacimiento) - 1, 
+			YEAR(NOW()) -  YEAR(fecha_nacimiento))) AS edad
+FROM pacientes
+WHERE idpaciente = 1;
+
+
+
+-- CONSULTA PARA REPORTE
+SELECT * FROM consultas;
+SELECT * FROM detalles_consulta;
+
+
+
+-- EXÁMENES
+SELECT * FROM examenes;
+SELECT * FROM examenes_consulta;
+

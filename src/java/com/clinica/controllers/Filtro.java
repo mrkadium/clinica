@@ -35,7 +35,6 @@ public class Filtro implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        PrintWriter out = response.getWriter();
         try{
             Conexion conn = new ConexionPool();
             conn.conectar();
@@ -69,7 +68,6 @@ public class Filtro implements Filter {
             
             Operaciones.commit();
         }catch(Exception ex){
-            out.println("ERROR: "+ex.getMessage());
             try {
                 Operaciones.rollback();
             } catch (SQLException ex1) {

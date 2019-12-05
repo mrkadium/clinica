@@ -165,7 +165,7 @@ public class Consultas extends HttpServlet {
                 case "pacientes": {
                     Operaciones.iniciarTransaccion();
                     
-                    sql = "SELECT idpaciente, CONCAT(nombres, apellidos) AS paciente FROM pacientes;";
+                    sql = "SELECT idpaciente, CONCAT(nombres,' ', apellidos) AS paciente FROM pacientes;";
                     rs = Operaciones.consultar(sql, null);
                     cabeceras = new String[]{"ID Paciente", "Paciente"};
                     Tabla t = new Tabla(rs, cabeceras);

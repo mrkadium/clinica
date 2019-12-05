@@ -221,7 +221,12 @@ INSERT INTO especialidades_medico(idespecialidad, idmedico) VALUES
 (1, 1);
 
 INSERT INTO pacientes(expediente, nombres, apellidos, fecha_nacimiento, genero, telefono, email, idmunicipio, idsucursal, idempleado) VALUES
-(1, 'Mario Adalberto', 'Rivera Olivo', '1997-08-13', 'MASCULINO', '7777-8888', 'mario@gmail.com', 3, '1', '1');
+(1, 'Mario Adalberto', 'Rivera Olivo', '1997-08-13', 'MASCULINO', '7777-8888', 'mario@gmail.com', 3, '1', '1'),
+(2, 'Alejandra Gabriela', 'Gutiérrez Panameño', '1999-06-07', 'FEMENINO', '7890-1234', 'alejandra@gmail.com', 5, '1', '2');
+INSERT INTO pacientes(expediente, nombres, apellidos, fecha_nacimiento, genero, telefono, email, idmunicipio, idsucursal, idempleado) VALUES
+(3, 'Jennifer Vanessa', 'Cuéllar Peña', '1994-12-01', 'FEMENINO', '7654-3210', 'vanessa@gmail.com', 15, '1', '1');
+INSERT INTO pacientes(expediente, nombres, apellidos, fecha_nacimiento, genero, telefono, email, idmunicipio, idsucursal, idempleado) VALUES
+(4, 'Katherine Jeanneth', 'Cuéllar Peña', '1994-12-03', 'FEMENINO', '7654-3210', 'vanessa@gmail.com', 15, '1', '1');
 
 INSERT INTO horarios(idespecialidad, idsucursal, hora_inicio, hora_fin, dias) VALUES
 (1, 1, '6:30 AM', '6:30 PM', 'LUNES, MIÉRCOLES Y SÁBADO'),
@@ -321,7 +326,7 @@ INSERT INTO consultas(idpaciente, idservicio, iddoctor, fecha_hora, programada, 
 (1,1,1, NOW(),FALSE,'Atendida');
 
 INSERT INTO empleados_consulta(idconsulta, idempleado) VALUES
-(1, 1), -- IDCONSULTA ES EL ID DE LA VENTA EN LA QUE SE REGISTRÓ UN SERVICIO
+(1, 1),
 (1, 2);
 
 INSERT INTO detalles_consulta(idconsulta, razon_consulta, temperatura, frecuencia_cardiaca, frecuencia_respiratoria, presion_arterial, saturacion_oxigeno, diagnostico, tratamiento, observaciones) VALUES 

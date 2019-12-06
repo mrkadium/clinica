@@ -46,11 +46,17 @@
         <div class="linksMobile">
             <c:if test="${Usuario == null}">
                 <a href="${pageContext.servletContext.contextPath}/Login" class="iniciar">Iniciar sesión</a>
-            </c:if>
-            <!--<a href="#" class="iniciar">Regístrate</a>-->
-            <c:if test="${permisos != null}">
-                <c:forEach var="p" items="${permisos}">
-                    <a href="${pageContext.servletContext.contextPath}${p.url}">${p.menu}</a>
+            </c:if>                
+            <c:if test="${Menus_Submenus != null && Menus_Submenus.size() != 0}">
+                <c:forEach var="m" items="${Menus_Submenus}">
+                    <a onclick="ocultarHijos(this);" class="padre">${m.menu_principal.menu} <i class="icon icon-circle-down"></i></a>
+                    <c:if test="${m.submenus != null && m.submenus.size() != 0}">
+                        <div>
+                            <c:forEach var="sm" items="${m.submenus}">
+                                <a href="${pageContext.servletContext.contextPath}${sm.url}">${sm.menu}</a>
+                            </c:forEach>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <a href="#servicios">Servicios</a>
@@ -61,3 +67,21 @@
             </c:if>
         </div>
     </nav>
+    <script>
+
+    function ocultarHijos(padre){
+        if(padre.nextElementSibling.style.display == ''){
+            padre.style.color = "rgb(0,164,167)";
+            padre.nextElementSibling.style.display = "flex";
+            padre.nextElementSibling.style.flexDirection = "column";
+            padre.firstElementChild.classList.remove("icon-circle-down");
+            padre.firstElementChild.classList.add("icon-circle-up");
+        }else{
+            padre.style.color = "";
+            padre.nextElementSibling.style = "";
+            padre.firstElementChild.classList.add("icon-circle-down");
+            padre.firstElementChild.classList.remove("icon-circle-up");
+        }
+
+    }
+    </script>

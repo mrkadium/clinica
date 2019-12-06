@@ -183,4 +183,13 @@ window.onload = function(){
         }
         timeout();
     }
+
+    // const padres = document.querySelectorAll(".padre");
+    // const hijos = document.querySelectorAll("nav .linksMobile p.padre + div");
+    // for(i=0; i<padres.length; i++){
+    //     var hijo = hijos[i];        
+    //     padres[i].addEventListener('click', function(){
+    //         console.log(padres[i].nextElementSibling);
+    //     });
+    // }
 }

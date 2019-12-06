@@ -14,7 +14,7 @@
                     <form action="">
                         <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
                         <select name="" id="category" title="Estado"> 
-                            <option value="0">-- Filtrar por tipo --</option>
+                            <option value="0">-- Filtrar por estado --</option>
                             <option value="Pendiente">Pendiente</option>
                             <option value="Cancelada">Cancelada</option>
                         </select>

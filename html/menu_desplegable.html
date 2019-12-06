@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Principal</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../web/resources/css/principal.css">
+    <link rel="stylesheet" href="../web/resources/css/fonts.css">
     <script src="../js/form.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../web/resources/js/main.js"></script>
+    <style>
+        .hide{
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -54,8 +58,22 @@
         <div class="linksMobile">
             <a href="#" class="iniciar">Iniciar sesión</a>
             <a href="#" class="iniciar">Regístrate</a>
-            <a href="#servicios">Servicios</a>
-            <a href="#citas">Citas</a>
+            <a class="padre" onclick="ocultarHijos(this);">Servicios <i class="icon icon-circle-down"></i></a>            
+            <div class="hide">
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+            </div>
+            <a class="padre" onclick="ocultarHijos(this);">Citas <i class="icon icon-circle-down"></i></a>
+            <div class="hide">
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+                <a href="">consultas</a>
+            </div>
             <a href="#acercade">Acerca de</a>
             <a href="#" class="cerrar">Cerrar Sesión</a>
         </div>
@@ -134,6 +152,21 @@
                 document.querySelector('nav .linksMobile').style = 'display: none;';
             }
         });
+        function ocultarHijos(padre){
+            if(padre.nextElementSibling.style.display == ''){
+                padre.style.color = "rgb(0,164,167)";
+                padre.nextElementSibling.style.display = "flex";
+                padre.nextElementSibling.style.flexDirection = "column";
+                padre.firstElementChild.classList.remove("icon-circle-down");
+                padre.firstElementChild.classList.add("icon-circle-up");
+            }else{
+                padre.style.color = "";
+                padre.nextElementSibling.style = "";
+                padre.firstElementChild.classList.add("icon-circle-down");
+                padre.firstElementChild.classList.remove("icon-circle-up");
+            }
+
+        }
     </script>
 </body>
 </html>

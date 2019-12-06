@@ -371,7 +371,7 @@ public class Consultas extends HttpServlet {
                     c.setIdservicio(Integer.parseInt(idservicio));
                     if(iddoctor != null && !iddoctor.equals(""))
                         c.setIddoctor(Integer.parseInt(iddoctor));
-                    if(idventa != null && !iddoctor.equals(""))
+                    if(idventa != null && !idventa.equals(""))
                         c.setIdventa(Integer.parseInt(idventa));
                     c.setFecha_hora(fecha.equals("") ? new Date() : new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(fecha_hora));
                     c.setProgramada(programada);
@@ -387,24 +387,28 @@ public class Consultas extends HttpServlet {
                         
                         
                         //INSERTAR EMPLEADOS Y EXÁMENES
-                        for(int i=0; i<idempleado_consulta.length; i++){
-                            if(idempleado_consulta[i].equals("0")){
-                                Empleado_consulta em = new Empleado_consulta();
-                                em.setIdconsulta(c.getIdconsulta());
-                                em.setIdempleado(Integer.parseInt(idempleado[i]));
-                                em = Operaciones.insertar(em);
+                        if(idempleado_consulta != null){
+                            for(int i=0; i<idempleado_consulta.length; i++){
+                                if(idempleado_consulta[i].equals("0")){
+                                    Empleado_consulta em = new Empleado_consulta();
+                                    em.setIdconsulta(c.getIdconsulta());
+                                    em.setIdempleado(Integer.parseInt(idempleado[i]));
+                                    em = Operaciones.insertar(em);
+                                }
                             }
                         }
-                        for(int i=0; i<idexamen_consulta.length; i++){
-                            if(idexamen_consulta[i].equals("0")){
-                                Examen_consulta em = new Examen_consulta();
-                                em.setIdconsulta(c.getIdconsulta());
-                                em.setIdexamen(Integer.parseInt(idexamen[i]));
-                                em.setEstado(estado[i]);
-                                if(!fecha_revision[i].equals(""))
-                                    em.setFecha_revision(new SimpleDateFormat("yyyy-MM-dd").parse(fecha_revision[i]));
-                                em.setResultados(resultados[i]);
-                                em = Operaciones.insertar(em);
+                        if(idexamen_consulta != null){
+                            for(int i=0; i<idexamen_consulta.length; i++){
+                                if(idexamen_consulta[i].equals("0")){
+                                    Examen_consulta em = new Examen_consulta();
+                                    em.setIdconsulta(c.getIdconsulta());
+                                    em.setIdexamen(Integer.parseInt(idexamen[i]));
+                                    em.setEstado(estado[i]);
+                                    if(!fecha_revision[i].equals(""))
+                                        em.setFecha_revision(new SimpleDateFormat("yyyy-MM-dd").parse(fecha_revision[i]));
+                                    em.setResultados(resultados[i]);
+                                    em = Operaciones.insertar(em);
+                                }
                             }
                         }
                     }

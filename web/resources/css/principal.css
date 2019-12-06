@@ -18,7 +18,6 @@
 
 
 
-
 /* NAVBAR */
 nav{
     position: sticky;
@@ -101,6 +100,22 @@ nav .linksMobile{
     flex-wrap: wrap;
     background-color: var(--nav-color);
 }
+nav .linksMobile a{
+    cursor: pointer;
+}
+nav .linksMobile a + div{
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    border-top: 1px solid var(--footer-color-trans);
+    border-bottom: 1px solid var(--footer-color-trans);
+}
+/* 
+nav .linksMobile a:hover + div,
+nav .linksMobile a + div:hover{
+    display: flex;
+} */
+
 nav .linksMobile .sesionUsuario{
     display: flex;
     flex-direction: column;

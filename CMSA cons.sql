@@ -93,7 +93,7 @@ SELECT * FROM consultas;
 SELECT
     a.idconsulta, a.fecha_hora, 
     CONCAT(b.nombres,' ',b.apellidos) as paciente,
-    c.nombre, CONCAT(d.nombres,' ',d.apellidos) as doctor, a.programada, a.estado
+    c.nombre, CONCAT(d.nombres,' ',d.apellidos) as doctor, a.idventa, a.programada, a.estado
 FROM consultas a, pacientes b, consumibles c, empleados d
 WHERE
 	a.idpaciente = b.idpaciente
@@ -104,7 +104,7 @@ ORDER BY a.fecha_hora
 SELECT
     a.idconsulta, a.fecha_hora, 
     CONCAT(b.nombres,' ',b.apellidos) as paciente,
-    c.nombre, IF(a.iddoctor IS NULL,'-',CONCAT(d.nombres,' ',d.apellidos)) as doctor, a.programada, a.estado
+    c.nombre, IF(a.iddoctor IS NULL,'-',CONCAT(d.nombres,' ',d.apellidos)) as doctor, a.idventa, a.programada, a.estado
 FROM consultas a
 INNER JOIN pacientes b ON a.idpaciente = b.idpaciente
 INNER JOIN consumibles c ON a.idservicio = c.idconsumible
@@ -188,4 +188,11 @@ SELECT * FROM detalles_consulta;
 -- EXÁMENES
 SELECT * FROM examenes;
 SELECT * FROM examenes_consulta;
+
+SELECT
+	a.idexamen_consulta, a.idconsulta, a.idexamen, b.examen, a.estado, a.fecha_revision, a.resultados
+FROM examenes_consulta a, examenes b
+WHERE
+	a.idexamen = b.idexamen
+    AND a.idconsulta = 1;
 

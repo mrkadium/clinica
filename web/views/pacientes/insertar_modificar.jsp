@@ -72,6 +72,18 @@
             <input type="text" class="long" name="empleado" id="empleado" value="${e.nombres} ${e.apellidos}" readonly tabindex="-1">
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Pacientes?accion=empleados');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
+        
+        <div class="campo" id="tabla">
+            <label for="campo2">Consultas</label>
+            <i></i>
+            <a  onclick="abrirVentana('${pageContext.servletContext.contextPath}/Consultas?accion=agregarExamen');" class="agregar"><i class="icon icon-plus"></i> Agregar</a>
+            <div class="tablas">
+                <table id="table01" class="examenes">
+                    ${tabla}
+                </table>
+            </div>
+        </div>
+        
         <input type="submit" name="" id="" class="ghost-blue" value="Guardar"> 
         <a href="${pageContext.servletContext.contextPath}/Sucursales" class="ghost-red">Cancelar</a>
     </form>

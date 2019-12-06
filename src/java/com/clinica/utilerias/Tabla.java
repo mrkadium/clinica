@@ -25,6 +25,7 @@ public class Tabla {
         public static final String MODIFICAR = "<i title='Modificar' class=\"icon icon-pencil\"></i>";
         public static final String ELIMINAR = "<i title='Eliminar' class=\"icon icon-bin\"></i>";
         public static final String ACEPTAR = "<i title='Aceptar' class=\"icon icon-new-tab\"></i>";
+        public static final String DINERO = "<i title='Generar venta' class=\"icon icon-coin-dollar\"></i>";
     }
 
     public static final class ALIGN {
@@ -41,6 +42,7 @@ public class Tabla {
     private String cabeceraEliminable;
     private String cabeceraSeleccionable;
     private String cabeceraImprimible;
+    private String cabeceraVendible;
     
     private boolean modificable;
     private boolean eliminable;
@@ -65,6 +67,10 @@ public class Tabla {
     private String paginaImprimible;
     private String iconoImprimible;
     
+    private boolean vendible;
+    private String paginaVendible;
+    private String iconoVendible;
+    
     private boolean chequeable;
     private String nameChequeable;
     
@@ -79,6 +85,7 @@ public class Tabla {
        cabeceraModificable = Tabla.ICON.MODIFICAR;
        cabeceraEliminable = Tabla.ICON.ELIMINAR;
        cabeceraImprimible = Tabla.ICON.IMPRIMIR;
+       cabeceraVendible = Tabla.ICON.DINERO;
        
        anchocolumnas = null;
        modificable = false;
@@ -89,7 +96,7 @@ public class Tabla {
        textoSeleccionable = "Seleccionar";
        iconoEliminable = Tabla.ICON.ELIMINAR;
        iconoModificable = Tabla.ICON.MODIFICAR;
-       iconoSeleccionable = Tabla.ICON.VER_MAS;   
+       iconoSeleccionable = Tabla.ICON.VER_MAS;
        paginaEliminable = "";
        paginaModificable = "";
        paginaSeleccionable = "";
@@ -97,9 +104,13 @@ public class Tabla {
        metodoFilaSeleccionable="=_seleccionar";
        pie="Resultado";
        
+       iconoImprimible = Tabla.ICON.IMPRIMIR;
        imprimible = false;
        paginaImprimible = "";
-       iconoImprimible = "";
+       
+       iconoVendible = Tabla.ICON.DINERO;
+       vendible = false;
+       paginaVendible = "";
     }
     
     public Tabla(String[][] rs, String ancho, String estilo,int alineacion,String[] cabeceras){
@@ -207,6 +218,16 @@ public class Tabla {
             cab += getCabeceraSeleccionable();
             cab +="</th>";
         }
+        if (isImprimible()){
+            cab +="<th>";
+            cab += getCabeceraImprimible();
+            cab +="</th>";
+        }
+        if (isVendible()){
+            cab +="<th>";
+            cab += getCabeceraVendible();
+            cab +="</th>";
+        }
         if (isModificable()){
             cab +="<th>";
             cab += getCabeceraModificable();
@@ -217,11 +238,7 @@ public class Tabla {
             cab += getCabeceraEliminable();
             cab +="</th>";
         }
-        if (isImprimible()){
-            cab +="<th>";
-            cab += getCabeceraImprimible();
-            cab +="</th>";
-        }
+        
         
         cab +="</tr></thead>";
         
@@ -290,16 +307,6 @@ public class Tabla {
                         + "<a class='btn' onclick=\"openWindow('"+getPaginaSeleccionable()+ (getPaginaSeleccionable().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
                         +enlaceSeleccionable+"</a></td>";  
            }
-           if (isModificable()){
-                String enlaceModificable;
-                if (getIconoModificable().equals(""))
-                    enlaceModificable = getTextoModificable();
-                else
-                    enlaceModificable = getIconoModificable();
-                
-                Tabla +="<td><a class='btn' href='"+getPaginaModificable()  +"&id="+rst[0][k]+"'>"
-                        +enlaceModificable+"</a></td>"; 
-           }
            if (isImprimible()){
                 String enlaceImprimible;
                 if (getIconoImprimible().equals(""))
@@ -310,6 +317,27 @@ public class Tabla {
 //                        + "<a class='btn' href='"+getPaginaImprimible() + (getPaginaImprimible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"'>"
                         + "<a class='btn' onclick=\"openWindow('"+getPaginaImprimible() + (getPaginaImprimible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
                         +enlaceImprimible+"</a></td>";
+           }
+           if (isVendible()){
+                String enlaceVendible;
+                if (getIconoImprimible().equals(""))
+                    enlaceVendible = getTextoEliminable();
+                else
+                    enlaceVendible = getIconoVendible();               
+                Tabla +="<td>"
+//                        + "<a class='btn' href='"+getPaginaImprimible() + (getPaginaImprimible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"'>"
+                        + "<a class='btn' onclick=\"openWindow('"+getPaginaVendible() + (getPaginaVendible().contains("?") ? "&" : "?") + "id="+rst[0][k]+"');\">"
+                        +enlaceVendible+"</a></td>";
+           }
+           if (isModificable()){
+                String enlaceModificable;
+                if (getIconoModificable().equals(""))
+                    enlaceModificable = getTextoModificable();
+                else
+                    enlaceModificable = getIconoModificable();
+                
+                Tabla +="<td><a class='btn' href='"+getPaginaModificable()  +"&id="+rst[0][k]+"'>"
+                        +enlaceModificable+"</a></td>"; 
            }
            if (isEliminable()){
                 String enlaceEliminable;
@@ -568,6 +596,33 @@ public class Tabla {
 
     public void setCabeceraImprimible(String cabeceraImprimible) {
         this.cabeceraImprimible = cabeceraImprimible;
+    }
+    
+    
+    
+    public boolean isVendible(){
+        return vendible;        
+    }
+    public String getPaginaVendible(){
+        return  this.pageContext+paginaVendible;
+    }
+    public String getIconoVendible(){
+        return iconoVendible;
+    }
+    public String getCabeceraVendible(){
+        return cabeceraVendible;
+    }
+    public void setVendible(boolean vendible){
+        this.vendible = vendible;
+    }
+    public void setPaginaVendible(String paginaVendible){
+        this.paginaVendible = paginaVendible;
+    }
+    public void setIconoVendible(String iconoVendible){
+        this.iconoVendible = iconoVendible;
+    }
+    public void setCabeceraVendible(String cabeceraVendible){
+        this.cabeceraVendible = cabeceraVendible;
     }
     
 }

@@ -12,11 +12,6 @@
             <input type="text" class="short" name="iddetalle_consulta" id="iddetalle_consulta" value="${v.iddetalle_consulta}" readonly tabindex="-1">
         </div>
         <div class="campo">
-            <label for="idventa">ID Venta</label>
-            <i></i>
-            <input type="text" class="short" name="idventa" id="idventa" value="${v.idventa}" readonly tabindex="-1">
-        </div>
-        <div class="campo">
             <label for="idconsulta">ID Consulta</label>
             <i></i>
             <input type="text" class="short" name="idconsulta" id="idconsulta" value="${v.idconsulta != null ? v.idconsulta : idconsulta}" readonly tabindex="-1">

@@ -18,7 +18,7 @@
         <h1 id="titulo">Formulario</h1>
         <form id="formulario" action="">
             <div class="campo">
-                <label for="idconsumible">Consumible</label>
+                <label for="idconsumible">Examen</label>
                 <i></i>
                 <div class="varios">
                     <input type="text" required class="short" name="idconsumible" id="idconsumible" value="" readonly tabindex="-1">
@@ -28,7 +28,7 @@
             </div>
             <div class="fondo">
                 <div class="conf">
-                    <h1>Selección de consumible</h1>
+                    <h1>Selección de examen</h1>
                     <div class="header">
                         <input type="text" id="buscar" autocomplete="off" placeholder="Buscar...">
                     </div>
@@ -38,19 +38,22 @@
                 </div>
             </div> 
             <div class="campo">
-                <label for="precio">Precio</label>
+                <label for="estado">Estado</label>
                 <i></i>
-                <input type="text" readonly required class="short" name="precio" id="precio">
+                <select type="text" required class="short" name="estado" id="estado">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Revisado">Revisado</option>
+                </select>
             </div>
             <div class="campo">
-                <label for="cantidad">Cantidad</label>
+                <label for="fecha_revision">Fecha de revisión</label>
                 <i></i>
-                <input type="number" required min="1" max="" class="short" name="cantidad" id="cantidad">
+                <input type="date" name="fecha_revision" id="fecha_revision">
             </div>
             <div class="campo">
-                <label for="existencias">Existencias disponibles</label>
+                <label for="resultados">Resultados</label>
                 <i></i>
-                <input type="text" required class="short" name="existencias" id="existencias">
+                <input type="text" class="short" name="resultados" id="resultados">
             </div>
             <div class="botones">
                 <input type="submit" name="" id="" class="ghost-blue" value="Agregar"> 
@@ -67,26 +70,21 @@
             
         const idconsumible = document.querySelector("#idconsumible");
         const nombre = document.querySelector("#nombre");
-        const precio_compra = document.querySelector("#precio");
-        const cantidad = document.querySelector("#cantidad");
-        const existencias = document.querySelector("#existencias");
+        const precio_compra = document.querySelector("#estado");
+        const cantidad = document.querySelector("#fecha_revision");
+        const existencias = document.querySelector("#resultados");
 
         formulario.addEventListener('submit', function(e){
             e.preventDefault();           
-            window.opener.setDataConsumible(idconsumible.value, nombre.value, precio_compra.value, cantidad.value);
+            window.opener.setDataExamen(idconsumible.value, nombre.value, precio_compra.value, cantidad.value, existencias.value);
             window.close();
         });
         function _Seleccionar_(row){
             var idjefe = row.cells[0].innerHTML;
             var jefe = row.cells[1].innerHTML;
-            var existencia = row.cells[3].innerHTML;
-            var precio = row.cells[4].innerHTML;
             
             idconsumible.value = idjefe;
             nombre.value = jefe;
-            cantidad.max = existencia;
-            precio_compra.value = precio;
-            existencias.value = existencia;
         }
     </script>
     </body>

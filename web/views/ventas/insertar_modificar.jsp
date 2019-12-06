@@ -13,6 +13,13 @@
             <i></i>
             <input type="text" class="short" name="idventa" id="idventa" value="${v.idventa}" readonly tabindex="-1">
         </div>
+        <c:if test="${idconsulta != null}">
+            <div class="campo">
+                <label for="idconsulta">ID Consulta</label>
+                <i></i>
+                <input type="text" class="short" name="idconsulta" id="idconsulta" value="${idconsulta}" readonly tabindex="-1">
+            </div>
+        </c:if>
         <div class="campo">
             <label for="fecha">Fecha</label>
             <i></i>
@@ -53,6 +60,15 @@
                         </tr>
                     </thead>
                     <tbody id="consumibles">
+                        <c:if test="${s != null}">
+                            <tr>
+                                <td><input type='text' readonly value='${s.idconsumible}' name='idconsumible'></td>
+                                <td><input type='text' readonly value='${s.nombre}' name='nombre_consumible'></td>
+                                <td><input type='text' readonly value='${s.precio_venta}' name='precio'></td>
+                                <td><input type='text' readonly value='1' name='cantidad'></td>
+                                <td><a id='${s.precio_venta}' onclick='eliminarFila(this);' class='btn'><i class='icon icon-bin'></i></a></td>
+                            </tr>
+                        </c:if>
                         <c:forEach var="i" items="${Detalles_venta}" varStatus="idx">
                             <tr>
                                 <td><input type='text' readonly value='${i.idconsumible}' name='idconsumible'></td>

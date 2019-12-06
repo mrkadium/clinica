@@ -3,6 +3,7 @@ package com.clinica.controllers;
 import com.clinica.conexion.Conexion;
 import com.clinica.conexion.ConexionPool;
 import com.clinica.models.Abono;
+import com.clinica.models.Consulta;
 import com.clinica.models.Consumible;
 import com.clinica.models.Departamento;
 import com.clinica.models.Detalle_venta;
@@ -65,7 +66,7 @@ public class Ventas extends HttpServlet {
                     request.setAttribute("op", "Insertar");
                     req += "insertar_modificar.jsp";
                 }break;
-                case "modificar":{
+                case "modificar": case "generarVenta":{
                     Operaciones.iniciarTransaccion();
                     
                     int id = Integer.parseInt(request.getParameter("id"));
@@ -272,6 +273,11 @@ public class Ventas extends HttpServlet {
                 }
             }else{
                 v = Operaciones.insertar(v); //COMPRA RECIÉN INSERTADA
+                if(request.getAttribute("idconsulta") != null){
+                    Consulta c = Operaciones.get(Integer.parseInt(request.getParameter("idconsulta")), new Consulta());
+                    c.setIdventa(v.getIdventa());
+                    c = Operaciones.actualizar(c.getIdconsulta(), c);
+                }
                 
                 List<Detalle_venta> lst = new ArrayList();                
                 for(int i=0; i<idconsumibles.length; i++){

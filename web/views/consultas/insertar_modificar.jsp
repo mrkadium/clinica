@@ -35,6 +35,11 @@
             <a onclick="abrirVentana('${pageContext.servletContext.contextPath}/Consultas?accion=doctores');" class="lupa"><i class="icon icon-search"></i></a>
         </div>
         <div class="campo">
+            <label for="idventa">ID Venta</label>
+            <i></i>
+            <input type="text" class="short" name="idventa" id="idventa" value="${v.idventa}" readonly tabindex="-1">
+        </div>
+        <div class="campo">
             <label for="fecha">Fecha</label>
             <i></i>
             <input type="date" name="fecha" id="fecha" value="${v.fecha_hora.toString().substring(0,10)}">
@@ -56,21 +61,21 @@
             </select>
         </div>
         <div class="campo">
-            <label for="estado">Estado</label>
+            <label for="estado_consulta">Estado</label>
             <i></i>
-            <select name="estado" id="estado" >
+            <select name="estado_consulta" id="estado" >
                 <option value="Pendiente">Pendiente</option>
                 <option ${v.estado == 'Atendida' ? 'selected' : ''} value="Atendida">Atendida</option>
             </select>
         </div>
         
         
-        <div class="campo" id="tabla doctores">
+        <div class="campo" id="tabla">
             <label for="campo2">Doctores/Enfermeros participantes</label>
             <i></i>
             <a  onclick="abrirVentana('${pageContext.servletContext.contextPath}/Consultas?accion=agregarEmpleado');" class="agregar"><i class="icon icon-plus"></i> Agregar</a>
             <div class="tablas">
-                <table id="table01">
+                <table id="table01" class="doctores">
                     <thead>
                         <tr>
                             <th>id</th>
@@ -97,16 +102,17 @@
         </div>
         
         
-        <div class="campo" id="tabla examenes">
+        <div class="campo" id="tabla">
             <label for="campo2">Exámenes</label>
             <i></i>
             <a  onclick="abrirVentana('${pageContext.servletContext.contextPath}/Consultas?accion=agregarExamen');" class="agregar"><i class="icon icon-plus"></i> Agregar</a>
             <div class="tablas">
-                <table id="table01">
+                <table id="table01" class="examenes">
                     <thead>
                         <tr>
                             <th>id</th>
                             <th>Examen</th>
+                            <th>Estado</th>
                             <th>Fecha revisión</th>
                             <th>Resultados</th>
                             <th><i class="icon icon-bin"></i></th>
@@ -119,7 +125,8 @@
                                 <td><input type='text' readonly value='${i.idexamen_consulta}' name='idexamen_consulta'></td>
                                 <td style="display:none;"><input type='text' readonly value='${i.idexamen}' name='idexamen'></td>
                                 <td><input type='text' readonly value='${i.examen}' name='examen'></td>
-                                <td><input type='text' readonly value='${i.fecha_revision}' name='fecha_revision'></td>
+                                <td><input type='text' readonly value='${i.estado}' name='estado'></td>
+                                <td><input type='date' readonly value='${i.fecha_revision.toString().substring(0,10)}' name='fecha_revision'></td>
                                 <td><input type='text' readonly value='${i.resultados}' name='resultados'></td>
                                 <td></td>
                             </tr>
@@ -136,7 +143,7 @@
 
 <script>
     function abrirVentana(URL){
-        window.open(URL,"ventana1","width=700,height=400,scrollbars=YES,statusbar=YES,top=150,left=300");
+        window.open(URL,"ventana1","width=450,height=600,scrollbars=YES,statusbar=YES,top=150,right=150");
     }
     function setDataDoctor(idjefe, jefe) {
         document.getElementById("iddoctor").value = idjefe;
@@ -150,11 +157,11 @@
         document.getElementById("idservicio").value = idmunicipio;
         document.getElementById("servicio").value = municipio;
     }
-    const table_body = document.querySelector(".doctores .tablas #table01 tbody");
+    const table_body = document.querySelector(".doctores tbody");
     function setDataEmpleadoConsulta(idempleado, empleado, cargo){
         //agregarlo a la tabla 
         var encontrado = false;
-        let table_filas = document.querySelectorAll(".doctores .tablas #table01 tbody tr");
+        let table_filas = document.querySelectorAll(".doctores tbody tr");
         for(var i=0; i<table_filas.length; i++){
             if(table_filas[i].cells[1].firstChild.value == idempleado){
                 encontrado = true;
@@ -170,6 +177,19 @@
                 "<td><a onclick='eliminarFila(this);' class='btn'><i class='icon icon-bin'></i></a></td>"+
             "</tr>";
         }
+    }
+    const table_body2 = document.querySelector(".examenes tbody");
+    function setDataExamen(idexamen, examen, estado, fecha_revision, resultados){
+        table_body2.innerHTML += 
+        "<tr>"+
+            "<td><input type='text' readonly value='0' name='idexamen_consulta'></td>"+
+            "<td style='display:none;'><input type='text' readonly value='" + idexamen + "' name='idexamen'></td>"+
+            "<td><input type='text' readonly value='" + examen + "' name='examen'></td>"+
+            "<td><input type='text' readonly value='" + estado + "' name='estado'></td>"+
+            "<td><input type='date' readonly value='" + fecha_revision + "' name='fecha_revision'></td>"+
+            "<td><input type='text' readonly value='" + resultados + "' name='resultados'></td>"+
+            "<td><a onclick='eliminarFila(this);' class='btn'><i class='icon icon-bin'></i></a></td>"+
+        "</tr>";
     }
 
     function eliminarFila(boton){

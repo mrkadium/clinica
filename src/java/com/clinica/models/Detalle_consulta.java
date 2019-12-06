@@ -6,7 +6,6 @@ public class Detalle_consulta {
     @PrimaryKey
     @AutoIncrement
     private int iddetalle_consulta;
-    private Integer idventa;
     private int idconsulta;
     private String razon_consulta;
     private String temperatura;
@@ -21,9 +20,8 @@ public class Detalle_consulta {
     public Detalle_consulta() {
     }
 
-    public Detalle_consulta(int iddetalle_consulta, Integer idventa, int idconsulta, String razon_consulta, String temperatura, String frecuencia_cardiaca, String frecuencia_respiratoria, String presion_arterial, String saturacion_oxigeno, String diagnostico, String tratamiento, String observaciones) {
+    public Detalle_consulta(int iddetalle_consulta, int idconsulta, String razon_consulta, String temperatura, String frecuencia_cardiaca, String frecuencia_respiratoria, String presion_arterial, String saturacion_oxigeno, String diagnostico, String tratamiento, String observaciones) {
         this.iddetalle_consulta = iddetalle_consulta;
-        this.idventa = idventa;
         this.idconsulta = idconsulta;
         this.razon_consulta = razon_consulta;
         this.temperatura = temperatura;
@@ -36,20 +34,13 @@ public class Detalle_consulta {
         this.observaciones = observaciones;
     }
 
+
     public int getIddetalle_consulta() {
         return iddetalle_consulta;
     }
 
     public void setIddetalle_consulta(int iddetalle_consulta) {
         this.iddetalle_consulta = iddetalle_consulta;
-    }
-
-    public Integer getIdventa() {
-        return idventa;
-    }
-
-    public void setIdventa(Integer idventa) {
-        this.idventa = idventa;
     }
 
     public int getIdconsulta() {

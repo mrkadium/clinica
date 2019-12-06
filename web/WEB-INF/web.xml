@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    
     <filter>
         <filter-name>Filtro</filter-name>
         <filter-class>com.clinica.controllers.Filtro</filter-class>
@@ -17,6 +16,7 @@
         <url-pattern>/Empresas</url-pattern>
         <url-pattern>/Especialidades</url-pattern>
         <url-pattern>/Especialidades_medico</url-pattern>
+        <url-pattern>/Examenes</url-pattern>
         <url-pattern>/Horarios</url-pattern>
         <url-pattern>/Inventarios</url-pattern>
         <url-pattern>/Laboratorios</url-pattern>
@@ -32,9 +32,11 @@
         <url-pattern>/Usuarios</url-pattern>
         <url-pattern>/Ventas</url-pattern>
         <url-pattern>/ConstanciaBuenaSalud</url-pattern>
+        <url-pattern>/ConstanciaIncapacidad</url-pattern>
+        <url-pattern>/ConstanciaMedica</url-pattern>
+        <url-pattern>/ReporteVentas</url-pattern>
+        <url-pattern>/ReporteConsultas</url-pattern>
     </filter-mapping>
-    
-    
     <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>com.clinica.controllers.Home</servlet-class>
@@ -94,6 +96,10 @@
             <param-name>accion</param-name>
             <param-value>detalle_consulta</param-value>
         </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>Examenes</servlet-name>
+        <servlet-class>com.clinica.controllers.Examenes</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servicios</servlet-name>
@@ -199,13 +205,10 @@
         <servlet-name>Empleados</servlet-name>
         <url-pattern>/Empleados</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet-mapping>
         <servlet-name>Reportes</servlet-name>
         <url-pattern>/Reportes</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ConstanciaBuenaSalud</servlet-name>
         <url-pattern>/ConstanciaBuenaSalud</url-pattern>
@@ -218,7 +221,6 @@
             <param-value>buenaSalud</param-value>
         </init-param>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>ConstanciaIncapacidad</servlet-name>
         <url-pattern>/ConstanciaIncapacidad</url-pattern>
@@ -231,7 +233,6 @@
             <param-value>incapacidad</param-value>
         </init-param>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>ConstanciaMedica</servlet-name>
         <url-pattern>/ConstanciaMedica</url-pattern>
@@ -244,8 +245,6 @@
             <param-value>medica</param-value>
         </init-param>
     </servlet>
-    
-    
     <servlet-mapping>
         <servlet-name>Filtro</servlet-name>
         <url-pattern>/Filtro</url-pattern>
@@ -305,6 +304,10 @@
     <servlet-mapping>
         <servlet-name>DetalleConsulta</servlet-name>
         <url-pattern>/DetalleConsulta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Examenes</servlet-name>
+        <url-pattern>/Examenes</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

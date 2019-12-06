@@ -12,6 +12,7 @@ public class Consulta {
     private int idpaciente;
     private int idservicio;
     private Integer iddoctor;
+    private Integer idventa;
     private Date fecha_hora;
     private boolean programada;
     private String estado;
@@ -19,15 +20,25 @@ public class Consulta {
     public Consulta() {
     }
 
-    public Consulta(int idconsulta, int idpaciente, int idservicio, Integer iddoctor, Date fecha, boolean programada, String estado) {
+    public Consulta(int idconsulta, int idpaciente, int idservicio, Integer iddoctor, Integer idventa, Date fecha_hora, boolean programada, String estado) {
         this.idconsulta = idconsulta;
         this.idpaciente = idpaciente;
         this.idservicio = idservicio;
         this.iddoctor = iddoctor;
-        this.fecha_hora = fecha;
+        this.idventa = idventa;
+        this.fecha_hora = fecha_hora;
         this.programada = programada;
         this.estado = estado;
     }
+
+    public Integer getIdventa() {
+        return idventa;
+    }
+
+    public void setIdventa(Integer idventa) {
+        this.idventa = idventa;
+    }
+
 
     public int getIdconsulta() {
         return idconsulta;

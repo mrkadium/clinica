@@ -444,10 +444,12 @@ CREATE TABLE consultas(
     idpaciente INT NOT NULL,
     idservicio INT NOT NULL,
     iddoctor INT,
+    idventa INT,
     fecha_hora DATETIME NOT NULL,
     programada BOOL DEFAULT FALSE,
     estado ENUM('Pendiente', 'Atendida'),
     
+    FOREIGN KEY (idventa) REFERENCES ventas(idventa),
 	FOREIGN KEY (idpaciente) REFERENCES pacientes(idpaciente),
     FOREIGN KEY (idservicio) REFERENCES consumibles(idconsumible),
     FOREIGN KEY (iddoctor) REFERENCES empleados(idempleado)
@@ -464,7 +466,6 @@ CREATE TABLE empleados_consulta(
 
 CREATE TABLE detalles_consulta(
 	iddetalle_consulta INT(11) PRIMARY KEY AUTO_INCREMENT,
-    idventa INT,
     idconsulta INT,
     razon_consulta LONGTEXT,
 	temperatura	VARCHAR(10),
@@ -476,7 +477,6 @@ CREATE TABLE detalles_consulta(
 	tratamiento LONGTEXT,
 	observaciones LONGTEXT,
     
-    FOREIGN KEY (idventa) REFERENCES ventas(idventa),
     FOREIGN KEY (idconsulta) REFERENCES consultas(idconsulta)
 );
 
@@ -487,13 +487,14 @@ CREATE TABLE examenes(
 );
 
 CREATE TABLE examenes_consulta(
+	idexamen_consulta INT PRIMARY KEY AUTO_INCREMENT,
 	idconsulta INT NOT NULL,
     idexamen INT NOT NULL,
     estado ENUM('Pendiente', 'Revisado'),
     fecha_revision DATE,
     resultados LONGTEXT,
     
-    FOREIGN KEY (idconsulta) REFERENCES ventas(idventa),
+    FOREIGN KEY (idconsulta) REFERENCES consultas(idconsulta),
     FOREIGN KEY (idexamen) REFERENCES examenes(idexamen)
 );
 

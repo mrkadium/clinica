@@ -250,6 +250,7 @@ INSERT INTO menus(menu, idpadre, descripcion, url) VALUES
 ('Empleados', 1, '', '/Empleados'),
 ('Empresas', 1, '', '/Empresas'),
 ('Especialidades', 1, '', '/Especialidades'),
+('Exámenes',1,'','/Examenes'),
 ('Esp. por médico', 1, '', '/Especialidades_medico'),
 ('Horarios', 3, '', '/Horarios'),
 ('Inventarios', 2, '', '/Inventarios'),
@@ -258,15 +259,17 @@ INSERT INTO menus(menu, idpadre, descripcion, url) VALUES
 ('Menus', 1, '', '/Menus'),
 ('Municipios', 3, '', '/Municipios'),
 ('Noticias', 3, '', '/Noticias'),
-('Pacientes', 1, '', '/Pacientes'),
+('Pacientes', 2, '', '/Pacientes'),
 ('Permisos', 3, '', '/Permisos'),
 ('Roles', 1, '', '/Roles'),
 ('Sucursales', 1, '', '/Sucursales'),
 ('Usuarios', 1, '', '/Usuarios'),
-('Reporte de ventas', 4, '', '/Ventas'),
-('Reporte de consultas', 4, '', '/Ventas'),
-('Constancia de buena salud', 4, '', '/Ventas'),
-('Constancia de incapacidad', 4, '', '/Ventas');
+('Ventas',2,'','/Ventas'),
+('Reporte de ventas', 4, '', '/ReporteVentas'),
+('Reporte de consultas', 4, '', '/ReporteConsultas'),
+('Constancia de buena salud', 4, '', '/ConstanciaBuenaSalud'),
+('Constancia de incapacidad', 4, '', '/ConstanciaIncapacidad'),
+('Constancia médica', 4, '', '/ConstanciaMedica');
 
 INSERT INTO permisos(idrol, idmenu) SELECT 1, idmenu FROM menus;
 INSERT INTO permisos(idrol, idmenu) SELECT 2, idmenu FROM menus WHERE idmenu IN (1);
@@ -322,8 +325,8 @@ INSERT INTO abonos(idventa, fecha, monto) VALUES
 -- UPDATE detalles_inventario SET cantidad = (cantidad - 5) WHERE iddetalle_inventario = 1; -- SÓLO SE REDUCEN LOS PRODUCTOS
 */
 
-INSERT INTO consultas(idpaciente, idservicio, iddoctor, fecha_hora, programada, estado) VALUES
-(1,1,1, NOW(),FALSE,'Atendida');
+INSERT INTO consultas(idpaciente, idservicio, iddoctor, idventa, fecha_hora, programada, estado) VALUES
+(1,1,1,1, NOW(),FALSE,'Atendida');
 
 INSERT INTO empleados_consulta(idconsulta, idempleado) VALUES
 (1, 1),
